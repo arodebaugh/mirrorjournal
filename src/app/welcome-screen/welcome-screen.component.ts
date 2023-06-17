@@ -1,5 +1,5 @@
-import {ChangeDetectorRef, Component, OnInit, ViewChild} from '@angular/core';
-import {AlertController, IonSlides, ModalController, Platform} from '@ionic/angular';
+import {ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {AlertController, ModalController, Platform} from '@ionic/angular';
 import { Haptics, ImpactStyle } from '@capacitor/haptics';
 
 
@@ -11,7 +11,7 @@ const PRODUCT_PRO_KEY = 'mirrorjournalpro';
   styleUrls: ['./welcome-screen.component.scss'],
 })
 export class WelcomeScreenComponent implements OnInit {
-  @ViewChild(IonSlides) slide: IonSlides;
+  @ViewChild('swiper') slide: ElementRef | undefined;
   viewEntered = false;
   last = false;
   isPro = false;
@@ -23,8 +23,6 @@ export class WelcomeScreenComponent implements OnInit {
     this.platform.ready().then(() => {
       this.viewEntered = true;
       this.last = false;
-      this.slide.update();
-      this.slide.lockSwipes(true);
     });
   }
   async presentAlert(header, message) {
@@ -40,14 +38,11 @@ export class WelcomeScreenComponent implements OnInit {
 
   async next() {
     Haptics.impact({style: ImpactStyle.Light});
-    await this.slide.lockSwipes(false);
-    await this.slide.slideNext();
-    await this.slide.lockSwipes(true);
+    this.slide?.nativeElement.swiper.slideNext();
   }
 
   async close() {
     Haptics.impact({style: ImpactStyle.Light});
-    await this.slide.slideTo(0);
     this.viewEntered = false;
     await this.modalController.dismiss();
   }
@@ -56,7 +51,7 @@ export class WelcomeScreenComponent implements OnInit {
   ngAfterViewInit() {
     setTimeout(() => {
           if (this.slide) {
-            this.slide.update();
+            // this.slide.update();
           }
         }, 300);
   }

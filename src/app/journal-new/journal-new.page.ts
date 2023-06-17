@@ -13,7 +13,7 @@ import {
 } from '@ionic/angular';
 import {NativeStorage} from '@awesome-cordova-plugins/native-storage/ngx';
 import {EmojiPickerComponent} from '../emoji-picker/emoji-picker.component';
-import {FormBuilder} from '@angular/forms';
+import {UntypedFormBuilder} from '@angular/forms';
 import {DomSanitizer} from '@angular/platform-browser';
 import * as moment from 'moment';
 import {ImagePicker} from '@awesome-cordova-plugins/image-picker/ngx';
@@ -98,7 +98,7 @@ export class JournalNewPage implements OnInit {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
   };
 
-  constructor(private cdr: ChangeDetectorRef, private speechRecognition: SpeechRecognition, private navCtrl: NavController, /*private taptic: TapticEngine,*/ private platform: Platform, private pickerController: PickerController, private popoverController: PopoverController, private router: Router, private imagePicker: ImagePicker, private route: ActivatedRoute, private modalCtrl: ModalController, private sanitizer: DomSanitizer, private fb: FormBuilder, private routerOutlet: IonRouterOutlet, private alertController: AlertController, private toastController: ToastController, private modalController: ModalController, private nativeStorage: NativeStorage) {
+  constructor(private cdr: ChangeDetectorRef, private speechRecognition: SpeechRecognition, private navCtrl: NavController, /*private taptic: TapticEngine,*/ private platform: Platform, private pickerController: PickerController, private popoverController: PopoverController, private router: Router, private imagePicker: ImagePicker, private route: ActivatedRoute, private modalCtrl: ModalController, private sanitizer: DomSanitizer, private fb: UntypedFormBuilder, private routerOutlet: IonRouterOutlet, private alertController: AlertController, private toastController: ToastController, private modalController: ModalController, private nativeStorage: NativeStorage) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.journalName = this.router.getCurrentNavigation().extras.state.journalName;

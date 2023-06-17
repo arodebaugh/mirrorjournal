@@ -1,14 +1,14 @@
 <ion-content>
-  <ion-slides *ngIf="viewEntered" style="overflow-y: scroll;">
-    <ion-slide>
+  <swiper-container *ngIf="viewEntered" style="overflow-y: scroll;">
+    <swiper-slide>
       <img src="../assets/mirror-images/assembly 3.png"/>
       <h2>👋 Oh hey there!</h2>
       <p><b>Mirror</b> is the digital Journal designed for self-reflection and secrecy.</p>
       <p>Let's get set up and take a quick tour!</p>
 
       <ion-button color="primary" fill="outline" (click)="next()">✈️ Let's go!</ion-button>
-    </ion-slide>
-    <ion-slide>
+    </swiper-slide>
+    <swiper-slide>
       <h2>Home page</h2>
       <p>We designed the home page as a simple way to display journal entries and to easily access features!</p>
       <p>Each journal entry is displayed on cards like the one below which you can click to view. Clicking
@@ -36,8 +36,8 @@
       <p>Click the <ion-icon name="menu-outline"></ion-icon> button then click <ion-icon name="lock-closed-outline"></ion-icon></p>
       <ion-button color="primary" fill="outline" (click)="next()">👍 Cool Cool Cool</ion-button>
       <br /><br /><br />
-    </ion-slide>
-    <ion-slide>
+    </swiper-slide>
+    <swiper-slide>
       <h2>Journal Entries</h2>
       <p>We packed journals with tons of useful features for you to enjoy! </p>
       <p>Journal entries made in <b>Mirror Journal</b> are mostly text based so we created a distraction-free editor that makes it easy to style your text.</p>
@@ -46,6 +46,6 @@
       <p>You can lock/encrypt their journals with a click of a button and also set expiration dates to have your journal entry deleted after some time!</p>
       <ion-button color="primary" fill="outline" (click)="close()">✨ Fabulous!</ion-button>
       <br /><br />
-    </ion-slide>
-  </ion-slides>
+    </swiper-slide>
+  </swiper-container>
 </ion-content>
