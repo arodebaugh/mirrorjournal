@@ -1,1 +1,0 @@
-{"ast":null,"code":"import { registerPlugin } from '@capacitor/core';\nconst Haptics = registerPlugin('Haptics', {\n  web: () => import('./web').then(m => new m.HapticsWeb())\n});\nexport * from './definitions';\nexport { Haptics }; //# sourceMappingURL=index.js.map","map":null,"metadata":{},"sourceType":"module"}

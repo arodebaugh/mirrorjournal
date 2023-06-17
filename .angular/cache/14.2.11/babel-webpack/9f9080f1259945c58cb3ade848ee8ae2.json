@@ -1,1 +1,0 @@
-{"ast":null,"code":"import { registerPlugin } from '@capacitor/core';\nconst Keyboard = registerPlugin('Keyboard');\nexport * from './definitions';\nexport { Keyboard }; //# sourceMappingURL=index.js.map","map":null,"metadata":{},"sourceType":"module"}
