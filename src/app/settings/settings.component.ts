@@ -21,7 +21,7 @@ const PRODUCT_PRO_KEY = 'mirrorjournalpro';
 export class SettingsComponent implements OnInit {
   menuLabel = false;
   notifications = false;
-  autosave = false;
+  autosave = true;
   authType = 'FaceID';
   secureWithID = false;
   pro = false;
@@ -41,6 +41,8 @@ export class SettingsComponent implements OnInit {
     const tempAutosave = await Preferences.get({key: 'autosave'});
     if (tempAutosave.value) {
       this.autosave = (tempAutosave.value === 'true');
+    } else {
+      await Preferences.set({key: 'autosave', value: 'true'});
     }
 
     const tempTheme = await Preferences.get({key: 'theme'});

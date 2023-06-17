@@ -74,7 +74,7 @@ export class JournalNewPage implements OnInit {
   fontsize = 'default';
   unsaved = true;
   first = true;
-  autosave = false;
+  autosave = true;
   private passcode: string;
   saveData = {
     name: this.journalName,
