@@ -1,0 +1,768 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+/* Core CSS required for Ionic components to work properly */
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import '~@ionic/angular/css/display.css';
+
+/* Optional CSS utils that can be commented out */
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+
+ion-text {
+  -webkit-user-select: auto;
+}
+
+[contenteditable] {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+.angular-editor-textarea {
+  border: none !important;
+}
+
+:focus { outline: none; }
+
+@media (prefers-color-scheme: dark) {
+  ion-card {
+    background: #1a1a1a;
+  }
+
+  .angular-editor-toolbar {
+    background-color: rgb(0, 0, 0) !important;
+    border: none !important;
+  }
+
+  .angular-editor-textarea::after {
+    background-color: rgb(0, 0, 0) !important;
+  }
+
+  .fa {
+    color: white !important;
+  }
+
+  .angular-editor-button {
+    background: black !important;
+  }
+
+  .active {
+    background: yellow !important;
+  }
+
+  .ae-font {
+    &.ae-picker {
+      color: white !important;
+    }
+    .ae-picker-label {
+      background-color: black !important;
+      color: white !important;
+      &:before {
+        background: linear-gradient(to right, black, black 100%) !important;
+      }
+      &:hover {
+        background-color: black !important;
+        &:before {
+          background: linear-gradient(to right, black 100%, black 100%) !important;
+        }
+      }
+
+    }
+    .ae-picker-options {
+      background-color: black !important;
+      color: white !important;
+      .ae-picker-item {
+        color: white !important;
+        &.selected {
+          color: white !important;
+          background-color: black !important;
+        }
+        &.focused {
+          background-color: black !important;
+        }
+        &:hover {
+          background-color: black !important;
+        }
+      }
+    }
+    &.ae-expanded {
+      .ae-picker-options {
+        color: white !important;
+      }
+    }
+  }
+}
+
+.angular-editor-toolbar {
+  width: 100%;
+}
+
+/*.ae-font {
+  margin-left: 100px;
+}*/
+
+#backButton {
+  --padding-start: 0;
+}
+
+#editorExpand {
+  height: 50vh;
+}
+
+.angular-editor-textarea {
+  resize: none !important;
+}
+
+
+.h1 {
+  font-size: 2em;
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+}
+
+.h2 {
+  font-size: 1.5em;
+  margin-top: 0.83em;
+  margin-bottom: 0.83em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+}
+
+.h3 {
+  font-size: 1.17em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+}
+
+.h4 {
+  font-size: 1em;
+  margin-top: 1.33em;
+  margin-bottom: 1.33em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+}
+
+.h5 {
+  font-size: .83em;
+  margin-top: 1.67em;
+  margin-bottom: 1.67em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+}
+
+.h6 {
+  font-size: .67em;
+  margin-top: 2.33em;
+  margin-bottom: 2.33em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+}
+
+/* Dashed border */
+hr.dashed {
+  border-top: 3px dashed #bbb;
+}
+
+/* Dotted border */
+hr.dotted {
+  border-top: 3px dotted #bbb;
+}
+
+/* Solid border */
+hr.solid {
+  border-top: 3px solid #bbb;
+}
+
+/* Rounded border */
+hr.rounded {
+  border-top: 8px solid #bbb;
+  border-radius: 5px;
+}
+
+ion-fab-button[data-desc] {
+  position: relative;
+}
+
+ion-fab-button[data-desc]::after {
+  position: absolute;
+  content: attr(data-desc);
+  z-index: 1;
+  bottom: 4px;
+  background-color: var(--ion-color-primary);
+  padding: 9px;
+  border-radius: 15px;
+  color: white;
+  box-shadow: 0 3px 5px -1px rgba(0,0,0,0.2), 0 6px 10px 0 rgba(0,0,0,0.14), 0 1px 18px 0 rgba(0,0,0,0.12);
+}
+
+ion-fab-button.desc-left[data-desc]::after {
+  right: 55px;
+  bottom: 0;
+}
+
+ion-fab-button.desc-right[data-desc]::after {
+  left: 55px;
+  bottom: 0;
+}
+
+ion-fab-button.desc-up[data-desc]::after {
+  bottom: 55px;
+  margin-right: 0;
+  margin-left: 0;
+  left: 0;
+}
+
+
+.modal-fullscreen {
+  .modal-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.ios .modal-fullscreen {
+  .modal-wrapper {
+    top: 26px;
+  }
+}
+
+// Themes
+
+// Dark Blue
+
+
+
+// Teal
+
+#teal {
+  --ion-color-primary: #00B9A0 !important;
+  --ion-color-primary-rgb: 0, 185, 160 !important;
+  --ion-color-primary-contrast: #ffffff !important;
+  --ion-color-primary-contrast-rgb: 255, 255, 255 !important;
+  --ion-color-primary-shade: #00a38d !important;
+  --ion-color-primary-tint: #1ac0aa !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  #teal {
+    ion-toast {
+      --background: #00B9A0;
+    }
+
+    ion-chip {
+      background: rgba(0, 185, 160, 0.12);
+      color: #00B9A0;
+    }
+
+    a {
+      color: #00B9A0;
+    }
+
+    .full-button {
+      --background: #00B9A0;
+    }
+
+    ion-fab-button[data-desc]::after {
+      background-color: #00B9A0;
+    }
+
+    ion-toggle {
+      --background-checked: #1ac0aa;
+      --handle-background-checked: #ffffff;
+    }
+
+    ion-fab-button {
+      --background: #00B9A0;
+      --background-activated: #00a38d;
+    }
+
+    ion-fab-list {
+      ion-fab-button {
+        --background: #f4f5f8;
+        --color: black;
+      }
+    }
+
+    ion-buttons {
+      ion-button {
+        --color: #00B9A0;
+      }
+
+      ion-back-button {
+        --color: #00B9A0;
+      }
+    }
+  }
+}
+
+// Purple
+
+#purple {
+  --ion-color-primary: #5260ff;
+  --ion-color-primary-rgb: 82,96,255;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255,255,255;
+  --ion-color-primary-shade: #4854e0;
+  --ion-color-primary-tint: #6370ff;
+}
+
+@media (prefers-color-scheme: dark) {
+  #purple {
+    ion-toast {
+      --background: #5260ff;
+    }
+
+    ion-chip {
+      background: rgba(82, 96, 255, 0.12);
+      color: #5260ff;
+    }
+
+    a {
+      color: #5260ff;
+    }
+
+    .full-button {
+      --background: #5260ff;
+    }
+
+    ion-fab-button[data-desc]::after {
+      background-color: #5260ff;
+    }
+
+    ion-toggle {
+      --background-checked: #5260ff;
+      --handle-background-checked: #ffffff;
+    }
+
+    ion-fab-button {
+      --background: #5260ff;
+      --background-activated: #4854e0;
+    }
+
+    ion-fab-list {
+      ion-fab-button {
+        --background: #f4f5f8;
+        --color: black;
+      }
+    }
+
+    ion-buttons {
+      ion-button {
+        --color: #5260ff;
+      }
+
+      ion-back-button {
+        --color: #5260ff;
+      }
+    }
+  }
+}
+
+// Red
+
+#red {
+  --ion-color-primary: #eb445a;
+  --ion-color-primary-rgb: 235, 68, 90;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #cf3c4f;
+  --ion-color-primary-tint: #ed576b;
+}
+
+@media (prefers-color-scheme: dark) {
+  #red {
+    ion-toast {
+      --background: #eb445a;
+    }
+
+    ion-chip {
+      background: rgba(235, 68, 90, 0.12);
+      color: #eb445a;
+    }
+
+    a {
+      color: #eb445a;
+    }
+
+    .full-button {
+      --background: #eb445a;
+    }
+
+    ion-fab-button[data-desc]::after {
+      background-color: #eb445a;
+    }
+
+    ion-toggle {
+      --background-checked: #eb445a;
+      --handle-background-checked: #ffffff;
+    }
+
+    ion-fab-button {
+      --background: #eb445a;
+      --background-activated: #cf3c4f;
+    }
+
+    ion-fab-list {
+      ion-fab-button {
+        --background: #f4f5f8;
+        --color: black;
+      }
+    }
+
+    ion-buttons {
+      ion-button {
+        --color: #eb445a;
+      }
+
+      ion-back-button {
+        --color: #eb445a;
+      }
+    }
+  }
+}
+
+// Pink
+
+#pink {
+  --ion-color-primary: #ff2d55;
+  --ion-color-primary-rgb: 255,45,85;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255,255,255;
+  --ion-color-primary-shade: #e0284b;
+  --ion-color-primary-tint: #ff4266;
+}
+
+@media (prefers-color-scheme: dark) {
+  #pink {
+    ion-toast {
+      --background: #ff2d55;
+    }
+
+    ion-chip {
+      background: rgba(255, 45, 85, 0.12);
+      color: #ff2d55;
+    }
+
+    a {
+      color: #ff2d55;
+    }
+
+    .full-button {
+      --background: #ff2d55;
+    }
+
+    ion-fab-button[data-desc]::after {
+      background-color: #ff2d55;
+    }
+
+    ion-toggle {
+      --background-checked: #ff2d55;
+      --handle-background-checked: #ffffff;
+    }
+
+    ion-fab-button {
+      --background: #ff2d55;
+      --background-activated: #e0284b;
+    }
+
+    ion-fab-list {
+      ion-fab-button {
+        --background: #f4f5f8;
+        --color: black;
+      }
+    }
+
+    ion-buttons {
+      ion-button {
+        --color: #ff2d55;
+      }
+
+      ion-back-button {
+        --color: #ff2d55;
+      }
+    }
+  }
+}
+
+// Grey
+
+#grey {
+  --ion-color-primary: #92949c;
+  --ion-color-primary-rgb: 146,148,156;
+  --ion-color-primary-contrast: #000000;
+  --ion-color-primary-contrast-rgb: 0,0,0;
+  --ion-color-primary-shade: #808289;
+  --ion-color-primary-tint: #9d9fa6;
+}
+
+@media (prefers-color-scheme: dark) {
+  #grey {
+    ion-toast {
+      --background: #92949c;
+    }
+
+    ion-chip {
+      background: rgba(146, 148, 156, 0.12);
+      color: #92949c;
+    }
+
+    a {
+      color: #92949c;
+    }
+
+    .full-button {
+      --background: #92949c;
+    }
+
+    ion-fab-button[data-desc]::after {
+      background-color: #92949c;
+    }
+
+    ion-toggle {
+      --background-checked: #92949c;
+      --handle-background-checked: white;
+    }
+
+    ion-fab-button {
+      --background: #92949c;
+      --background-activated: #808289;
+    }
+
+    ion-fab-list {
+      ion-fab-button {
+        --background: #000000;
+        --color: white;
+      }
+    }
+
+    ion-buttons {
+      ion-button {
+        --color: #92949c;
+      }
+
+      ion-back-button {
+        --color: #92949c;
+      }
+    }
+  }
+}
+
+// Yellow
+
+#yellow {
+  --ion-color-primary: #ffc409;
+  --ion-color-primary-rgb: 255,196,9;
+  --ion-color-primary-contrast: #000000;
+  --ion-color-primary-contrast-rgb: 0,0,0;
+  --ion-color-primary-shade: #e0ac08;
+  --ion-color-primary-tint: #ffca22;
+}
+
+@media (prefers-color-scheme: dark) {
+  #yellow {
+    ion-toast {
+      --background: #ffc409;
+    }
+
+    ion-chip {
+      background: rgba(255, 196, 9, 0.12);
+      color: #ffc409;
+    }
+
+    a {
+      color: #ffc409;
+    }
+
+    .full-button {
+      --background: #ffc409;
+    }
+
+    ion-fab-button[data-desc]::after {
+      background-color: #ffc409;
+    }
+
+    ion-toggle {
+      --background-checked: #ffc409;
+      --handle-background-checked: white;
+    }
+
+    ion-fab-button {
+      --background: #ffc409;
+      --background-activated: #e0ac08;
+    }
+
+    ion-fab-list {
+      ion-fab-button {
+        --background: #000000;
+        --color: white;
+      }
+    }
+
+    ion-buttons {
+      ion-button {
+        --color: #ffc409;
+      }
+
+      ion-back-button {
+        --color: #ffc409;
+      }
+    }
+  }
+}
+
+// Orange
+
+#orange {
+  --ion-color-primary: #ff9500;
+  --ion-color-primary-rgb: 255,149,0;
+  --ion-color-primary-contrast: #000000;
+  --ion-color-primary-contrast-rgb: 0,0,0;
+  --ion-color-primary-shade: #e08300;
+  --ion-color-primary-tint: #ffa01a;
+}
+
+@media (prefers-color-scheme: dark) {
+  #orange {
+    ion-toast {
+      --background: #ff9500;
+    }
+
+    ion-chip {
+      background: rgba(255, 149, 0, 0.12);
+      color: #ff9500;
+    }
+
+    a {
+      color: #ff9500;
+    }
+
+    .full-button {
+      --background: #ff9500;
+    }
+
+    ion-fab-button[data-desc]::after {
+      background-color: #ff9500;
+    }
+
+    ion-toggle {
+      --background-checked: #ff9500;
+      --handle-background-checked: white;
+    }
+
+    ion-fab-button {
+      --background: #ff9500;
+      --background-activated: #e08300;
+    }
+
+    ion-fab-list {
+      ion-fab-button {
+        --background: #000000;
+        --color: white;
+      }
+    }
+
+    ion-buttons {
+      ion-button {
+        --color: #ff9500;
+      }
+
+      ion-back-button {
+        --color: #ff9500;
+      }
+    }
+  }
+}
+
+
+// Green
+
+#green {
+  --ion-color-primary: #2dd36f;
+  --ion-color-primary-rgb: 45,211,111;
+  --ion-color-primary-contrast: #000000;
+  --ion-color-primary-contrast-rgb: 0,0,0;
+  --ion-color-primary-shade: #28ba62;
+  --ion-color-primary-tint: #42d77d;
+}
+
+@media (prefers-color-scheme: dark) {
+  #green {
+    ion-toast {
+      --background: #2dd36f;
+    }
+
+    ion-chip {
+      background: rgba(45, 211, 111, 0.12);
+      color: #2dd36f;
+    }
+
+    a {
+      color: #2dd36f;
+    }
+
+    .full-button {
+      --background: #2dd36f;
+    }
+
+    ion-fab-button[data-desc]::after {
+      background-color: #2dd36f;
+    }
+
+    ion-toggle {
+      --background-checked: #2dd36f;
+      --handle-background-checked: white;
+    }
+
+    ion-fab-button {
+      --background: #2dd36f;
+      --background-activated: #28ba62;
+    }
+
+    ion-fab-list {
+      ion-fab-button {
+        --background: #000000;
+        --color: white;
+      }
+    }
+
+    ion-buttons {
+      ion-button {
+        --color: #2dd36f;
+      }
+
+      ion-back-button {
+        --color: #2dd36f;
+      }
+    }
+  }
+}

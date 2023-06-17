@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="dismiss()">Close</ion-button>
+    </ion-buttons>
+    <ion-title>{{ pickerName }}</ion-title>
+    <ion-buttons slot="end" *ngIf="newNote">
+      <ion-button (click)="save()">Save</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-text>
+    <div class="text-block" *ngFor="let data of noteData; let dataIndex = index;">
+      <div class="text-block" *ngFor="let text of data.text; let textIndex = index;" [innerHTML]="data.highlight ? '<mark>' + text + ' </mark>' : text + ' '" (click)="releasePressEvent(dataIndex, textIndex)"></div>
+      <div class="note-textholder" *ngIf="data.highlight"><ion-textarea [disabled]="!newNote" [(ngModel)]="data.note" placeholder="Enter note here..." autoGrow="true" spellcheck="true" [value]="data.note"></ion-textarea></div>
+    </div>
+  </ion-text>
+</ion-content>

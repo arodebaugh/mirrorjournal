@@ -1,0 +1,8 @@
+{
+  "name": "mirror-app",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "b7e80d68"
+}

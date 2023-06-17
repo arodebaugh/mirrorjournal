@@ -1,0 +1,142 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Journal Entries</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Journal Entries</ion-title>
+    </ion-toolbar>
+    <!--<ion-toolbar>
+      <ion-searchbar showCancelButton="focus" [(ngModel)]="search" (ionChange)="searchForJournal()"></ion-searchbar>
+    </ion-toolbar>-->
+  </ion-header>
+
+  <div *ngIf="showJournals">
+    <div *ngIf="memories.length > 0">
+      <h2 class="ion-padding-start ion-padding-start">Memories</h2>
+      <ion-slides [options]="{ slidesPerView: 1.2, spaceBetween: 0 }">
+        <ion-slide *ngFor="let journal of memories; let i = index;">
+          <ion-card (click)="openJournalPage('/tabs/journalView', journal)" style="text-align: left;">
+            <ion-card-header>
+              <ion-row>
+                <ion-col size="11" offset="0" style="--ion-grid-column-padding: 0;" (click)="openJournalPage('/tabs/journalView', journal)">
+                  <ion-card-title>{{ journal.name }}</ion-card-title>
+                </ion-col>
+                <ion-col size="1" offset="0" style="--ion-grid-column-padding: 0;">
+                  <ion-icon name="ellipsis-horizontal-outline" (click)="presentCardOptions($event, journal)"></ion-icon>
+                </ion-col>
+              </ion-row>
+              <ion-card-subtitle>{{ dateFormattedMemories[i] }}</ion-card-subtitle>
+              <ion-card-subtitle *ngIf="journal.locked"><ion-badge color="danger">Locked</ion-badge></ion-card-subtitle>
+            </ion-card-header>
+
+            <ion-card-content [innerHTML]="journalContentFormattedMemories[i] | words : 25">
+            </ion-card-content>
+          </ion-card>
+        </ion-slide>
+      </ion-slides>
+      <hr class="dotted">
+    </div>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col sizeLg="6" sizeMd="6" sizeXs="12" *ngFor="let journal of journals; let i = index;">
+          <ion-card style="margin-bottom: 0; margin-top: 8px;">
+            <ion-card-header>
+              <ion-grid style="--ion-grid-padding: 0;">
+                <ion-row>
+                  <ion-col size="11" offset="0" style="--ion-grid-column-padding: 0;" (click)="openJournalPage('/tabs/journalView', journal)">
+                    <ion-card-title>{{ journal.name }}</ion-card-title>
+                  </ion-col>
+                  <ion-col size="1" offset="0" style="--ion-grid-column-padding: 0;">
+                    <ion-icon name="ellipsis-horizontal-outline" (click)="presentCardOptions($event, journal)"></ion-icon>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+              <ion-card-subtitle (click)="openJournalPage('/tabs/journalView', journal)">{{ dateFormatted[i] }}</ion-card-subtitle>
+              <ion-card-subtitle (click)="openJournalPage('/tabs/journalView', journal)" *ngIf="journal.locked"><ion-badge color="danger">Locked</ion-badge></ion-card-subtitle>
+            </ion-card-header>
+
+            <ion-card-content (click)="openJournalPage('/tabs/journalView', journal)" [innerHTML]="journalContentFormatted[i] | words : 25">
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-infinite-scroll threshold="80px" (ionInfinite)="loadData($event)">
+      <ion-infinite-scroll-content
+              loadingSpinner="bubbles"
+              loadingText="Loading more journal entries...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+    <br/><br/><br/><br/>
+  </div>
+
+  <ion-card *ngIf="!showJournals">
+    <div style="text-align: center;"><img src="../assets/mirror-images/assembly 5.png" style="height: 300px; margin-top: 10px;"/></div>
+    <ion-card-content style="text-align: center;">
+      No entries... why don't you <a (click)="openPage('/tabs/journalNew')">express yourself</a>?
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Left -->
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed" style="margin-bottom: 20pt; margin-left: 10pt;" *ngIf="fabPos == 0">
+    <ion-fab-button>
+      <ion-icon name="menu-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button *ngIf="!menuLabel" (click)="openSettings()"><ion-icon name="cog"></ion-icon></ion-fab-button>
+      <ion-fab-button *ngIf="menuLabel" (click)="openSettings()" data-desc="Settings" class="desc-right"><ion-icon name="cog"></ion-icon></ion-fab-button>
+
+      <ion-fab-button *ngIf="!menuLabel" (click)="unlockLockJournals()"><ion-icon [name]="lockIcon"></ion-icon></ion-fab-button>
+      <ion-fab-button *ngIf="lockDesc == 'Unlock' && menuLabel" (click)="unlockLockJournals()" data-desc="Unlock" class="desc-left"><ion-icon [name]="lockIcon"></ion-icon></ion-fab-button>
+      <ion-fab-button *ngIf="lockDesc == 'Lock' && menuLabel" (click)="unlockLockJournals()" data-desc="Lock" class="desc-left"><ion-icon [name]="lockIcon"></ion-icon></ion-fab-button>
+
+      <ion-fab-button *ngIf="!menuLabel" (click)="openPage('/tabs/journalNew')"><ion-icon name="add"></ion-icon></ion-fab-button>
+      <ion-fab-button *ngIf="menuLabel" (click)="openPage('/tabs/journalNew')" data-desc="New" class="desc-up"><ion-icon name="add"></ion-icon></ion-fab-button>
+
+    </ion-fab-list>
+  </ion-fab>
+
+  <!-- Center -->
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed" style="margin-bottom: 20pt;" *ngIf="fabPos == 1">
+    <ion-fab-button>
+      <ion-icon name="menu-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button *ngIf="!menuLabel" (click)="openPage('/tabs/journalNew')"><ion-icon name="add"></ion-icon></ion-fab-button>
+      <ion-fab-button *ngIf="menuLabel" (click)="openPage('/tabs/journalNew')" data-desc="New" class="desc-up"><ion-icon name="add"></ion-icon></ion-fab-button>
+    </ion-fab-list>
+    <ion-fab-list side="start">
+      <ion-fab-button *ngIf="!menuLabel" (click)="unlockLockJournals()"><ion-icon [name]="lockIcon"></ion-icon></ion-fab-button>
+      <ion-fab-button *ngIf="lockDesc == 'Unlock' && menuLabel" (click)="unlockLockJournals()" data-desc="Unlock" class="desc-left"><ion-icon [name]="lockIcon"></ion-icon></ion-fab-button>
+      <ion-fab-button *ngIf="lockDesc == 'Lock' && menuLabel" (click)="unlockLockJournals()" data-desc="Lock" class="desc-left"><ion-icon [name]="lockIcon"></ion-icon></ion-fab-button>
+    </ion-fab-list>
+    <ion-fab-list side="end">
+      <ion-fab-button *ngIf="!menuLabel" (click)="openSettings()"><ion-icon name="cog"></ion-icon></ion-fab-button>
+      <ion-fab-button *ngIf="menuLabel" (click)="openSettings()" data-desc="Settings" class="desc-right"><ion-icon name="cog"></ion-icon></ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
+  <!-- Right -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" style="margin-bottom: 20pt; margin-right: 10pt;" *ngIf="fabPos == 2">
+    <ion-fab-button>
+      <ion-icon name="menu-outline"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button *ngIf="!menuLabel" (click)="openSettings()"><ion-icon name="cog"></ion-icon></ion-fab-button>
+      <ion-fab-button *ngIf="menuLabel" (click)="openSettings()" data-desc="Settings" class="desc-right"><ion-icon name="cog"></ion-icon></ion-fab-button>
+
+      <ion-fab-button *ngIf="!menuLabel" (click)="unlockLockJournals()"><ion-icon [name]="lockIcon"></ion-icon></ion-fab-button>
+      <ion-fab-button *ngIf="lockDesc == 'Unlock' && menuLabel" (click)="unlockLockJournals()" data-desc="Unlock" class="desc-left"><ion-icon [name]="lockIcon"></ion-icon></ion-fab-button>
+      <ion-fab-button *ngIf="lockDesc == 'Lock' && menuLabel" (click)="unlockLockJournals()" data-desc="Lock" class="desc-left"><ion-icon [name]="lockIcon"></ion-icon></ion-fab-button>
+
+      <ion-fab-button *ngIf="!menuLabel" (click)="openPage('/tabs/journalNew')"><ion-icon name="add"></ion-icon></ion-fab-button>
+      <ion-fab-button *ngIf="menuLabel" (click)="openPage('/tabs/journalNew')" data-desc="New" class="desc-up"><ion-icon name="add"></ion-icon></ion-fab-button>
+
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>

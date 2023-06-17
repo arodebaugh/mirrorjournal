@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" text="Home"></ion-back-button>
+    </ion-buttons>
+    <ion-title (click)="editName()"><ion-badge color="danger" *ngIf="unsaved && !first">!</ion-badge> {{ journalName }}</ion-title>
+    <ion-buttons slot="end"><ion-button *ngIf="unsaved" (click)="saveJournalPrompt()">Save</ion-button> <ion-button *ngIf="!unsaved" (click)="saveJournalPrompt()">Saved</ion-button></ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-button class="full-button" expand="full" (click)="insertNewHeader()" *ngIf="headerImageData === undefined || headerImageData === null"><ion-icon name="image-outline" slot="start"></ion-icon> Insert optional header</ion-button>
+  <!--<ion-button expand="full" style="margin: 0;" (click)="insertNewDrawing()" *ngIf="headerImageData === undefined || headerImageData === null"><ion-icon name="brush-outline" slot="start"></ion-icon> Create drawing</ion-button>-->
+
+  <ion-card *ngIf="!speaking">
+    <img *ngIf="headerImageData !== undefined || headerImageData !== null"  [src]="headerImageData" (click)="presentImageSettings($event)" />
+    <ion-card-content>
+      <div style="text-align: center">
+        <ion-chip color="primary">
+          <ion-label (click)="presentEmojiModalMood()">{{mood}} Mood</ion-label>
+          <ion-icon *ngIf="mood !== null" (click)="clearMood()" name="close-outline"></ion-icon>
+        </ion-chip>
+        <ion-chip color="primary">
+          <ion-label (click)="presentEmojiModalActivity()">{{activity}}️ Activity</ion-label>
+          <ion-icon *ngIf="activity !== null" (click)="clearActivity()" name="close-outline"></ion-icon>
+        </ion-chip>
+        <ion-chip color="primary">
+          <ion-label (click)="setExpire()">⌛ {{ expireLabelText }}</ion-label>
+        </ion-chip>
+        <ion-chip color="primary" (click)="changeLockState()">
+          <ion-label>{{ lockState ? '🔒 Locked' : '🔓 Unlocked'}}</ion-label>
+        </ion-chip>
+        <ion-chip color="primary" (click)="changeMemoriesState()">
+          <ion-label style="padding-right: 5px;">{{ memories ? '👁 Show in memories' : '⛔ Hide from memories' }}</ion-label>
+        </ion-chip>
+        <ion-chip color="primary" (click)="speak()">
+          <ion-label>🎤 Speak (beta)</ion-label>
+        </ion-chip>
+        <ion-chip color="primary" (click)="help($event)">
+          <ion-label>💡 Help</ion-label>
+        </ion-chip>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="speaking">
+    <ion-card-content>
+      <div style="text-align: center">
+        <h1>Listening...</h1>
+        <div class="lds-ripple"><div></div><div></div></div>
+        <br/>
+        <ion-chip color="primary" (click)="stopSpeak()">
+          <ion-label>🛑 Stop</ion-label>
+        </ion-chip>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <div id="journal-display">
+    <div (click)="expandEditor()" id="editorExpand">
+      <ion-text [style.font-size]="fontsize" style="margin-left: 10px; color: rgb(147, 152, 158)" *ngIf="journalContent === '' && !modalUp">What are you thinking about?</ion-text>
+      <div style="margin-left: 10px;" [style.font-size]="fontsize" [innerHTML]="journalContent" *ngIf="journalContent !== '' || modalUp"></div>
+    </div>
+  </div>
+</ion-content>
+

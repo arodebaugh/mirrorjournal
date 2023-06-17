@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="dismiss()">Close</ion-button>
+    </ion-buttons>
+    <ion-title>Notes</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div *ngIf="notes == undefined">
+    <ion-card>
+      <ion-card-content style="text-align: center;">
+        No notes... why don't you <a (click)="createANote()">create one</a>?
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <ion-list *ngIf="notes.length > 0">
+    <ion-item-sliding *ngFor="let note of notes">
+      <ion-item detail="true" (click)="openNote(note)">
+        <ion-label>
+          <h2>{{note.name}}</h2>
+          <h3 *ngIf="note.date !== undefined">{{note.date}}</h3>
+        </ion-label>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option (click)="trash(note)" color="danger"><ion-icon name="trash-outline" slot="start"></ion-icon> Delete</ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,37 @@
+app-rich-text-editor {
+  [contenteditable=true] {
+    -webkit-user-select: auto !important;
+    padding: 2px;
+    margin: 2px;
+    border: 1px solid #bbb;
+    overflow-x: scroll;
+    overflow-y: auto;
+    word-wrap: normal;
+    height: 40vh;
+    img {
+      padding-left: 2px;
+      max-width: 95%;
+    }
+    background-color: #fff;
+    &:empty:before {
+      content: attr(data-placeholder-text);
+      display: block;
+      color: lightgrey;
+      font-weight: bold;
+    }
+  }
+  div.decorator {
+    background: #444;
+    margin: 5px 1px 5px 1px;
+    text-align: center;
+    button {
+      background: #444;
+      color: #fff;
+      font-size: 1.1em;
+      height: 35px;
+      min-width: 30px;
+      padding-left: 1px;
+      padding-right: 1px;
+    }
+  }
+}

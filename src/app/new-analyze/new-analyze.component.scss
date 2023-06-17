@@ -1,0 +1,19 @@
+ion-textarea {
+  border-left-color: #0d0d0d;
+  border-left-style: solid;
+  padding-left: 5px;
+}
+
+@media (prefers-color-scheme: dark) {
+  ion-textarea {
+    border-left-color: grey;
+  }
+}
+
+.note-textholder {
+  padding: 10px !important;
+}
+
+.text-block {
+  display: inline;
+}

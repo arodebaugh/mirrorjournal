@@ -1,0 +1,160 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="dismiss()">Close</ion-button>
+    </ion-buttons>
+    <ion-title>{{ pickerName }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-text style="text-align: center;"><h5>People</h5></ion-text>
+  <ion-segment scrollable [(ngModel)]="skinColor" (ionChange)="segmentChanged($event)" value="none">
+    <ion-segment-button value="none">
+      <ion-label>Default</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="white">
+      <ion-label>🏻</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="creamWhite">
+      <ion-label>🏼</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="lightBrown">
+      <ion-label>🏽</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="brown">
+      <ion-label>🏾</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="darkBrown">
+      <ion-label>🏿</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <ion-grid>
+    <ion-row *ngFor="let item of people; let i = index;">
+      <div *ngIf="i % 8 == 0" style="font-size: 200%; text-align: center;">
+        <ion-col (click)="selectEmoji(item)">{{ item }}</ion-col>
+        <ion-col *ngIf="i + 1 < people.length" (click)="selectEmoji(people[i + 1])">{{ people[i + 1] }}</ion-col>
+        <ion-col *ngIf="i + 2 < people.length" (click)="selectEmoji(people[i + 2])">{{ people[i + 2] }}</ion-col>
+        <ion-col *ngIf="i + 3 < people.length" (click)="selectEmoji(people[i + 3])">{{ people[i + 3] }}</ion-col>
+        <ion-col *ngIf="i + 4 < people.length" (click)="selectEmoji(people[i + 4])">{{ people[i + 4] }}</ion-col>
+        <ion-col *ngIf="i + 5 < people.length" (click)="selectEmoji(people[i + 5])">{{ people[i + 5] }}</ion-col>
+        <ion-col *ngIf="i + 6 < people.length" (click)="selectEmoji(people[i + 6])">{{ people[i + 6] }}</ion-col>
+        <ion-col *ngIf="i + 7 < people.length" (click)="selectEmoji(people[i + 7])">{{ people[i + 7] }}</ion-col>
+      </div>
+    </ion-row>
+  </ion-grid>
+
+  <ion-text style="text-align: center;"><h5>Animals and Nature</h5></ion-text>
+  <ion-grid>
+    <ion-row *ngFor="let item of animals_and_nature; let i = index;">
+      <div *ngIf="i % 8 == 0" style="font-size: 200%; text-align: center;">
+        <ion-col (click)="selectEmoji(item)">{{ item }}</ion-col>
+        <ion-col *ngIf="i + 1 < animals_and_nature.length" (click)="selectEmoji(animals_and_nature[i + 1])">{{ animals_and_nature[i + 1] }}</ion-col>
+        <ion-col *ngIf="i + 2 < animals_and_nature.length" (click)="selectEmoji(animals_and_nature[i + 2])">{{ animals_and_nature[i + 2] }}</ion-col>
+        <ion-col *ngIf="i + 3 < animals_and_nature.length" (click)="selectEmoji(animals_and_nature[i + 3])">{{ animals_and_nature[i + 3] }}</ion-col>
+        <ion-col *ngIf="i + 4 < animals_and_nature.length" (click)="selectEmoji(animals_and_nature[i + 4])">{{ animals_and_nature[i + 4] }}</ion-col>
+        <ion-col *ngIf="i + 5 < animals_and_nature.length" (click)="selectEmoji(animals_and_nature[i + 5])">{{ animals_and_nature[i + 5] }}</ion-col>
+        <ion-col *ngIf="i + 6 < animals_and_nature.length" (click)="selectEmoji(animals_and_nature[i + 6])">{{ animals_and_nature[i + 6] }}</ion-col>
+        <ion-col *ngIf="i + 7 < animals_and_nature.length" (click)="selectEmoji(animals_and_nature[i + 7])">{{ animals_and_nature[i + 7] }}</ion-col>
+      </div>
+    </ion-row>
+  </ion-grid>
+
+  <ion-text style="text-align: center;"><h5>Food and Drink</h5></ion-text>
+  <ion-grid>
+    <ion-row *ngFor="let item of food_and_drink; let i = index;">
+      <div *ngIf="i % 8 == 0" style="font-size: 200%; text-align: center;">
+        <ion-col (click)="selectEmoji(item)">{{ item }}</ion-col>
+        <ion-col *ngIf="i + 1 < food_and_drink.length" (click)="selectEmoji(food_and_drink[i + 1])">{{ food_and_drink[i + 1] }}</ion-col>
+        <ion-col *ngIf="i + 2 < food_and_drink.length" (click)="selectEmoji(food_and_drink[i + 2])">{{ food_and_drink[i + 2] }}</ion-col>
+        <ion-col *ngIf="i + 3 < food_and_drink.length" (click)="selectEmoji(food_and_drink[i + 3])">{{ food_and_drink[i + 3] }}</ion-col>
+        <ion-col *ngIf="i + 4 < food_and_drink.length" (click)="selectEmoji(food_and_drink[i + 4])">{{ food_and_drink[i + 4] }}</ion-col>
+        <ion-col *ngIf="i + 5 < food_and_drink.length" (click)="selectEmoji(food_and_drink[i + 5])">{{ food_and_drink[i + 5] }}</ion-col>
+        <ion-col *ngIf="i + 6 < food_and_drink.length" (click)="selectEmoji(food_and_drink[i + 6])">{{ food_and_drink[i + 6] }}</ion-col>
+        <ion-col *ngIf="i + 7 < food_and_drink.length" (click)="selectEmoji(food_and_drink[i + 7])">{{ food_and_drink[i + 7] }}</ion-col>
+      </div>
+    </ion-row>
+  </ion-grid>
+
+  <ion-text style="text-align: center;"><h5>Activity</h5></ion-text>
+  <ion-grid>
+    <ion-row *ngFor="let item of activity; let i = index;">
+      <div *ngIf="i % 8 == 0" style="font-size: 200%; text-align: center;">
+        <ion-col (click)="selectEmoji(item)">{{ item }}</ion-col>
+        <ion-col *ngIf="i + 1 < activity.length" (click)="selectEmoji(activity[i + 1])">{{ activity[i + 1] }}</ion-col>
+        <ion-col *ngIf="i + 2 < activity.length" (click)="selectEmoji(activity[i + 2])">{{ activity[i + 2] }}</ion-col>
+        <ion-col *ngIf="i + 3 < activity.length" (click)="selectEmoji(activity[i + 3])">{{ activity[i + 3] }}</ion-col>
+        <ion-col *ngIf="i + 4 < activity.length" (click)="selectEmoji(activity[i + 4])">{{ activity[i + 4] }}</ion-col>
+        <ion-col *ngIf="i + 5 < activity.length" (click)="selectEmoji(activity[i + 5])">{{ activity[i + 5] }}</ion-col>
+        <ion-col *ngIf="i + 6 < activity.length" (click)="selectEmoji(activity[i + 6])">{{ activity[i + 6] }}</ion-col>
+        <ion-col *ngIf="i + 7 < activity.length" (click)="selectEmoji(activity[i + 7])">{{ activity[i + 7] }}</ion-col>
+      </div>
+    </ion-row>
+  </ion-grid>
+
+  <!--<ion-text style="text-align: center;"><h5>Travel and Places</h5></ion-text>
+  <ion-grid>
+    <ion-row *ngFor="let item of travel_and_places; let i = index;">
+      <div *ngIf="i % 8 == 0" style="font-size: 200%; text-align: center;">
+        <ion-col (click)="selectEmoji(item)">{{ item }}</ion-col>
+        <ion-col *ngIf="i + 1 < travel_and_places.length" (click)="selectEmoji(travel_and_places[i + 1])">{{ travel_and_places[i + 1] }}</ion-col>
+        <ion-col *ngIf="i + 2 < travel_and_places.length" (click)="selectEmoji(travel_and_places[i + 2])">{{ travel_and_places[i + 2] }}</ion-col>
+        <ion-col *ngIf="i + 3 < travel_and_places.length" (click)="selectEmoji(travel_and_places[i + 3])">{{ travel_and_places[i + 3] }}</ion-col>
+        <ion-col *ngIf="i + 4 < travel_and_places.length" (click)="selectEmoji(travel_and_places[i + 4])">{{ travel_and_places[i + 4] }}</ion-col>
+        <ion-col *ngIf="i + 5 < travel_and_places.length" (click)="selectEmoji(travel_and_places[i + 5])">{{ travel_and_places[i + 5] }}</ion-col>
+        <ion-col *ngIf="i + 6 < travel_and_places.length" (click)="selectEmoji(travel_and_places[i + 6])">{{ travel_and_places[i + 6] }}</ion-col>
+        <ion-col *ngIf="i + 7 < travel_and_places.length" (click)="selectEmoji(travel_and_places[i + 7])">{{ travel_and_places[i + 7] }}</ion-col>
+      </div>
+    </ion-row>
+  </ion-grid>-->
+
+  <ion-text style="text-align: center;"><h5>Objects</h5></ion-text>
+  <ion-grid>
+    <ion-row *ngFor="let item of objects; let i = index;">
+      <div *ngIf="i % 8 == 0" style="font-size: 200%; text-align: center;">
+        <ion-col (click)="selectEmoji(item)">{{ item }}</ion-col>
+        <ion-col *ngIf="i + 1 < objects.length" (click)="selectEmoji(objects[i + 1])">{{ objects[i + 1] }}</ion-col>
+        <ion-col *ngIf="i + 2 < objects.length" (click)="selectEmoji(objects[i + 2])">{{ objects[i + 2] }}</ion-col>
+        <ion-col *ngIf="i + 3 < objects.length" (click)="selectEmoji(objects[i + 3])">{{ objects[i + 3] }}</ion-col>
+        <ion-col *ngIf="i + 4 < objects.length" (click)="selectEmoji(objects[i + 4])">{{ objects[i + 4] }}</ion-col>
+        <ion-col *ngIf="i + 5 < objects.length" (click)="selectEmoji(objects[i + 5])">{{ objects[i + 5] }}</ion-col>
+        <ion-col *ngIf="i + 6 < objects.length" (click)="selectEmoji(objects[i + 6])">{{ objects[i + 6] }}</ion-col>
+        <ion-col *ngIf="i + 7 < objects.length" (click)="selectEmoji(objects[i + 7])">{{ objects[i + 7] }}</ion-col>
+      </div>
+    </ion-row>
+  </ion-grid>
+
+  <!--<ion-text style="text-align: center;"><h5>Symbols</h5></ion-text>
+  <ion-grid>
+    <ion-row *ngFor="let item of symbols; let i = index;">
+      <div *ngIf="i % 8 == 0" style="font-size: 200%; text-align: center;">
+        <ion-col (click)="selectEmoji(item)">{{ item }}</ion-col>
+        <ion-col *ngIf="i + 1 < symbols.length" (click)="selectEmoji(symbols[i + 1])">{{ symbols[i + 1] }}</ion-col>
+        <ion-col *ngIf="i + 2 < symbols.length" (click)="selectEmoji(symbols[i + 2])">{{ symbols[i + 2] }}</ion-col>
+        <ion-col *ngIf="i + 3 < symbols.length" (click)="selectEmoji(symbols[i + 3])">{{ symbols[i + 3] }}</ion-col>
+        <ion-col *ngIf="i + 4 < symbols.length" (click)="selectEmoji(symbols[i + 4])">{{ symbols[i + 4] }}</ion-col>
+        <ion-col *ngIf="i + 5 < symbols.length" (click)="selectEmoji(symbols[i + 5])">{{ symbols[i + 5] }}</ion-col>
+        <ion-col *ngIf="i + 6 < symbols.length" (click)="selectEmoji(symbols[i + 6])">{{ symbols[i + 6] }}</ion-col>
+        <ion-col *ngIf="i + 7 < symbols.length" (click)="selectEmoji(symbols[i + 7])">{{ symbols[i + 7] }}</ion-col>
+      </div>
+    </ion-row>
+  </ion-grid>
+
+  <ion-text style="text-align: center;"><h5>Flags</h5></ion-text>
+  <ion-grid>
+    <ion-row *ngFor="let item of flags; let i = index;">
+      <div *ngIf="i % 8 == 0" style="font-size: 200%; text-align: center;">
+        <ion-col (click)="selectEmoji(item)">{{ item }}</ion-col>
+        <ion-col *ngIf="i + 1 < flags.length" (click)="selectEmoji(flags[i + 1])">{{ flags[i + 1] }}</ion-col>
+        <ion-col *ngIf="i + 2 < flags.length" (click)="selectEmoji(flags[i + 2])">{{ flags[i + 2] }}</ion-col>
+        <ion-col *ngIf="i + 3 < flags.length" (click)="selectEmoji(flags[i + 3])">{{ flags[i + 3] }}</ion-col>
+        <ion-col *ngIf="i + 4 < flags.length" (click)="selectEmoji(flags[i + 4])">{{ flags[i + 4] }}</ion-col>
+        <ion-col *ngIf="i + 5 < flags.length" (click)="selectEmoji(flags[i + 5])">{{ flags[i + 5] }}</ion-col>
+        <ion-col *ngIf="i + 6 < flags.length" (click)="selectEmoji(flags[i + 6])">{{ flags[i + 6] }}</ion-col>
+        <ion-col *ngIf="i + 7 < flags.length" (click)="selectEmoji(flags[i + 7])">{{ flags[i + 7] }}</ion-col>
+      </div>
+    </ion-row>
+  </ion-grid>-->
+
+  <br />
+</ion-content>

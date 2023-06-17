@@ -1,0 +1,94 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/" text="Home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ data.name }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <img *ngIf="data.headerImage !== undefined || data.headerImage !== null" [src]="data.headerImage" />
+    <ion-card-header>
+      <ion-card-subtitle style="text-align: center">{{ dateFormatted }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <div style="text-align: center">
+        <ion-chip color="primary" *ngIf="data.mood !== null">
+          <ion-label>{{ data.mood }} Mood</ion-label>
+        </ion-chip>
+        <ion-chip color="primary" *ngIf="data.activity !== null">
+          <ion-label>{{ data.activity }} Activity</ion-label>
+        </ion-chip>
+        <ion-chip color="primary">
+          <ion-label *ngIf="data.notes !== undefined" (click)="viewNotes()">🔍 {{data.notes.length }} {{data.notes.length > 1 ? 'notes' : 'note'}}</ion-label>
+          <ion-label *ngIf="data.notes === undefined" (click)="viewNotes()">🔍 0 notes</ion-label>
+        </ion-chip>
+        <ion-chip color="danger" *ngIf="data.expire != 'Never'">
+          <ion-label>⌛ {{ timeToExpire }}</ion-label>
+        </ion-chip>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <div id="journal-display" style="margin-left: 10pt; margin-right: 10pt;">
+    <ion-text>
+      <div [innerHTML]="data.content" [style.font-size]="fontsize"></div>
+      <br /><br /><br />
+    </ion-text>
+  </div>
+
+  <!-- Left -->
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed" style="margin-bottom: 20pt; margin-left: 10pt;" *ngIf="fabPos == 0">
+    <ion-fab-button>
+      <ion-icon name="cog"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button *ngIf="!menuLabel" (click)="editJournal()"><ion-icon name="create-outline"></ion-icon></ion-fab-button>
+      <ion-fab-button *ngIf="menuLabel" (click)="editJournal()" data-desc="Edit" class="desc-right"><ion-icon name="create-outline"></ion-icon></ion-fab-button>
+
+      <ion-fab-button *ngIf="!menuLabel" (click)="analyzeJournal()"><ion-icon name="search-outline"></ion-icon></ion-fab-button>
+      <ion-fab-button *ngIf="menuLabel" (click)="analyzeJournal()" data-desc="Note" class="desc-left"><ion-icon name="search-outline"></ion-icon></ion-fab-button>
+
+      <ion-fab-button *ngIf="!menuLabel" (click)="trashJournal()"><ion-icon name="trash"></ion-icon></ion-fab-button>
+      <ion-fab-button *ngIf="menuLabel" (click)="trashJournal()" data-desc="Delete" class="desc-up"><ion-icon name="trash"></ion-icon></ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
+  <!-- Center -->
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed" style="margin-bottom: 20pt;" *ngIf="fabPos == 1">
+    <ion-fab-button>
+      <ion-icon name="cog"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button *ngIf="!menuLabel" (click)="trashJournal()"><ion-icon name="trash"></ion-icon></ion-fab-button>
+      <ion-fab-button *ngIf="menuLabel" (click)="trashJournal()" data-desc="Delete" class="desc-up"><ion-icon name="trash"></ion-icon></ion-fab-button>
+    </ion-fab-list>
+    <ion-fab-list side="start">
+      <ion-fab-button *ngIf="!menuLabel" (click)="analyzeJournal()"><ion-icon name="search-outline"></ion-icon></ion-fab-button>
+      <ion-fab-button *ngIf="menuLabel" (click)="analyzeJournal()" data-desc="Note" class="desc-left"><ion-icon name="search-outline"></ion-icon></ion-fab-button>
+    </ion-fab-list>
+    <ion-fab-list side="end">
+      <ion-fab-button *ngIf="!menuLabel" (click)="editJournal()"><ion-icon name="create-outline"></ion-icon></ion-fab-button>
+      <ion-fab-button *ngIf="menuLabel" (click)="editJournal()" data-desc="Edit" class="desc-right"><ion-icon name="create-outline"></ion-icon></ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+
+  <!-- Right -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" style="margin-bottom: 20pt; margin-right: 10pt;" *ngIf="fabPos == 2">
+    <ion-fab-button>
+      <ion-icon name="cog"></ion-icon>
+    </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button *ngIf="!menuLabel" (click)="editJournal()"><ion-icon name="create-outline"></ion-icon></ion-fab-button>
+      <ion-fab-button *ngIf="menuLabel" (click)="editJournal()" data-desc="Edit" class="desc-right"><ion-icon name="create-outline"></ion-icon></ion-fab-button>
+
+      <ion-fab-button *ngIf="!menuLabel" (click)="analyzeJournal()"><ion-icon name="search-outline"></ion-icon></ion-fab-button>
+      <ion-fab-button *ngIf="menuLabel" (click)="analyzeJournal()" data-desc="Note" class="desc-left"><ion-icon name="search-outline"></ion-icon></ion-fab-button>
+
+      <ion-fab-button *ngIf="!menuLabel" (click)="trashJournal()"><ion-icon name="trash"></ion-icon></ion-fab-button>
+      <ion-fab-button *ngIf="menuLabel" (click)="trashJournal()" data-desc="Delete" class="desc-up"><ion-icon name="trash"></ion-icon></ion-fab-button>
+    </ion-fab-list>
+  </ion-fab>
+</ion-content>
