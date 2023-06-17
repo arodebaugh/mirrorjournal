@@ -1,5 +1,5 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {IonSlides, ModalController, Platform} from '@ionic/angular';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import { ModalController, Platform} from '@ionic/angular';
 import { Haptics, ImpactStyle } from '@capacitor/haptics';
 
 
@@ -9,7 +9,7 @@ import { Haptics, ImpactStyle } from '@capacitor/haptics';
   styleUrls: ['./whats-new.component.scss'],
 })
 export class WhatsNewComponent implements OnInit {
-  @ViewChild(IonSlides) slide: IonSlides;
+  @ViewChild('swiper') slide: ElementRef | undefined;
   viewEntered = false;
 
   constructor(private platform: Platform, private modalController: ModalController) { }
@@ -17,14 +17,14 @@ export class WhatsNewComponent implements OnInit {
   ngOnInit() {
     this.platform.ready().then(() => {
       this.viewEntered = true;
-      this.slide.update();
-      this.slide.lockSwipes(true);
+      // this.slide.update();
+      // this.slide?.nativeElement.swiper.lockSwipes();
     });
   }
 
   async close() {
     Haptics.impact({style: ImpactStyle.Light});
-    await this.slide.slideTo(0);
+    //this.slide?.nativeElement.swiper.activeIndex = 0;
     this.viewEntered = false;
     await this.modalController.dismiss();
   }

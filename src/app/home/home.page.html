@@ -17,8 +17,8 @@
   <div *ngIf="showJournals">
     <div *ngIf="memories.length > 0">
       <h2 class="ion-padding-start ion-padding-start">Memories</h2>
-      <ion-slides [options]="{ slidesPerView: 1.2, spaceBetween: 0 }">
-        <ion-slide *ngFor="let journal of memories; let i = index;">
+      <swiper-container slides-per-view="1.2" space-between="0">
+        <swiper-slide *ngFor="let journal of memories; let i = index;">
           <ion-card (click)="openJournalPage('/tabs/journalView', journal)" style="text-align: left;">
             <ion-card-header>
               <ion-row>
@@ -36,8 +36,8 @@
             <ion-card-content [innerHTML]="journalContentFormattedMemories[i] | words : 25">
             </ion-card-content>
           </ion-card>
-        </ion-slide>
-      </ion-slides>
+        </swiper-slide>
+      </swiper-container>
       <hr class="dotted">
     </div>
 

@@ -1,6 +1,6 @@
 <ion-content>
-  <ion-slides *ngIf="viewEntered" style="overflow-y: scroll;">
-    <ion-slide>
+  <swiper-container #swiper *ngIf="viewEntered" style="overflow-y: scroll;" is-locked="true">
+    <swiper-slide>
       <img src="../assets/mirror-images/assembly.png"/>
       <h2>✨ What's New ✨</h2>
       <h3>v1.2 - The 🗣️ chatterbox update</h3>
@@ -23,6 +23,6 @@
 
       <ion-button color="primary" fill="outline" (click)="close()">👍 Got it!</ion-button>
       <br /><br />
-    </ion-slide>
-  </ion-slides>
+    </swiper-slide>
+  </swiper-container>
 </ion-content>

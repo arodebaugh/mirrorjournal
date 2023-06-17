@@ -1,5 +1,5 @@
 import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {UntypedFormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-rich-text-editor',
@@ -11,7 +11,7 @@ export class RichTextEditorComponent implements OnInit {
   @ViewChild('decorate') decorate: ElementRef;
   @ViewChild('styler') styler: ElementRef;
 
-  @Input() formControlItem: FormControl;
+  @Input() formControlItem: UntypedFormControl;
 
   @Input() placeholderText: string;
 

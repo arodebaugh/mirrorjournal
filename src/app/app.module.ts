@@ -29,21 +29,25 @@ import { InAppBrowser } from '@awesome-cordova-plugins/in-app-browser/ngx';
 import {LocalNotifications} from '@awesome-cordova-plugins/local-notifications/ngx';
 import { SpeechRecognition } from '@awesome-cordova-plugins/speech-recognition/ngx';
 import {WhatsNewComponent} from './whats-new/whats-new.component';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { register } from 'swiper/element/bundle';
+
+register();
 
 @NgModule({
-  declarations: [AppComponent, EmojiPickerComponent, JournalHelpComponent, CardQuickOptionsComponent, NotesListComponent, PopupEditorComponent, RichTextEditorComponent, WelcomeScreenComponent, NewAnalyzeComponent, ImageSettingsComponent, SettingsComponent, PasswordDialogComponent, WhatsNewComponent],
-  entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, TruncateModule, HttpClientModule, AngularEditorModule, FormsModule],
-  providers: [
-    NativeStorage,
-    ImagePicker,
-    EmailComposer,
-    AppRate,
-    InAppBrowser,
-    LocalNotifications,
-    SpeechRecognition,
-    {provide: RouteReuseStrategy, useClass: IonicRouteStrategy}
-  ],
-  bootstrap: [AppComponent]
+    declarations: [AppComponent, EmojiPickerComponent, JournalHelpComponent, CardQuickOptionsComponent, NotesListComponent, PopupEditorComponent, RichTextEditorComponent, WelcomeScreenComponent, NewAnalyzeComponent, ImageSettingsComponent, SettingsComponent, PasswordDialogComponent, WhatsNewComponent],
+    imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, TruncateModule, HttpClientModule, AngularEditorModule, FormsModule],
+    providers: [
+        NativeStorage,
+        ImagePicker,
+        EmailComposer,
+        AppRate,
+        InAppBrowser,
+        LocalNotifications,
+        SpeechRecognition,
+        { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    ],
+    bootstrap: [AppComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule {}
