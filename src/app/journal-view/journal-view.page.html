@@ -49,10 +49,10 @@
       <ion-fab-button *ngIf="menuLabel" (click)="editJournal()" data-desc="Edit" class="desc-right"><ion-icon name="create-outline"></ion-icon></ion-fab-button>
 
       <ion-fab-button *ngIf="!menuLabel" (click)="analyzeJournal()"><ion-icon name="search-outline"></ion-icon></ion-fab-button>
-      <ion-fab-button *ngIf="menuLabel" (click)="analyzeJournal()" data-desc="Note" class="desc-left"><ion-icon name="search-outline"></ion-icon></ion-fab-button>
+      <ion-fab-button *ngIf="menuLabel" (click)="analyzeJournal()" data-desc="Note" class="desc-right"><ion-icon name="search-outline"></ion-icon></ion-fab-button>
 
       <ion-fab-button *ngIf="!menuLabel" (click)="trashJournal()"><ion-icon name="trash"></ion-icon></ion-fab-button>
-      <ion-fab-button *ngIf="menuLabel" (click)="trashJournal()" data-desc="Delete" class="desc-up"><ion-icon name="trash"></ion-icon></ion-fab-button>
+      <ion-fab-button *ngIf="menuLabel" (click)="trashJournal()" data-desc="Delete" class="desc-right"><ion-icon name="trash"></ion-icon></ion-fab-button>
     </ion-fab-list>
   </ion-fab>
 
@@ -82,13 +82,13 @@
     </ion-fab-button>
     <ion-fab-list side="top">
       <ion-fab-button *ngIf="!menuLabel" (click)="editJournal()"><ion-icon name="create-outline"></ion-icon></ion-fab-button>
-      <ion-fab-button *ngIf="menuLabel" (click)="editJournal()" data-desc="Edit" class="desc-right"><ion-icon name="create-outline"></ion-icon></ion-fab-button>
+      <ion-fab-button *ngIf="menuLabel" (click)="editJournal()" data-desc="Edit" class="desc-left"><ion-icon name="create-outline"></ion-icon></ion-fab-button>
 
       <ion-fab-button *ngIf="!menuLabel" (click)="analyzeJournal()"><ion-icon name="search-outline"></ion-icon></ion-fab-button>
       <ion-fab-button *ngIf="menuLabel" (click)="analyzeJournal()" data-desc="Note" class="desc-left"><ion-icon name="search-outline"></ion-icon></ion-fab-button>
 
       <ion-fab-button *ngIf="!menuLabel" (click)="trashJournal()"><ion-icon name="trash"></ion-icon></ion-fab-button>
-      <ion-fab-button *ngIf="menuLabel" (click)="trashJournal()" data-desc="Delete" class="desc-up"><ion-icon name="trash"></ion-icon></ion-fab-button>
+      <ion-fab-button *ngIf="menuLabel" (click)="trashJournal()" data-desc="Delete" class="desc-left"><ion-icon name="trash"></ion-icon></ion-fab-button>
     </ion-fab-list>
   </ion-fab>
 </ion-content>
