@@ -15,7 +15,7 @@ export class PasswordDialogComponent implements OnInit {
   oldPasscodeInput = '';
   passcodeInput = '';
   passcodeReinput = '';
-  passcodeSet = true;
+  passcodeSet = false;
   private encryptedPasscode: string;
 
   constructor(private modalController: ModalController, private platform: Platform, private toastController: ToastController, private nativeStorage: NativeStorage) { }
@@ -23,7 +23,7 @@ export class PasswordDialogComponent implements OnInit {
   ngOnInit() {
     this.platform.ready().then(() => {
       Preferences.get({key: 'passcode' }).then(out => {
-        this.passcodeSet = true;
+        this.passcodeSet = out.value ? true : false;
         this.encryptedPasscode = out.value;
       }).catch(err => {
         this.passcodeSet = false;
