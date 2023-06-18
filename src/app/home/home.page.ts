@@ -440,14 +440,14 @@ export class HomePage implements OnInit {
 
   async unlockLockJournals() {
     if (this.passcode === undefined) {
-      this.nativeStorage.getItem('passcode').then((out) => {
-        this.passcode = out;
+      const { value } = await Preferences.get({key: 'passcode' });
+      if (value) {
+        this.passcode = value;
         Haptics.impact({style: ImpactStyle.Light});
         this.askForPasscode();
-      }).catch(err => {
+      } else {
         this.openPasswordDialog();
-        console.log('Error unlocklock: ' + JSON.stringify(err));
-      });
+      }
     } else {
       this.passcode = undefined;
       this.lockIcon = 'lock-closed-outline';
