@@ -15,23 +15,28 @@ export class PasswordDialogComponent implements OnInit {
   oldPasscodeInput = '';
   passcodeInput = '';
   passcodeReinput = '';
-  passcodeSet = false;
+  passcodeSet = true;
   private encryptedPasscode: string;
 
   constructor(private modalController: ModalController, private platform: Platform, private toastController: ToastController, private nativeStorage: NativeStorage) { }
 
-  ngOnInit() {
+ ngOnInit() {
     this.platform.ready().then(() => {
-      Preferences.get({key: 'passcode' }).then(out => {
-        this.passcodeSet = out.value ? true : false;
-        this.encryptedPasscode = out.value;
-      }).catch(err => {
-        this.passcodeSet = false;
-        console.log('Saving error: ' + JSON.stringify(err));
-      });
+      this.getPasscode();
     }).catch(err => {
       alert('Platform load error: ' + JSON.stringify(err));
     });
+  }
+
+  async getPasscode() {
+    const { value } = await Preferences.get({key: 'passcode' });
+
+    if (value) {
+      this.passcodeSet = value ? true : false;
+      this.encryptedPasscode = value;
+    } else {
+      this.passcodeSet = false;
+    }
   }
 
   async dismiss() {
@@ -66,7 +71,7 @@ export class PasswordDialogComponent implements OnInit {
       Haptics.notification({type: NotificationType.Success});
       toast.message = 'Saved!';
       toast.color = 'success';
-      this.nativeStorage.setItem('passcode', CryptoJS.AES.encrypt('passcode', this.passcodeInput).toString()).then(() => {
+      Preferences.set({ key: 'passcode', value: CryptoJS.AES.encrypt('passcode', this.passcodeInput).toString()}).then(() => {
         toast.present();
         this.dismiss();
       }).catch(err => {
