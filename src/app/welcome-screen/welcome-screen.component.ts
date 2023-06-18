@@ -25,6 +25,7 @@ export class WelcomeScreenComponent implements OnInit {
       this.last = false;
     });
   }
+
   async presentAlert(header, message) {
     const alert = await this.alertController.create({
       header,
@@ -34,7 +35,6 @@ export class WelcomeScreenComponent implements OnInit {
 
     await alert.present();
   }
-
 
   async next() {
     Haptics.impact({style: ImpactStyle.Light});

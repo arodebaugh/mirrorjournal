@@ -21,7 +21,13 @@
       <p>- Fullscreen editing for iPad ⌨️</p>
       <p>- Blank emoji reactions 😶</p>
 
-      <ion-button color="primary" fill="outline" (click)="close()">👍 Got it!</ion-button>
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="12" class="ion-text-center">
+            <ion-button color="primary" fill="outline" (click)="close()">👍 Got it!</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
       <br /><br />
     </swiper-slide>
   </swiper-container>
