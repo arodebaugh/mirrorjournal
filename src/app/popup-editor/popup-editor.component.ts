@@ -97,4 +97,8 @@ export class PopupEditorComponent implements OnInit {
     });
     await modal.present();*/
   }
+
+  editorChanged(evt) {
+    alert(JSON.stringify(evt));
+  }
 }

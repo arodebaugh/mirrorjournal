@@ -4,7 +4,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { JournalNewPageRoutingModule } from './journal-new-routing.module';
 import { JournalNewPage } from './journal-new.page';
-import {AngularEditorModule} from '@kolkov/angular-editor';
+import { AngularEditorModule } from '@kolkov/angular-editor';
 
 
 @NgModule({

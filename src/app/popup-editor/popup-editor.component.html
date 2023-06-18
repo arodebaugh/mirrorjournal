@@ -6,5 +6,5 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <angular-editor #editor [(ngModel)]="journalContent" [config]="editorConfig" [style.font-size]="fontsize"></angular-editor>
+  <quill-editor [(ngModel)]="journalContent" (onEditorChanged)="editorChanged($event)" [placeholder]="'What are you thinking about?'"></quill-editor>
 </ion-content>
