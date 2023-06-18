@@ -92,11 +92,11 @@
       <ion-fab-button *ngIf="menuLabel" (click)="openSettings()" data-desc="Settings" class="desc-right"><ion-icon name="cog"></ion-icon></ion-fab-button>
 
       <ion-fab-button *ngIf="!menuLabel" (click)="unlockLockJournals()"><ion-icon [name]="lockIcon"></ion-icon></ion-fab-button>
-      <ion-fab-button *ngIf="lockDesc == 'Unlock' && menuLabel" (click)="unlockLockJournals()" data-desc="Unlock" class="desc-left"><ion-icon [name]="lockIcon"></ion-icon></ion-fab-button>
-      <ion-fab-button *ngIf="lockDesc == 'Lock' && menuLabel" (click)="unlockLockJournals()" data-desc="Lock" class="desc-left"><ion-icon [name]="lockIcon"></ion-icon></ion-fab-button>
+      <ion-fab-button *ngIf="lockDesc == 'Unlock' && menuLabel" (click)="unlockLockJournals()" data-desc="Unlock" class="desc-right"><ion-icon [name]="lockIcon"></ion-icon></ion-fab-button>
+      <ion-fab-button *ngIf="lockDesc == 'Lock' && menuLabel" (click)="unlockLockJournals()" data-desc="Lock" class="desc-right"><ion-icon [name]="lockIcon"></ion-icon></ion-fab-button>
 
       <ion-fab-button *ngIf="!menuLabel" (click)="openPage('/tabs/journalNew')"><ion-icon name="add"></ion-icon></ion-fab-button>
-      <ion-fab-button *ngIf="menuLabel" (click)="openPage('/tabs/journalNew')" data-desc="New" class="desc-up"><ion-icon name="add"></ion-icon></ion-fab-button>
+      <ion-fab-button *ngIf="menuLabel" (click)="openPage('/tabs/journalNew')" data-desc="New" class="desc-right"><ion-icon name="add"></ion-icon></ion-fab-button>
 
     </ion-fab-list>
   </ion-fab>
@@ -128,14 +128,14 @@
     </ion-fab-button>
     <ion-fab-list side="top">
       <ion-fab-button *ngIf="!menuLabel" (click)="openSettings()"><ion-icon name="cog"></ion-icon></ion-fab-button>
-      <ion-fab-button *ngIf="menuLabel" (click)="openSettings()" data-desc="Settings" class="desc-right"><ion-icon name="cog"></ion-icon></ion-fab-button>
+      <ion-fab-button *ngIf="menuLabel" (click)="openSettings()" data-desc="Settings" class="desc-left"><ion-icon name="cog"></ion-icon></ion-fab-button>
 
       <ion-fab-button *ngIf="!menuLabel" (click)="unlockLockJournals()"><ion-icon [name]="lockIcon"></ion-icon></ion-fab-button>
       <ion-fab-button *ngIf="lockDesc == 'Unlock' && menuLabel" (click)="unlockLockJournals()" data-desc="Unlock" class="desc-left"><ion-icon [name]="lockIcon"></ion-icon></ion-fab-button>
       <ion-fab-button *ngIf="lockDesc == 'Lock' && menuLabel" (click)="unlockLockJournals()" data-desc="Lock" class="desc-left"><ion-icon [name]="lockIcon"></ion-icon></ion-fab-button>
 
       <ion-fab-button *ngIf="!menuLabel" (click)="openPage('/tabs/journalNew')"><ion-icon name="add"></ion-icon></ion-fab-button>
-      <ion-fab-button *ngIf="menuLabel" (click)="openPage('/tabs/journalNew')" data-desc="New" class="desc-up"><ion-icon name="add"></ion-icon></ion-fab-button>
+      <ion-fab-button *ngIf="menuLabel" (click)="openPage('/tabs/journalNew')" data-desc="New" class="desc-left"><ion-icon name="add"></ion-icon></ion-fab-button>
 
     </ion-fab-list>
   </ion-fab>
