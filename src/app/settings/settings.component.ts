@@ -10,6 +10,7 @@ import {LocalNotifications} from '@awesome-cordova-plugins/local-notifications/n
 import {ThemeWatchService} from '../theme-watch.service';
 import {WhatsNewComponent} from '../whats-new/whats-new.component';
 import { Preferences } from '@capacitor/preferences';
+import { Filesystem } from '@capacitor/filesystem';
 
 const PRODUCT_PRO_KEY = 'mirrorjournalpro';
 
@@ -197,5 +198,16 @@ export class SettingsComponent implements OnInit {
     }).catch(err => {
       alert('Error: ' + JSON.stringify(err));
     });
+  }
+
+  syncFromOldMirrorJournal() {
+    let warn = confirm("Warning: This may replace any journals in your iCloud Drive! Proceed with caution.");
+    if (warn) {
+      Filesystem.syncToDrive({}).then(()=> {
+        alert("Success!")
+      }).catch(err => {
+        alert("There was an error: " + JSON.stringify(err))
+      });
+    }
   }
 }
