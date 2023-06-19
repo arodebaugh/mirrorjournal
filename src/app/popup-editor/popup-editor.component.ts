@@ -15,39 +15,6 @@ export class PopupEditorComponent implements OnInit {
   @Input() fullscreen = false;
   editor: any;
   fontsize = '';
-  editorConfig: AngularEditorConfig = {
-    editable: true,
-    spellcheck: true,
-    height: 'auto',
-    minHeight: '0',
-    maxHeight: 'auto',
-    width: 'auto',
-    minWidth: '0',
-    translate: 'yes',
-    enableToolbar: true,
-    showToolbar: true,
-    placeholder: 'What are you thinking about?',
-    defaultParagraphSeparator: '',
-    defaultFontName: '',
-    defaultFontSize: '',
-    fonts: [
-      {class: 'arial', name: 'Arial'},
-      {class: 'times-new-roman', name: 'Times New Roman'},
-      {class: 'calibri', name: 'Calibri'},
-      {class: 'comic-sans-ms', name: 'Comic Sans MS'}
-    ],
-    sanitize: true,
-    toolbarPosition: 'top',
-    toolbarHiddenButtons: [
-      ['justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull', 'fontSize', 'insertVideo', 'removeFormat', 'link', 'unlink', 'subscript',
-        'superscript', 'indent',
-        'outdent', 'insertUnorderedList',
-        'insertOrderedList', 'undo',
-        'redo', 'textColor',
-        'backgroundColor', 'insertHorizontalRule',
-        'removeFormat', 'toggleEditorMode', 'fontName', 'insertImage']
-    ]
-  };
 
   constructor(private modalController: ModalController, private platform: Platform) { }
 
@@ -63,14 +30,17 @@ export class PopupEditorComponent implements OnInit {
   }
 
   async ionViewDidEnter() {
+    // todo: fix font size
     const tempFontsize = await Preferences.get({key: 'fontsize'});
     if (tempFontsize.value) {
       this.fontsize = tempFontsize.value;
       if (this.fontsize === 'default') {
-        this.fontsize = '';
+        this.fontsize = '16px';
       } else {
         this.fontsize = this.fontsize + 'px';
       }
+    } else {
+      this.fontsize = '16px';
     }
     // this.editorConfig.defaultFontSize = this.fontsize;
   }

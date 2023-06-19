@@ -25,6 +25,92 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+// Quill
+
+@import '~quill/dist/quill.core.css';
+@import '~quill/dist/quill.snow.css'; 
+
+.ql-snow .ql-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.ql-container {
+  font-size: 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+  /* Set the color of the placeholder text */
+  .ql-snow .ql-editor::placeholder {
+    color: #fff;
+  }
+
+  /* Set the border color of the editor */
+  .ql-snow.ql-container {
+    border-color: transparent;
+  }
+
+  .ql-snow.ql-toolbar {
+    border-top-color: #fff;
+    border-bottom-color: #fff;
+    border-left-color: transparent;
+    border-right-color: transparent;
+  }
+
+  /* Set the color of the toolbar icons */
+  .ql-snow .ql-toolbar .ql-picker-label::before,
+  .ql-snow .ql-toolbar button svg {
+    fill: #fff;
+  }
+
+  .ql-snow .ql-fill, .ql-snow .ql-stroke.ql-fill {
+    fill: #fff;
+  }
+
+  .ql-snow .ql-stroke {
+    stroke: #fff;
+  }
+
+  /* Set the color of the text in the editor */
+  .ql-snow .ql-editor {
+    color: #fff;
+  }
+
+  /* Set the background color of the toolbar */
+  .ql-snow .ql-toolbar {
+    // background-color: #444;
+  }
+
+  /* Set the color of the toolbar buttons */
+  .ql-snow .ql-toolbar button {
+    color: #fff;
+  }
+
+  /* Set the color of the toolbar buttons when hovered */
+  .ql-snow .ql-toolbar button:hover {
+    color: #ccc;
+  }
+
+  /* Set the background color of the toolbar dropdowns */
+  .ql-snow .ql-picker-options {
+    background-color: #fff;
+  }
+
+  /* Set the color of the toolbar dropdown options */
+  .ql-snow .ql-picker-item {
+    color: #fff;
+  }
+
+  /* Set the color of the toolbar dropdown options when hovered */
+  .ql-snow .ql-picker-item:hover {
+    color: #ccc;
+  }
+}
+
+
+// End quill
+
 ion-text {
   -webkit-user-select: auto;
 }

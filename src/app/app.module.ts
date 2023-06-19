@@ -11,7 +11,6 @@ import { TruncateModule } from '@yellowspot/ng-truncate';
 import { EmojiPickerComponent } from './emoji-picker/emoji-picker.component';
 import { RichTextEditorComponent } from './rich-text-editor/rich-text-editor.component';
 import { HttpClientModule} from '@angular/common/http';
-import { AngularEditorModule } from '@kolkov/angular-editor';
 import { NewAnalyzeComponent } from './new-analyze/new-analyze.component';
 import { FormsModule } from '@angular/forms';
 import { ImagePicker } from '@awesome-cordova-plugins/image-picker/ngx';
@@ -31,12 +30,25 @@ import { SpeechRecognition } from '@awesome-cordova-plugins/speech-recognition/n
 import {WhatsNewComponent} from './whats-new/whats-new.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { register } from 'swiper/element/bundle';
+import { QuillModule } from 'ngx-quill';
 
 register();
 
 @NgModule({
     declarations: [AppComponent, EmojiPickerComponent, JournalHelpComponent, CardQuickOptionsComponent, NotesListComponent, PopupEditorComponent, RichTextEditorComponent, WelcomeScreenComponent, NewAnalyzeComponent, ImageSettingsComponent, SettingsComponent, PasswordDialogComponent, WhatsNewComponent],
-    imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, TruncateModule, HttpClientModule, AngularEditorModule, FormsModule],
+    imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, TruncateModule, HttpClientModule, FormsModule, 
+        QuillModule.forRoot({
+            modules: {
+                // placeholder: 'What are you thinking about?',
+                toolbar: [
+                    ['bold', 'italic', 'underline', 'strike'],
+                    ['blockquote'],
+                
+                    [{ 'header': 1 }, { 'header': 2 }],
+                    [{ 'list': 'ordered'}, { 'list': 'bullet' }]
+                  ]
+            },
+        })],
     providers: [
         NativeStorage,
         ImagePicker,
