@@ -91,9 +91,10 @@ export class HomePage implements OnInit {
   }
 
   stripJournalContent(content) {
-    const tagsToStrip = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'h7'];
+    const tagsToStrip = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'h7', 'br'];
     for (const i in tagsToStrip) {
       content = content.replace(new RegExp('<' + tagsToStrip[i] + '.*>.*?<\/' + tagsToStrip[i] +  '>'), '');
+      content = content.replace(/(<(\/)?(br|BR|Br|bR)>)|(<(\/)?(P|P)>)|(<(\/)?(P|P)>)/g, '');
     }
     return content.split('\n', 1)[0].trim();
   }
