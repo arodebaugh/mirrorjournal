@@ -25,7 +25,6 @@ import {PopupEditorComponent} from '../popup-editor/popup-editor.component';
 import { Directory, Encoding, Filesystem } from '@capacitor/filesystem';
 import { Haptics, ImpactStyle, NotificationType } from '@capacitor/haptics';
 import {JournalHelpComponent} from '../journal-help/journal-help.component';
-import { SpeechRecognition } from '@awesome-cordova-plugins/speech-recognition/ngx';
 import { Preferences } from '@capacitor/preferences';
 
 const options = [
@@ -70,7 +69,6 @@ export class JournalNewPage implements OnInit {
   lockState = false;
   modalUp = false;
   memories = true;
-  speaking = false;
   fontsize = 'default';
   unsaved = true;
   first = true;
@@ -98,7 +96,7 @@ export class JournalNewPage implements OnInit {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
   };
 
-  constructor(private cdr: ChangeDetectorRef, private speechRecognition: SpeechRecognition, private navCtrl: NavController, /*private taptic: TapticEngine,*/ private platform: Platform, private pickerController: PickerController, private popoverController: PopoverController, private router: Router, private imagePicker: ImagePicker, private route: ActivatedRoute, private modalCtrl: ModalController, private sanitizer: DomSanitizer, private fb: UntypedFormBuilder, private routerOutlet: IonRouterOutlet, private alertController: AlertController, private toastController: ToastController, private modalController: ModalController, private nativeStorage: NativeStorage) {
+  constructor(private cdr: ChangeDetectorRef, private navCtrl: NavController, /*private taptic: TapticEngine,*/ private platform: Platform, private pickerController: PickerController, private popoverController: PopoverController, private router: Router, private imagePicker: ImagePicker, private route: ActivatedRoute, private modalCtrl: ModalController, private sanitizer: DomSanitizer, private fb: UntypedFormBuilder, private routerOutlet: IonRouterOutlet, private alertController: AlertController, private toastController: ToastController, private modalController: ModalController, private nativeStorage: NativeStorage) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.journalName = this.router.getCurrentNavigation().extras.state.journalName;
@@ -141,56 +139,6 @@ export class JournalNewPage implements OnInit {
     if (tempAutosave.value) {
       this.autosave = (tempAutosave.value === 'true');
     }
-  }
-
-  stopSpeak() {
-    this.speechRecognition.stopListening().then(() => {
-      this.speaking = false;
-    }).catch(err => {
-      alert('error: ' + err);
-    });
-  }
-
-  speak() {
-    this.speechRecognition.isRecognitionAvailable()
-        .then((available: boolean) => {
-          if (available) {
-            this.speechRecognition.hasPermission()
-                .then((hasPermission: boolean) => {
-                  if (!hasPermission) {
-                    this.speechRecognition.requestPermission()
-                        .then(
-                            () => console.log('Granted'),
-                            () => console.log('Denied')
-                        );
-                  }
-
-                  this.speaking = true;
-
-                  this.speechRecognition.startListening({
-                    prompt: 'Speech to text feature for creating journals.'
-                  })
-                      .subscribe(
-                          (matches: string[]) => {
-                            if (this.journalContent === '') {
-                              this.journalContent = matches[0];
-                            } else {
-                              this.journalContent += '<br/><br/>' + matches[0];
-                            }
-                            this.cdr.detectChanges();
-                            this.unsaved = true;
-                            this.first = false;
-                          },
-                          err => {
-                            this.speaking = false;
-                            console.log(err);
-                          }
-                      );
-                });
-          } else {
-            alert('Speak Recognition is not available for this device ');
-          }
-    });
   }
 
   async setExpire() {
