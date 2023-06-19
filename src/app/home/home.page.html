@@ -17,9 +17,9 @@
   <div *ngIf="showJournals">
     <div *ngIf="memories.length > 0">
       <h2 class="ion-padding-start ion-padding-start">Memories</h2>
-      <swiper-container slides-per-view="1.2" space-between="0">
+      <swiper-container slides-per-view="1.1" space-between="0">
         <swiper-slide *ngFor="let journal of memories; let i = index;">
-          <ion-card (click)="openJournalPage('/tabs/journalView', journal)" style="text-align: left;">
+          <ion-card style="text-align: left;">
             <ion-card-header>
               <ion-row>
                 <ion-col size="11" offset="0" style="--ion-grid-column-padding: 0;" (click)="openJournalPage('/tabs/journalView', journal)">
@@ -29,11 +29,11 @@
                   <ion-icon name="ellipsis-horizontal-outline" (click)="presentCardOptions($event, journal)"></ion-icon>
                 </ion-col>
               </ion-row>
-              <ion-card-subtitle>{{ dateFormattedMemories[i] }}</ion-card-subtitle>
-              <ion-card-subtitle *ngIf="journal.locked"><ion-badge color="danger">Locked</ion-badge></ion-card-subtitle>
+              <ion-card-subtitle (click)="openJournalPage('/tabs/journalView', journal)">{{ dateFormattedMemories[i] }}</ion-card-subtitle>
+              <ion-card-subtitle *ngIf="journal.locked" (click)="openJournalPage('/tabs/journalView', journal)"><ion-badge color="danger">Locked</ion-badge></ion-card-subtitle>
             </ion-card-header>
 
-            <ion-card-content [innerHTML]="journalContentFormattedMemories[i] | words : 25">
+            <ion-card-content (click)="openJournalPage('/tabs/journalView', journal)" [innerHTML]="journalContentFormattedMemories[i] | words : 25">
             </ion-card-content>
           </ion-card>
         </swiper-slide>

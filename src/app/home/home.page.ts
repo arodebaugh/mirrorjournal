@@ -257,21 +257,13 @@ export class HomePage implements OnInit {
 
   generateMemories(journals) {
     this.memories = [];
-    // 1 week, 1 month, 6 months, every year
     for (const journal of journals) {
-      // Todo: Maybe a better way to do the year thing.
-      if (journal.hideMemories) {
-        if (moment().subtract(1, 'week').isSame(moment(journal.date), 'date')) {
-          this.loadMemory(journal.id);
-        } else if (moment().subtract(1, 'month').isSame(moment(journal.date), 'date')) {
+      if (journal.hideMemories != true) {
+        if (moment().subtract(1, 'month').isSame(moment(journal.date), 'date')) {
           this.loadMemory(journal.id);
         } else if (moment().subtract(6, 'month').isSame(moment(journal.date), 'date')) {
           this.loadMemory(journal.id);
-        } else if (moment().subtract(1, 'year').isSame(moment(journal.date), 'date')) {
-          this.loadMemory(journal.id);
-        } else if (moment().subtract(2, 'year').isSame(moment(journal.date), 'date')) {
-          this.loadMemory(journal.id);
-        } else if (moment().subtract(3, 'year').isSame(moment(journal.date), 'date')) {
+        } else if (moment().isSame(moment(journal.date), 'month') && moment().isSame(moment(journal.date), 'day') && !moment().isSame(moment(journal.date), 'year')) {
           this.loadMemory(journal.id);
         }
       }
