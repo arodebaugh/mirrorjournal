@@ -12,7 +12,7 @@
   <ion-button class="full-button" expand="full" (click)="insertNewHeader()" *ngIf="headerImageData === undefined || headerImageData === null"><ion-icon name="image-outline" slot="start"></ion-icon> Insert optional header</ion-button>
   <!--<ion-button expand="full" style="margin: 0;" (click)="insertNewDrawing()" *ngIf="headerImageData === undefined || headerImageData === null"><ion-icon name="brush-outline" slot="start"></ion-icon> Create drawing</ion-button>-->
 
-  <ion-card *ngIf="!speaking">
+  <ion-card>
     <img *ngIf="headerImageData !== undefined || headerImageData !== null"  [src]="headerImageData" (click)="presentImageSettings($event)" />
     <ion-card-content>
       <div style="text-align: center">
@@ -33,24 +33,8 @@
         <ion-chip color="primary" (click)="changeMemoriesState()">
           <ion-label style="padding-right: 5px;">{{ memories ? '👁 Show in memories' : '⛔ Hide from memories' }}</ion-label>
         </ion-chip>
-        <ion-chip color="primary" (click)="speak()">
-          <ion-label>🎤 Speak (beta)</ion-label>
-        </ion-chip>
         <ion-chip color="primary" (click)="help($event)">
           <ion-label>💡 Help</ion-label>
-        </ion-chip>
-      </div>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-card *ngIf="speaking">
-    <ion-card-content>
-      <div style="text-align: center">
-        <h1>Listening...</h1>
-        <div class="lds-ripple"><div></div><div></div></div>
-        <br/>
-        <ion-chip color="primary" (click)="stopSpeak()">
-          <ion-label>🛑 Stop</ion-label>
         </ion-chip>
       </div>
     </ion-card-content>
