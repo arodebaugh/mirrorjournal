@@ -140,5 +140,24 @@
       </ion-item>-->
     </ion-item-group>
   </ion-list>
+  <ion-list>
+    <ion-item-group>
+      <ion-item-divider>
+        <ion-label>
+          Advanced
+        </ion-label>
+      </ion-item-divider>
+      <ion-item (click)="syncFromOldMirrorJournal()" detail="true">
+        <ion-icon name="cloud-outline" slot="start"></ion-icon>
+        <ion-label>Move from old Mirror Journal</ion-label>
+      </ion-item>
+      <!--<ion-item>
+        <ion-icon *ngIf="authType == 'FaceID'" name="scan-outline" slot="start"></ion-icon>
+        <ion-icon *ngIf="authType == 'TouchID'" name="finger-print-outline" slot="start"></ion-icon>
+        <ion-label>Lock with {{ authType }}</ion-label>
+        <ion-toggle [(ngModel)]="secureWithID" (ionChange)="saveSecureWithID()"></ion-toggle>
+      </ion-item>-->
+    </ion-item-group>
+  </ion-list>
   <br /><br /><br />
 </ion-content>

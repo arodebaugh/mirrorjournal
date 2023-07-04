@@ -1,6 +1,7 @@
 import {ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {AlertController, ModalController, Platform} from '@ionic/angular';
 import { Haptics, ImpactStyle } from '@capacitor/haptics';
+import { Filesystem } from '@capacitor/filesystem';
 
 
 const PRODUCT_PRO_KEY = 'mirrorjournalpro';
@@ -45,6 +46,18 @@ export class WelcomeScreenComponent implements OnInit {
     Haptics.impact({style: ImpactStyle.Light});
     this.viewEntered = false;
     await this.modalController.dismiss();
+  }
+
+  syncFromOldMirrorJournal() {
+    // todo: make this whole process nicer.
+    let warn = confirm("This version of Mirror Journal syncs with iCloud. Do you want to move your journals to iCloud? This is required to see them.");
+    if (warn) {
+      Filesystem.syncToDrive({}).then(()=> {
+        alert("Success!");
+      }).catch(err => {
+        alert("There was an error: " + JSON.stringify(err))
+      });
+    }
   }
 
   // tslint:disable-next-line:use-lifecycle-interface
