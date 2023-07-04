@@ -38,7 +38,7 @@ export class NewAnalyzeComponent implements OnInit {
   }
 
   ngOnInit() {
-    const allTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'h7', 'i', 'strike', 'u', 'b', 'p'];
+    const allTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'h7', 'i', 'strike', 'u', 'b', 'p', 'ul', 'li', 'ol', 'em', 's', 'strong'];
     console.log(this.newNote);
     if (this.newNote) {
       this.noteData = [];
