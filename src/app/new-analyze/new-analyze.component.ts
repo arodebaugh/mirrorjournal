@@ -66,6 +66,12 @@ export class NewAnalyzeComponent implements OnInit {
         for (const i in styles) {
           if (styles[i].includes('h')) {
             splitText[index] = '<b class="' + styles[i] + '">' + splitText[index] + '</b>';
+          } else if (styles[i].includes('li')) {
+            if (splitText[index].replace(/\s+/g, '') != '') {
+              splitText[index] = '<p class="' + styles[i] + '">- ' + splitText[index] + '</p>';
+            }
+          } else if (styles[i].includes('ul') || styles[i].includes('ol')) {
+            splitText[index] = splitText[index];
           } else {
             splitText[index] = '<' + styles[i] + '>' + splitText[index] + '</' + styles[i] + '>';
           }

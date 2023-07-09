@@ -26,8 +26,7 @@
 @import "~@ionic/angular/css/flex-utils.css";
 
 .highlight {
-  background-color: yellow !important;
-  color: black !important;
+  color: #ffff00;
 }
 
 // Quill
@@ -113,8 +112,12 @@
   }
 }
 
-
 // End quill
+
+mark {
+  background-color: yellow;
+  color: black;
+}
 
 ion-text {
   -webkit-user-select: auto;
