@@ -1,3 +1,16 @@
 ion-grid {
     width: 100%;
+    padding-top: 0;
+    padding-bottom: 0;
 }
+
+ion-title {
+    padding-left: 0px;
+}
+
+#selected-page {
+    font-weight: bold;
+    text-decoration: underline;
+    text-underline-offset: 8px;
+}
+  

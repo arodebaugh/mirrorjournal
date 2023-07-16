@@ -582,13 +582,14 @@ export class JournalNewPage implements OnInit {
   async changeLockState() {
     this.lockState = !this.lockState;
     if (this.lockState && this.passcode === undefined) {
-      this.nativeStorage.getItem('passcode').then((out) => {
-        this.passcode = out;
+      const { value } = await Preferences.get({key: 'passcode' });
+      if (value) {
+        this.passcode = value;
+        Haptics.impact({style: ImpactStyle.Light});
         this.askForPasscode();
-      }).catch(err => {
-        console.log('Error getting passcode ' + err);
+      } else {
         this.openPasswordDialog();
-      });
+      }
     }
   }
 
