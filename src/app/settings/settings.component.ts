@@ -6,11 +6,11 @@ import { EmailComposer } from '@awesome-cordova-plugins/email-composer/ngx';
 import * as moment from 'moment';
 import { Haptics, ImpactStyle } from '@capacitor/haptics';
 import { AppRate } from '@awesome-cordova-plugins/app-rate/ngx';
-import {LocalNotifications} from '@awesome-cordova-plugins/local-notifications/ngx';
 import {ThemeWatchService} from '../theme-watch.service';
 import {WhatsNewComponent} from '../whats-new/whats-new.component';
 import { Preferences } from '@capacitor/preferences';
 import { Filesystem } from '@capacitor/filesystem';
+import { LocalNotifications } from '@capacitor/local-notifications';
 
 const PRODUCT_PRO_KEY = 'mirrorjournalpro';
 
@@ -31,7 +31,7 @@ export class SettingsComponent implements OnInit {
   fontsize = 'default';
   menuplacment = '1';
 
-  constructor(private platform: Platform, private appRate: AppRate, private alertController: AlertController, private localNotifications: LocalNotifications, private ref: ChangeDetectorRef, private modalController: ModalController, private emailComposer: EmailComposer, private themeWatch: ThemeWatchService) { }
+  constructor(private platform: Platform, private appRate: AppRate, private alertController: AlertController,  private ref: ChangeDetectorRef, private modalController: ModalController, private emailComposer: EmailComposer, private themeWatch: ThemeWatchService) { }
 
   async ngOnInit() {
     const tempMenuLabel = await Preferences.get({key: 'menuLabel'});
@@ -166,9 +166,8 @@ export class SettingsComponent implements OnInit {
   }
 
   async schedule() {
-    await this.localNotifications.cancelAll();
     if (this.notifications) {
-      this.localNotifications.schedule({
+      LocalNotifications.schedule({
         id: 1,
         text: '👋 It\'s your scheduled journaling time!',
         trigger: { every: { hour: parseInt(this.time.split(':')[0]), minute: parseInt(this.time.split(':')[1]) } }
