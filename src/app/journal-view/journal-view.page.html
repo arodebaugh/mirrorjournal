@@ -25,7 +25,7 @@
           <ion-label *ngIf="data.notes !== undefined" (click)="viewNotes()">🔍 {{data.notes.length }} {{data.notes.length > 1 ? 'notes' : 'note'}}</ion-label>
           <ion-label *ngIf="data.notes === undefined" (click)="viewNotes()">🔍 0 notes</ion-label>
         </ion-chip>
-        <ion-chip color="danger" *ngIf="data.expire != 'Never'">
+        <ion-chip color="danger" *ngIf="data.expire !== 'Never'">
           <ion-label>⌛ {{ timeToExpire }}</ion-label>
         </ion-chip>
       </div>
@@ -40,7 +40,7 @@
   </div>
 
   <!-- Left -->
-  <ion-fab vertical="bottom" horizontal="start" slot="fixed" style="margin-bottom: 20pt; margin-left: 10pt;" *ngIf="fabPos == 0">
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed" style="margin-bottom: 20pt; margin-left: 10pt;" *ngIf="fabPos === 0">
     <ion-fab-button>
       <ion-icon name="cog"></ion-icon>
     </ion-fab-button>
@@ -57,7 +57,7 @@
   </ion-fab>
 
   <!-- Center -->
-  <ion-fab vertical="bottom" horizontal="center" slot="fixed" style="margin-bottom: 20pt;" *ngIf="fabPos == 1">
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed" style="margin-bottom: 20pt;" *ngIf="fabPos === 1">
     <ion-fab-button>
       <ion-icon name="cog"></ion-icon>
     </ion-fab-button>
@@ -76,7 +76,7 @@
   </ion-fab>
 
   <!-- Right -->
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed" style="margin-bottom: 20pt; margin-right: 10pt;" *ngIf="fabPos == 2">
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" style="margin-bottom: 20pt; margin-right: 10pt;" *ngIf="fabPos === 2">
     <ion-fab-button>
       <ion-icon name="cog"></ion-icon>
     </ion-fab-button>

@@ -13,6 +13,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-eslint/schematics": "^1.0.0",
     "@angular/common": "^14.3.0",
     "@angular/core": "^14.3.0",
     "@angular/forms": "^14.3.0",
@@ -70,6 +71,9 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^14.2.12",
+    "@angular-eslint/builder": "^16.1.0",
+    "@angular-eslint/eslint-plugin": "^16.1.0",
+    "@angular-eslint/eslint-plugin-template": "^16.1.0",
     "@angular/cli": "^14.2.12",
     "@angular/compiler": "^14.3.0",
     "@angular/compiler-cli": "^14.3.0",
@@ -79,6 +83,7 @@
     "@types/jasmine": "~3.5.14",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^14.18.53",
+    "@typescript-eslint/parser": "^6.0.0",
     "jasmine-core": "~3.8.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "6.4.2",
