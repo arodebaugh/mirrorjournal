@@ -31,6 +31,7 @@ import { Keyboard, KeyboardStyle } from '@capacitor/keyboard';
 export class HomePage implements OnInit {
   showJournals = false;
   journals = [];
+  currentPage = "Home";
   dateFormatted = [];
   journalContentFormatted = [];
   dateFormattedMemories = [];
@@ -38,6 +39,7 @@ export class HomePage implements OnInit {
   journalsLoaded: number;
   sortedJournals = [];
   showLoadmore = false;
+  todaysDate = moment().format('dddd, MMMM Do');
   passcode: string;
   lockIcon = 'lock-closed-outline';
   lockDesc = 'Unlock';
@@ -389,7 +391,7 @@ export class HomePage implements OnInit {
     return await modal.present();
   }
 
-  async askForPasscode() {
+  async askForPasscode(privatePage = false) {
     const alert = await this.alertController.create({
       message: 'What is your passcode?',
       inputs: [{
@@ -409,6 +411,7 @@ export class HomePage implements OnInit {
           handler: () => {
             // console.log('Confirm Cancel');
             this.passcode = undefined;
+            this.currentPage = 'Home';
             Haptics.impact({style: ImpactStyle.Light});
           }
         }, {
@@ -432,13 +435,13 @@ export class HomePage implements OnInit {
     await alert.present();
   }
 
-  async unlockLockJournals() {
+  async unlockLockJournals(privatePage = false) {
     if (this.passcode === undefined) {
       const { value } = await Preferences.get({key: 'passcode' });
       if (value) {
         this.passcode = value;
         Haptics.impact({style: ImpactStyle.Light});
-        this.askForPasscode();
+        this.askForPasscode(privatePage);
       } else {
         this.openPasswordDialog();
       }
@@ -449,6 +452,21 @@ export class HomePage implements OnInit {
       this.loadJournal();
     }
   }
+
+  setSelectedPage(page: string) {
+    this.currentPage = page;
+
+    if (this.currentPage == "Private") {
+      if (this.passcode === undefined) {
+        this.unlockLockJournals(true);
+      }
+    }
+  }
+
+  get lockedJournalsCount(): number {
+    return this.journals.filter(journal => journal.locked).length;
+  }
+  
 }
 
 // Definitions that were not importing correctly from Filesystem

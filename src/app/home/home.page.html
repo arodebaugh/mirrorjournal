@@ -1,46 +1,33 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Journal Entries</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
+  <ion-header [translucent]="true">
     <ion-toolbar>
-      <ion-title size="large">Journal Entries</ion-title>
+      <ion-item lines="none">
+        <p>{{ todaysDate }}</p>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-title size="large">Journal</ion-title>
+        <ion-buttons slot="end">
+          <ion-button (click)="openPage('/tabs/journalNew')">
+            <ion-icon name="add" size="large" color="dark"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+      </ion-item>
     </ion-toolbar>
     <!--<ion-toolbar>
       <ion-searchbar showCancelButton="focus" [(ngModel)]="search" (ionChange)="searchForJournal()"></ion-searchbar>
     </ion-toolbar>-->
   </ion-header>
 
-  <div *ngIf="showJournals">
-    <div *ngIf="memories.length > 0">
-      <h2 class="ion-padding-start ion-padding-start">Memories</h2>
-      <swiper-container slides-per-view="1.1" space-between="0">
-        <swiper-slide *ngFor="let journal of memories; let i = index;">
-          <ion-card style="text-align: left;">
-            <ion-card-header>
-              <ion-row>
-                <ion-col size="11" offset="0" style="--ion-grid-column-padding: 0;" (click)="openJournalPage('/tabs/journalView', journal)">
-                  <ion-card-title>{{ journal.name }}</ion-card-title>
-                </ion-col>
-                <ion-col size="1" offset="0" style="--ion-grid-column-padding: 0;">
-                  <ion-icon name="ellipsis-horizontal-outline" (click)="presentCardOptions($event, journal)"></ion-icon>
-                </ion-col>
-              </ion-row>
-              <ion-card-subtitle (click)="openJournalPage('/tabs/journalView', journal)">{{ dateFormattedMemories[i] }}</ion-card-subtitle>
-              <ion-card-subtitle *ngIf="journal.locked" (click)="openJournalPage('/tabs/journalView', journal)"><ion-badge color="danger">Locked</ion-badge></ion-card-subtitle>
-            </ion-card-header>
+  <ion-grid>
+    <ion-row class="ion-justify-content-around">
+      <ion-col size="2"><ion-button fill="clear" color="dark" [id]="(currentPage === 'Home') ? 'selected-page' : ''" (click)="setSelectedPage('Home')">Home</ion-button></ion-col>
+      <ion-col size="3"><ion-button fill="clear" color="dark" [id]="(currentPage === 'Memories') ? 'selected-page' : ''" (click)="setSelectedPage('Memories')">Memories</ion-button></ion-col>
+      <!--<ion-col size="3"><ion-button fill="clear" color="dark" [id]="(currentPage === 'Reflections') ? 'selected-page' : ''" (click)="setSelectedPage('Reflections')">Reflections</ion-button></ion-col>-->
+      <ion-col size="3"><ion-button fill="clear" color="dark" [id]="(currentPage === 'Private') ? 'selected-page' : ''" (click)="setSelectedPage('Private')">Private</ion-button></ion-col>
+    </ion-row>
+  </ion-grid>
 
-            <ion-card-content (click)="openJournalPage('/tabs/journalView', journal)" [innerHTML]="journalContentFormattedMemories[i] | words : 25">
-            </ion-card-content>
-          </ion-card>
-        </swiper-slide>
-      </swiper-container>
-      <hr class="dotted">
-    </div>
-
+  <div *ngIf="currentPage === 'Home'">
     <ion-grid>
       <ion-row>
         <ion-col sizeLg="6" sizeMd="6" sizeXs="12" *ngFor="let journal of journals; let i = index;">
@@ -57,7 +44,7 @@
                 </ion-row>
               </ion-grid>
               <ion-card-subtitle (click)="openJournalPage('/tabs/journalView', journal)">{{ dateFormatted[i] }}</ion-card-subtitle>
-              <ion-card-subtitle (click)="openJournalPage('/tabs/journalView', journal)" *ngIf="journal.locked"><ion-badge color="danger">Locked</ion-badge></ion-card-subtitle>
+              <ion-card-subtitle (click)="openJournalPage('/tabs/journalView', journal)" *ngIf="journal.locked"><ion-badge color="danger">Private</ion-badge></ion-card-subtitle>
             </ion-card-header>
 
             <ion-card-content (click)="openJournalPage('/tabs/journalView', journal)" [innerHTML]="journalContentFormatted[i] | words : 25">
@@ -66,6 +53,79 @@
         </ion-col>
       </ion-row>
     </ion-grid>
+
+    <ion-infinite-scroll threshold="80px" (ionInfinite)="loadData($event)">
+      <ion-infinite-scroll-content
+              loadingSpinner="bubbles"
+              loadingText="Loading more journal entries...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+    <br/><br/><br/><br/>
+  </div>
+
+  <div *ngIf="currentPage === 'Memories'">
+    <div *ngIf="memories.length > 0; else noMemories">
+      <ion-card *ngFor="let journal of memories; let i = index;">
+        <ion-card-header>
+          <ion-row>
+            <ion-col size="11" offset="0" style="--ion-grid-column-padding: 0;" (click)="openJournalPage('/tabs/journalView', journal)">
+              <ion-card-title>{{ journal.name }}</ion-card-title>
+            </ion-col>
+            <ion-col size="1" offset="0" style="--ion-grid-column-padding: 0;">
+              <ion-icon name="ellipsis-horizontal-outline" (click)="presentCardOptions($event, journal)"></ion-icon>
+            </ion-col>
+          </ion-row>
+          <ion-card-subtitle (click)="openJournalPage('/tabs/journalView', journal)">{{ dateFormattedMemories[i] }}</ion-card-subtitle>
+          <ion-card-subtitle *ngIf="journal.locked" (click)="openJournalPage('/tabs/journalView', journal)"><ion-badge color="danger">Private</ion-badge></ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content (click)="openJournalPage('/tabs/journalView', journal)" [innerHTML]="journalContentFormattedMemories[i] | words : 25">
+        </ion-card-content>
+      </ion-card>
+    </div>
+      
+      <ion-card #noMemories>
+        <div style="text-align: center;"><img src="../assets/mirror-images/assembly 5.png" style="height: 300px; margin-top: 10px;"/></div>
+        <ion-card-content style="text-align: center;">
+          No memories today!
+        </ion-card-content>
+      </ion-card>
+  </div>
+
+  <div *ngIf="currentPage === 'Private'">
+    <ion-card *ngIf="lockedJournalsCount === 0">
+      <div style="text-align: center;"><img src="../assets/mirror-images/assembly 5.png" style="height: 300px; margin-top: 10px;"/></div>
+      <ion-card-content style="text-align: center;">
+        No private journals yet!
+      </ion-card-content>
+    </ion-card>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col sizeLg="6" sizeMd="6" sizeXs="12" *ngFor="let journal of journals; let i = index;">
+          <ion-card style="margin-bottom: 0; margin-top: 8px;" *ngIf="journal.locked">
+            <ion-card-header>
+              <ion-grid style="--ion-grid-padding: 0;">
+                <ion-row class="ion-justify-content-center">
+                  <ion-col size="11" offset="0" style="--ion-grid-column-padding: 0;" (click)="openJournalPage('/tabs/journalView', journal)">
+                    <ion-card-title>{{ journal.name }}</ion-card-title>
+                  </ion-col>
+                  <ion-col size="1" offset="0" style="--ion-grid-column-padding: 0;">
+                    <ion-icon name="ellipsis-horizontal-outline" (click)="presentCardOptions($event, journal)"></ion-icon>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+              <ion-card-subtitle (click)="openJournalPage('/tabs/journalView', journal)">{{ dateFormatted[i] }}</ion-card-subtitle>
+              <!--<ion-card-subtitle (click)="openJournalPage('/tabs/journalView', journal)" *ngIf="journal.locked"><ion-badge color="danger">Locked</ion-badge></ion-card-subtitle>-->
+            </ion-card-header>
+
+            <ion-card-content (click)="openJournalPage('/tabs/journalView', journal)" [innerHTML]="journalContentFormatted[i] | words : 25">
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
     <ion-infinite-scroll threshold="80px" (ionInfinite)="loadData($event)">
       <ion-infinite-scroll-content
               loadingSpinner="bubbles"
@@ -83,7 +143,7 @@
   </ion-card>
 
   <!-- Left -->
-  <ion-fab vertical="bottom" horizontal="start" slot="fixed" style="margin-bottom: 20pt; margin-left: 10pt;" *ngIf="fabPos == 0">
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed" style="margin-bottom: 20pt; margin-left: 10pt;" *ngIf="fabPos === 0">
     <ion-fab-button>
       <ion-icon name="menu-outline"></ion-icon>
     </ion-fab-button>
@@ -92,8 +152,8 @@
       <ion-fab-button *ngIf="menuLabel" (click)="openSettings()" data-desc="Settings" class="desc-right"><ion-icon name="cog"></ion-icon></ion-fab-button>
 
       <ion-fab-button *ngIf="!menuLabel" (click)="unlockLockJournals()"><ion-icon [name]="lockIcon"></ion-icon></ion-fab-button>
-      <ion-fab-button *ngIf="lockDesc == 'Unlock' && menuLabel" (click)="unlockLockJournals()" data-desc="Unlock" class="desc-right"><ion-icon [name]="lockIcon"></ion-icon></ion-fab-button>
-      <ion-fab-button *ngIf="lockDesc == 'Lock' && menuLabel" (click)="unlockLockJournals()" data-desc="Lock" class="desc-right"><ion-icon [name]="lockIcon"></ion-icon></ion-fab-button>
+      <ion-fab-button *ngIf="lockDesc === 'Unlock' && menuLabel" (click)="unlockLockJournals()" data-desc="Unlock" class="desc-right"><ion-icon [name]="lockIcon"></ion-icon></ion-fab-button>
+      <ion-fab-button *ngIf="lockDesc === 'Lock' && menuLabel" (click)="unlockLockJournals()" data-desc="Lock" class="desc-right"><ion-icon [name]="lockIcon"></ion-icon></ion-fab-button>
 
       <ion-fab-button *ngIf="!menuLabel" (click)="openPage('/tabs/journalNew')"><ion-icon name="add"></ion-icon></ion-fab-button>
       <ion-fab-button *ngIf="menuLabel" (click)="openPage('/tabs/journalNew')" data-desc="New" class="desc-right"><ion-icon name="add"></ion-icon></ion-fab-button>
@@ -102,7 +162,7 @@
   </ion-fab>
 
   <!-- Center -->
-  <ion-fab vertical="bottom" horizontal="center" slot="fixed" style="margin-bottom: 20pt;" *ngIf="fabPos == 1">
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed" style="margin-bottom: 20pt;" *ngIf="fabPos === 1">
     <ion-fab-button>
       <ion-icon name="menu-outline"></ion-icon>
     </ion-fab-button>
@@ -112,8 +172,8 @@
     </ion-fab-list>
     <ion-fab-list side="start">
       <ion-fab-button *ngIf="!menuLabel" (click)="unlockLockJournals()"><ion-icon [name]="lockIcon"></ion-icon></ion-fab-button>
-      <ion-fab-button *ngIf="lockDesc == 'Unlock' && menuLabel" (click)="unlockLockJournals()" data-desc="Unlock" class="desc-left"><ion-icon [name]="lockIcon"></ion-icon></ion-fab-button>
-      <ion-fab-button *ngIf="lockDesc == 'Lock' && menuLabel" (click)="unlockLockJournals()" data-desc="Lock" class="desc-left"><ion-icon [name]="lockIcon"></ion-icon></ion-fab-button>
+      <ion-fab-button *ngIf="lockDesc === 'Unlock' && menuLabel" (click)="unlockLockJournals()" data-desc="Unlock" class="desc-left"><ion-icon [name]="lockIcon"></ion-icon></ion-fab-button>
+      <ion-fab-button *ngIf="lockDesc === 'Lock' && menuLabel" (click)="unlockLockJournals()" data-desc="Lock" class="desc-left"><ion-icon [name]="lockIcon"></ion-icon></ion-fab-button>
     </ion-fab-list>
     <ion-fab-list side="end">
       <ion-fab-button *ngIf="!menuLabel" (click)="openSettings()"><ion-icon name="cog"></ion-icon></ion-fab-button>
@@ -122,7 +182,7 @@
   </ion-fab>
 
   <!-- Right -->
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed" style="margin-bottom: 20pt; margin-right: 10pt;" *ngIf="fabPos == 2">
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" style="margin-bottom: 20pt; margin-right: 10pt;" *ngIf="fabPos === 2">
     <ion-fab-button>
       <ion-icon name="menu-outline"></ion-icon>
     </ion-fab-button>
@@ -131,8 +191,8 @@
       <ion-fab-button *ngIf="menuLabel" (click)="openSettings()" data-desc="Settings" class="desc-left"><ion-icon name="cog"></ion-icon></ion-fab-button>
 
       <ion-fab-button *ngIf="!menuLabel" (click)="unlockLockJournals()"><ion-icon [name]="lockIcon"></ion-icon></ion-fab-button>
-      <ion-fab-button *ngIf="lockDesc == 'Unlock' && menuLabel" (click)="unlockLockJournals()" data-desc="Unlock" class="desc-left"><ion-icon [name]="lockIcon"></ion-icon></ion-fab-button>
-      <ion-fab-button *ngIf="lockDesc == 'Lock' && menuLabel" (click)="unlockLockJournals()" data-desc="Lock" class="desc-left"><ion-icon [name]="lockIcon"></ion-icon></ion-fab-button>
+      <ion-fab-button *ngIf="lockDesc === 'Unlock' && menuLabel" (click)="unlockLockJournals()" data-desc="Unlock" class="desc-left"><ion-icon [name]="lockIcon"></ion-icon></ion-fab-button>
+      <ion-fab-button *ngIf="lockDesc === 'Lock' && menuLabel" (click)="unlockLockJournals()" data-desc="Lock" class="desc-left"><ion-icon [name]="lockIcon"></ion-icon></ion-fab-button>
 
       <ion-fab-button *ngIf="!menuLabel" (click)="openPage('/tabs/journalNew')"><ion-icon name="add"></ion-icon></ion-fab-button>
       <ion-fab-button *ngIf="menuLabel" (click)="openPage('/tabs/journalNew')" data-desc="New" class="desc-left"><ion-icon name="add"></ion-icon></ion-fab-button>

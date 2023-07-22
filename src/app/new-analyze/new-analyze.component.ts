@@ -38,7 +38,7 @@ export class NewAnalyzeComponent implements OnInit {
   }
 
   ngOnInit() {
-    const allTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'h7', 'i', 'strike', 'u', 'b', 'p'];
+    const allTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'h7', 'i', 'strike', 'u', 'b', 'p', 'ul', 'li', 'ol', 'em', 's', 'strong'];
     console.log(this.newNote);
     if (this.newNote) {
       this.noteData = [];
@@ -66,6 +66,12 @@ export class NewAnalyzeComponent implements OnInit {
         for (const i in styles) {
           if (styles[i].includes('h')) {
             splitText[index] = '<b class="' + styles[i] + '">' + splitText[index] + '</b>';
+          } else if (styles[i].includes('li')) {
+            if (splitText[index].replace(/\s+/g, '') != '') {
+              splitText[index] = '<p class="' + styles[i] + '">- ' + splitText[index] + '</p>';
+            }
+          } else if (styles[i].includes('ul') || styles[i].includes('ol')) {
+            splitText[index] = splitText[index];
           } else {
             splitText[index] = '<' + styles[i] + '>' + splitText[index] + '</' + styles[i] + '>';
           }

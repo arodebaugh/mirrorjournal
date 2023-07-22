@@ -25,6 +25,10 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+.highlight {
+  color: #ffff00;
+}
+
 // Quill
 
 @import '~quill/dist/quill.core.css';
@@ -108,8 +112,12 @@
   }
 }
 
-
 // End quill
+
+mark {
+  background-color: yellow;
+  color: black;
+}
 
 ion-text {
   -webkit-user-select: auto;

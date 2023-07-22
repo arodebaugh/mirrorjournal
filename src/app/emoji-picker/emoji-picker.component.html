@@ -31,7 +31,7 @@
   </ion-segment>
   <ion-grid>
     <ion-row *ngFor="let item of people; let i = index;">
-      <div *ngIf="i % 8 == 0" style="font-size: 200%; text-align: center;">
+      <div *ngIf="i % 8 === 0" style="font-size: 200%; text-align: center;">
         <ion-col (click)="selectEmoji(item)">{{ item }}</ion-col>
         <ion-col *ngIf="i + 1 < people.length" (click)="selectEmoji(people[i + 1])">{{ people[i + 1] }}</ion-col>
         <ion-col *ngIf="i + 2 < people.length" (click)="selectEmoji(people[i + 2])">{{ people[i + 2] }}</ion-col>
@@ -47,7 +47,7 @@
   <ion-text style="text-align: center;"><h5>Animals and Nature</h5></ion-text>
   <ion-grid>
     <ion-row *ngFor="let item of animals_and_nature; let i = index;">
-      <div *ngIf="i % 8 == 0" style="font-size: 200%; text-align: center;">
+      <div *ngIf="i % 8 === 0" style="font-size: 200%; text-align: center;">
         <ion-col (click)="selectEmoji(item)">{{ item }}</ion-col>
         <ion-col *ngIf="i + 1 < animals_and_nature.length" (click)="selectEmoji(animals_and_nature[i + 1])">{{ animals_and_nature[i + 1] }}</ion-col>
         <ion-col *ngIf="i + 2 < animals_and_nature.length" (click)="selectEmoji(animals_and_nature[i + 2])">{{ animals_and_nature[i + 2] }}</ion-col>
@@ -63,7 +63,7 @@
   <ion-text style="text-align: center;"><h5>Food and Drink</h5></ion-text>
   <ion-grid>
     <ion-row *ngFor="let item of food_and_drink; let i = index;">
-      <div *ngIf="i % 8 == 0" style="font-size: 200%; text-align: center;">
+      <div *ngIf="i % 8 === 0" style="font-size: 200%; text-align: center;">
         <ion-col (click)="selectEmoji(item)">{{ item }}</ion-col>
         <ion-col *ngIf="i + 1 < food_and_drink.length" (click)="selectEmoji(food_and_drink[i + 1])">{{ food_and_drink[i + 1] }}</ion-col>
         <ion-col *ngIf="i + 2 < food_and_drink.length" (click)="selectEmoji(food_and_drink[i + 2])">{{ food_and_drink[i + 2] }}</ion-col>
@@ -79,7 +79,7 @@
   <ion-text style="text-align: center;"><h5>Activity</h5></ion-text>
   <ion-grid>
     <ion-row *ngFor="let item of activity; let i = index;">
-      <div *ngIf="i % 8 == 0" style="font-size: 200%; text-align: center;">
+      <div *ngIf="i % 8 === 0" style="font-size: 200%; text-align: center;">
         <ion-col (click)="selectEmoji(item)">{{ item }}</ion-col>
         <ion-col *ngIf="i + 1 < activity.length" (click)="selectEmoji(activity[i + 1])">{{ activity[i + 1] }}</ion-col>
         <ion-col *ngIf="i + 2 < activity.length" (click)="selectEmoji(activity[i + 2])">{{ activity[i + 2] }}</ion-col>
@@ -95,7 +95,7 @@
   <!--<ion-text style="text-align: center;"><h5>Travel and Places</h5></ion-text>
   <ion-grid>
     <ion-row *ngFor="let item of travel_and_places; let i = index;">
-      <div *ngIf="i % 8 == 0" style="font-size: 200%; text-align: center;">
+      <div *ngIf="i % 8 === 0" style="font-size: 200%; text-align: center;">
         <ion-col (click)="selectEmoji(item)">{{ item }}</ion-col>
         <ion-col *ngIf="i + 1 < travel_and_places.length" (click)="selectEmoji(travel_and_places[i + 1])">{{ travel_and_places[i + 1] }}</ion-col>
         <ion-col *ngIf="i + 2 < travel_and_places.length" (click)="selectEmoji(travel_and_places[i + 2])">{{ travel_and_places[i + 2] }}</ion-col>
@@ -111,7 +111,7 @@
   <ion-text style="text-align: center;"><h5>Objects</h5></ion-text>
   <ion-grid>
     <ion-row *ngFor="let item of objects; let i = index;">
-      <div *ngIf="i % 8 == 0" style="font-size: 200%; text-align: center;">
+      <div *ngIf="i % 8 === 0" style="font-size: 200%; text-align: center;">
         <ion-col (click)="selectEmoji(item)">{{ item }}</ion-col>
         <ion-col *ngIf="i + 1 < objects.length" (click)="selectEmoji(objects[i + 1])">{{ objects[i + 1] }}</ion-col>
         <ion-col *ngIf="i + 2 < objects.length" (click)="selectEmoji(objects[i + 2])">{{ objects[i + 2] }}</ion-col>
@@ -127,7 +127,7 @@
   <!--<ion-text style="text-align: center;"><h5>Symbols</h5></ion-text>
   <ion-grid>
     <ion-row *ngFor="let item of symbols; let i = index;">
-      <div *ngIf="i % 8 == 0" style="font-size: 200%; text-align: center;">
+      <div *ngIf="i % 8 === 0" style="font-size: 200%; text-align: center;">
         <ion-col (click)="selectEmoji(item)">{{ item }}</ion-col>
         <ion-col *ngIf="i + 1 < symbols.length" (click)="selectEmoji(symbols[i + 1])">{{ symbols[i + 1] }}</ion-col>
         <ion-col *ngIf="i + 2 < symbols.length" (click)="selectEmoji(symbols[i + 2])">{{ symbols[i + 2] }}</ion-col>
@@ -143,7 +143,7 @@
   <ion-text style="text-align: center;"><h5>Flags</h5></ion-text>
   <ion-grid>
     <ion-row *ngFor="let item of flags; let i = index;">
-      <div *ngIf="i % 8 == 0" style="font-size: 200%; text-align: center;">
+      <div *ngIf="i % 8 === 0" style="font-size: 200%; text-align: center;">
         <ion-col (click)="selectEmoji(item)">{{ item }}</ion-col>
         <ion-col *ngIf="i + 1 < flags.length" (click)="selectEmoji(flags[i + 1])">{{ flags[i + 1] }}</ion-col>
         <ion-col *ngIf="i + 2 < flags.length" (click)="selectEmoji(flags[i + 2])">{{ flags[i + 2] }}</ion-col>
