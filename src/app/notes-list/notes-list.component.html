@@ -12,7 +12,7 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <div *ngIf="notes == undefined">
+  <div *ngIf="notes === undefined">
     <ion-card>
       <ion-card-content style="text-align: center;">
         No notes... why don't you <a (click)="createANote()">create one</a>?
