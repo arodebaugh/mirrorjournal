@@ -60,7 +60,7 @@ export class SettingsComponent implements OnInit {
       this.menuplacment = tempMenuplacement.value;
     }
 
-    this.localNotifications.getScheduledIds().then(out => {
+    /*this.localNotifications.getScheduledIds().then(out => {
       if (out[0] === 1) {
         this.notifications = true;
         this.localNotifications.get(1).then(noti => {
@@ -71,7 +71,7 @@ export class SettingsComponent implements OnInit {
           alert(JSON.stringify(err));
         });
       }
-    });
+    });*/
   }
 
   async whatsNew() {
@@ -165,7 +165,7 @@ export class SettingsComponent implements OnInit {
     await Preferences.set({key: 'menuplacement', value: String(this.menuplacment)});
   }
 
-  async schedule() {
+  /*async schedule() {
     if (this.notifications) {
       LocalNotifications.schedule({
         id: 1,
@@ -173,7 +173,7 @@ export class SettingsComponent implements OnInit {
         trigger: { every: { hour: parseInt(this.time.split(':')[0]), minute: parseInt(this.time.split(':')[1]) } }
       });
     }
-  }
+  }*/
 
   async setAutosave() {
     if (this.autosave === true) {
@@ -183,7 +183,7 @@ export class SettingsComponent implements OnInit {
     }
   }
 
-  setNotifications() {
+  /*setNotifications() {
     this.localNotifications.hasPermission().then(out => {
       if (out) {
         this.schedule();
@@ -197,7 +197,7 @@ export class SettingsComponent implements OnInit {
     }).catch(err => {
       alert('Error: ' + JSON.stringify(err));
     });
-  }
+  }*/
 
   syncFromOldMirrorJournal() {
     let warn = confirm("Warning: This may replace any journals in your iCloud Drive! Proceed with caution.");
