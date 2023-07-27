@@ -6,11 +6,11 @@ import { EmailComposer } from '@awesome-cordova-plugins/email-composer/ngx';
 import * as moment from 'moment';
 import { Haptics, ImpactStyle } from '@capacitor/haptics';
 import { AppRate } from '@awesome-cordova-plugins/app-rate/ngx';
-import {LocalNotifications} from '@awesome-cordova-plugins/local-notifications/ngx';
 import {ThemeWatchService} from '../theme-watch.service';
 import {WhatsNewComponent} from '../whats-new/whats-new.component';
 import { Preferences } from '@capacitor/preferences';
 import { Filesystem } from '@capacitor/filesystem';
+import { LocalNotifications } from '@capacitor/local-notifications';
 
 const PRODUCT_PRO_KEY = 'mirrorjournalpro';
 
@@ -31,7 +31,7 @@ export class SettingsComponent implements OnInit {
   fontsize = 'default';
   menuplacment = '1';
 
-  constructor(private platform: Platform, private appRate: AppRate, private alertController: AlertController, private localNotifications: LocalNotifications, private ref: ChangeDetectorRef, private modalController: ModalController, private emailComposer: EmailComposer, private themeWatch: ThemeWatchService) { }
+  constructor(private platform: Platform, private appRate: AppRate, private alertController: AlertController,  private ref: ChangeDetectorRef, private modalController: ModalController, private emailComposer: EmailComposer, private themeWatch: ThemeWatchService) { }
 
   async ngOnInit() {
     const tempMenuLabel = await Preferences.get({key: 'menuLabel'});
@@ -60,7 +60,7 @@ export class SettingsComponent implements OnInit {
       this.menuplacment = tempMenuplacement.value;
     }
 
-    this.localNotifications.getScheduledIds().then(out => {
+    /*this.localNotifications.getScheduledIds().then(out => {
       if (out[0] === 1) {
         this.notifications = true;
         this.localNotifications.get(1).then(noti => {
@@ -71,7 +71,7 @@ export class SettingsComponent implements OnInit {
           alert(JSON.stringify(err));
         });
       }
-    });
+    });*/
   }
 
   async whatsNew() {
@@ -165,16 +165,15 @@ export class SettingsComponent implements OnInit {
     await Preferences.set({key: 'menuplacement', value: String(this.menuplacment)});
   }
 
-  async schedule() {
-    await this.localNotifications.cancelAll();
+  /*async schedule() {
     if (this.notifications) {
-      this.localNotifications.schedule({
+      LocalNotifications.schedule({
         id: 1,
         text: '👋 It\'s your scheduled journaling time!',
         trigger: { every: { hour: parseInt(this.time.split(':')[0]), minute: parseInt(this.time.split(':')[1]) } }
       });
     }
-  }
+  }*/
 
   async setAutosave() {
     if (this.autosave === true) {
@@ -184,7 +183,7 @@ export class SettingsComponent implements OnInit {
     }
   }
 
-  setNotifications() {
+  /*setNotifications() {
     this.localNotifications.hasPermission().then(out => {
       if (out) {
         this.schedule();
@@ -198,7 +197,7 @@ export class SettingsComponent implements OnInit {
     }).catch(err => {
       alert('Error: ' + JSON.stringify(err));
     });
-  }
+  }*/
 
   syncFromOldMirrorJournal() {
     let warn = confirm("Warning: This may replace any journals in your iCloud Drive! Proceed with caution.");

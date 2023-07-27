@@ -1,7 +1,9 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/" text="Home"></ion-back-button>
+      <ion-button (click)="checkUnsavedChanges()">
+        <ion-icon name="chevron-back"></ion-icon>
+      </ion-button>
     </ion-buttons>
     <ion-title (click)="editName()"><ion-badge color="danger" *ngIf="unsaved && !first">!</ion-badge> {{ journalName }}</ion-title>
     <ion-buttons slot="end"><ion-button *ngIf="unsaved" (click)="saveJournalPrompt()">Save</ion-button> <ion-button *ngIf="!unsaved" (click)="saveJournalPrompt()">Saved</ion-button></ion-buttons>
@@ -9,11 +11,11 @@
 </ion-header>
 
 <ion-content>
-  <ion-button class="full-button" expand="full" (click)="insertNewHeader()" *ngIf="headerImageData === undefined || headerImageData === null"><ion-icon name="image-outline" slot="start"></ion-icon> Insert optional header</ion-button>
+  <ion-button class="full-button" expand="full" (click)="insertNewHeader()" *ngIf="headerImageData == undefined || headerImageData == null || headerImageData == ''"><ion-icon name="image-outline" slot="start"></ion-icon> Insert optional header</ion-button>
   <!--<ion-button expand="full" style="margin: 0;" (click)="insertNewDrawing()" *ngIf="headerImageData === undefined || headerImageData === null"><ion-icon name="brush-outline" slot="start"></ion-icon> Create drawing</ion-button>-->
 
   <ion-card>
-    <img *ngIf="headerImageData !== undefined || headerImageData !== null"  [src]="headerImageData" (click)="presentImageSettings($event)" />
+    <img *ngIf="headerImageData != undefined || headerImageData != null"  [src]="headerImageData" (click)="presentImageSettings($event)" />
     <ion-card-content>
       <div style="text-align: center">
         <ion-chip color="primary">
