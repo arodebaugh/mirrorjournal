@@ -1,4 +1,5 @@
-<ion-content [fullscreen]="true">
+<ion-content class="ion-padding-top" [fullscreen]="true">
+  <br>
   <ion-list>
     <ion-item color="none" lines="none">
       <p>{{ todaysDate }}</p>
@@ -88,38 +89,31 @@
   </div>
 
   <div *ngIf="currentPage === 'Private'">
-    <ion-card *ngIf="lockedJournalsCount === 0">
+    <ion-card  *ngIf="private.length == 0;">
       <div style="text-align: center;"><img src="../assets/mirror-images/assembly 5.png" style="height: 300px; margin-top: 10px;"/></div>
       <ion-card-content style="text-align: center;">
         No private journals yet!
       </ion-card-content>
     </ion-card>
 
-    <ion-grid>
-      <ion-row>
-        <ion-col sizeLg="6" sizeMd="6" sizeXs="12" *ngFor="let journal of journals; let i = index;">
-          <ion-card style="margin-bottom: 0; margin-top: 8px;" *ngIf="journal.locked">
-            <ion-card-header>
-              <ion-grid style="--ion-grid-padding: 0;">
-                <ion-row class="ion-justify-content-center">
-                  <ion-col size="11" offset="0" style="--ion-grid-column-padding: 0;" (click)="openJournalPage('/tabs/journalView', journal)">
-                    <ion-card-title>{{ journal.name }}</ion-card-title>
-                  </ion-col>
-                  <ion-col size="1" offset="0" style="--ion-grid-column-padding: 0;">
-                    <ion-icon name="ellipsis-horizontal-outline" (click)="presentCardOptions($event, journal)"></ion-icon>
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
-              <ion-card-subtitle (click)="openJournalPage('/tabs/journalView', journal)">{{ dateFormatted[i] }}</ion-card-subtitle>
-              <!--<ion-card-subtitle (click)="openJournalPage('/tabs/journalView', journal)" *ngIf="journal.locked"><ion-badge color="danger">Locked</ion-badge></ion-card-subtitle>-->
-            </ion-card-header>
+    <div *ngIf="private.length > 0;">
+      <ion-card *ngFor="let journal of private; let i = index;">
+        <ion-card-header>
+          <ion-row>
+            <ion-col size="11" offset="0" style="--ion-grid-column-padding: 0;" (click)="openJournalPage('/tabs/journalView', journal)">
+              <ion-card-title>{{ journal.name }}</ion-card-title>
+            </ion-col>
+            <ion-col size="1" offset="0" style="--ion-grid-column-padding: 0;">
+              <ion-icon name="ellipsis-horizontal-outline" (click)="presentCardOptions($event, journal)"></ion-icon>
+            </ion-col>
+          </ion-row>
+          <ion-card-subtitle (click)="openJournalPage('/tabs/journalView', journal)">{{ dateFormattedPrivates[i] }}</ion-card-subtitle>
+        </ion-card-header>
 
-            <ion-card-content (click)="openJournalPage('/tabs/journalView', journal)" [innerHTML]="journalContentFormatted[i] | words : 25">
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+        <ion-card-content (click)="openJournalPage('/tabs/journalView', journal)" [innerHTML]="journalContentFormattedPrivates[i] | words : 25">
+        </ion-card-content>
+      </ion-card>
+    </div>
 
     <ion-infinite-scroll threshold="80px" (ionInfinite)="loadData($event)">
       <ion-infinite-scroll-content

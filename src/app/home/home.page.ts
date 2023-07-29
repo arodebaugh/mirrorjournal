@@ -36,6 +36,8 @@ export class HomePage implements OnInit {
   journalContentFormatted = [];
   dateFormattedMemories = [];
   journalContentFormattedMemories = [];
+  dateFormattedPrivates = [];
+  journalContentFormattedPrivates = [];
   journalsLoaded: number;
   sortedJournals = [];
   showLoadmore = false;
@@ -44,6 +46,7 @@ export class HomePage implements OnInit {
   lockIcon = 'lock-closed-outline';
   lockDesc = 'Unlock';
   memories = [];
+  private = [];
   menuLabel = false;
   disableClickCard = false;
   search = '';
@@ -151,6 +154,11 @@ export class HomePage implements OnInit {
         if (output['notes']) {
           output['notes'] = JSON.parse(CryptoJS.AES.decrypt(output['notes'], this.passcode).toString(CryptoJS.enc.Utf8));
         }
+        if (!this.private.includes(output)) {
+          this.dateFormattedPrivates.push(moment(output.date).format('LLLL'));
+          this.journalContentFormattedPrivates.push(this.stripJournalContent(output.content));
+          this.private.push(output);
+        }
       }
       output['id'] = id;
       this.journals.push(output);
@@ -207,6 +215,28 @@ export class HomePage implements OnInit {
       this.dateFormattedMemories.push(moment(output.date).format('LLLL'));
       this.journalContentFormattedMemories.push(this.stripJournalContent(output.content));
       this.memories.push(output);
+    }
+  }
+
+  async loadPrivate(id) {
+    const contents = await Filesystem.readFile({
+      path: 'Mirror-app/' + id + '.txt',
+      directory: Directory.Documents,
+      encoding: Encoding.UTF8
+    });
+    const output = JSON.parse(contents.data);
+    /* tslint:disable:no-string-literal */
+    if (!output['locked'] || (this.passcode !== undefined && output['locked'])) {
+      if (output['locked']) {
+        output['content'] = CryptoJS.AES.decrypt(output['content'], this.passcode).toString(CryptoJS.enc.Utf8);
+        if (output['notes']) {
+          output['notes'] = CryptoJS.AES.decrypt(output['notes'], this.passcode).toString(CryptoJS.enc.Utf8);
+        }
+      }
+      output['id'] = id;
+      this.dateFormattedPrivates.push(moment(output.date).format('LLLL'));
+      this.journalContentFormattedPrivates.push(this.stripJournalContent(output.content));
+      this.private.push(output);
     }
   }
 
@@ -273,6 +303,15 @@ export class HomePage implements OnInit {
     }
   }
 
+  generatePrivate(journals) {
+    this.private = [];
+    for (const journal of journals) {
+      if (journal.locked) {
+        this.loadPrivate(journal.id);
+      }
+    }
+  }
+
   async loadJournal() {
     const tempMenuLabel = await Preferences.get({key: 'menuLabel'});
     if (tempMenuLabel.value) {
@@ -293,6 +332,7 @@ export class HomePage implements OnInit {
         return Number(new Date(b.date)) - Number(new Date(a.date));
       });
       this.generateMemories(this.sortedJournals);
+      // this.generatePrivate(this.sortedJournals);
       this.loadNextFiveJournals(1);
     }).catch(e => {
       console.error('file read err', e);

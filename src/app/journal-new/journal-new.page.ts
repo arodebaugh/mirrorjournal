@@ -227,7 +227,8 @@ export class JournalNewPage implements OnInit {
       if (!this.previouslySaved) {
         newData.push({
           id: this.journalID,
-          date: this.created
+          date: this.created,
+          locked: this.lockState
         });
       }
       try {
@@ -248,7 +249,8 @@ export class JournalNewPage implements OnInit {
     } else {
       const journals = [{
         id: this.journalID,
-        date: this.created
+        date: this.created,
+        locked: this.lockState
       }];
       try {
         const result = await Filesystem.writeFile({
