@@ -141,6 +141,17 @@ export class JournalNewPage implements OnInit {
     }
   }
 
+  async checkUnsavedChanges() {
+
+    if (this.unsaved && !this.first) {
+      // Prompt the user to save changes
+      this.presentUnsavedPrompt();
+    } else {
+      // Navigate back
+      this.navCtrl.back();
+    }
+  }
+
   async setExpire() {
     const picker = await this.pickerController.create({
       columns: this.getColumns(2, 11, options),
@@ -216,7 +227,8 @@ export class JournalNewPage implements OnInit {
       if (!this.previouslySaved) {
         newData.push({
           id: this.journalID,
-          date: this.created
+          date: this.created,
+          locked: this.lockState
         });
       }
       try {
@@ -237,7 +249,8 @@ export class JournalNewPage implements OnInit {
     } else {
       const journals = [{
         id: this.journalID,
-        date: this.created
+        date: this.created,
+        locked: this.lockState
       }];
       try {
         const result = await Filesystem.writeFile({
@@ -510,6 +523,39 @@ export class JournalNewPage implements OnInit {
       }
     });
     return await popover.present();
+  }
+
+  async presentUnsavedPrompt() {
+    const alert = await this.alertController.create({
+      header: 'Unsaved Changes',
+      message: 'Do you want to save your changes before leaving?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            // Do nothing
+          }
+        },
+        {
+          text: 'Don\'t Save',
+          handler: () => {
+            // Navigate back without saving
+            this.navCtrl.back();
+          }
+        },
+        {
+          text: 'Save',
+          handler: () => {
+            // Save changes and navigate back
+            this.saveJournalPrompt();
+            this.navCtrl.back();
+          }
+        }
+      ]
+    });
+  
+    await alert.present();
   }
 
   async help(ev: any) {
