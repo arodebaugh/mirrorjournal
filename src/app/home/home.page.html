@@ -1,22 +1,17 @@
 <ion-content [fullscreen]="true">
-  <ion-header [translucent]="true">
-    <ion-toolbar>
-      <ion-item lines="none">
-        <p>{{ todaysDate }}</p>
-      </ion-item>
-      <ion-item lines="none">
-        <ion-title size="large">Journal</ion-title>
-        <ion-buttons slot="end">
-          <ion-button (click)="openPage('/tabs/journalNew')">
-            <ion-icon name="add" size="large" color="dark"></ion-icon>
-          </ion-button>
-        </ion-buttons>
-      </ion-item>
-    </ion-toolbar>
-    <!--<ion-toolbar>
-      <ion-searchbar showCancelButton="focus" [(ngModel)]="search" (ionChange)="searchForJournal()"></ion-searchbar>
-    </ion-toolbar>-->
-  </ion-header>
+  <ion-list>
+    <ion-item color="none" lines="none">
+      <p>{{ todaysDate }}</p>
+    </ion-item>
+    <ion-item color="none" lines="none">
+      <ion-title size="large">Journal</ion-title>
+      <ion-buttons slot="end">
+        <ion-button (click)="openPage('/tabs/journalNew')">
+          <ion-icon name="add" size="large" color="dark"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-list>
 
   <ion-grid>
     <ion-row class="ion-justify-content-around">
