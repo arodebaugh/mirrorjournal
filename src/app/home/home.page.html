@@ -1,5 +1,5 @@
 <ion-content class="ion-padding-top" [fullscreen]="true">
-  <br>
+  <br><br>
   <ion-list>
     <ion-item color="none" lines="none">
       <p>{{ todaysDate }}</p>
@@ -17,13 +17,33 @@
   <ion-grid>
     <ion-row class="ion-justify-content-around">
       <ion-col size="2"><ion-button fill="clear" color="dark" [id]="(currentPage === 'Home') ? 'selected-page' : ''" (click)="setSelectedPage('Home')">Home</ion-button></ion-col>
-      <ion-col size="3"><ion-button fill="clear" color="dark" [id]="(currentPage === 'Memories') ? 'selected-page' : ''" (click)="setSelectedPage('Memories')">Memories</ion-button></ion-col>
+      <ion-col size="3"><ion-button fill="clear" color="dark" [id]="(currentPage === 'Memories') ? 'selected-page' : ''" (click)="setSelectedPage('Memories')">Memories <ion-badge *ngIf="memories.length > 0" style="margin-left: 4px;" color="danger">{{ memories.length }}</ion-badge></ion-button></ion-col>
       <!--<ion-col size="3"><ion-button fill="clear" color="dark" [id]="(currentPage === 'Reflections') ? 'selected-page' : ''" (click)="setSelectedPage('Reflections')">Reflections</ion-button></ion-col>-->
       <ion-col size="3"><ion-button fill="clear" color="dark" [id]="(currentPage === 'Private') ? 'selected-page' : ''" (click)="setSelectedPage('Private')">Private</ion-button></ion-col>
     </ion-row>
   </ion-grid>
 
   <div *ngIf="currentPage === 'Home'">
+    <div *ngIf="streakData.streak > 0">
+      <ion-card style="margin-bottom: 0; margin-top: 8px;">
+        <ion-card-content class="details-card">
+          <ion-grid style="--ion-grid-padding: 0;">
+            <ion-row class="ion-justify-content-around">
+              <ion-col size="4">
+                <p class="emoji">🔥</p>
+                <p>streak</p>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-justify-content-around">
+              <ion-col size="4">
+                <h1>{{ streakData.streak }}</h1>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
     <ion-grid>
       <ion-row>
         <ion-col sizeLg="6" sizeMd="6" sizeXs="12" *ngFor="let journal of journals; let i = index;">

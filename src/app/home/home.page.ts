@@ -50,6 +50,7 @@ export class HomePage implements OnInit {
   menuLabel = false;
   disableClickCard = false;
   search = '';
+  streakData = {lastDate: moment(), streak: 0};
   fabPos = 1; // 0 start, 1 center, 2 end
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
@@ -77,6 +78,8 @@ export class HomePage implements OnInit {
 
     this.platform.ready().then(() => {
       this.loadJournal();
+      this.loadStreakData();
+
     }).catch((err) => {
       console.log('Error loading platform: ' + JSON.stringify(err));
     });
@@ -262,6 +265,18 @@ export class HomePage implements OnInit {
         event.target.disabled = true;
       }
     }, 500);
+  }
+
+  async loadStreakData() {
+    const dayBefore = moment().subtract(1, 'days');
+    const tempStreak = await Preferences.get({key: 'streaks'});
+    if (tempStreak.value) {
+      this.streakData = JSON.parse(tempStreak.value);
+      if (this.streakData.lastDate.isBefore(dayBefore, 'day')) {
+        this.streakData = { lastDate: moment(), streak: 0 };
+        await Preferences.set({key: "streaks", value: JSON.stringify(this.streakData)});
+      }
+    }
   }
 
   async createMirrorJournals() {
