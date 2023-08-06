@@ -73,6 +73,7 @@ export class JournalNewPage implements OnInit {
   unsaved = true;
   first = true;
   autosave = true;
+  streakData = null;
   private passcode: string;
   saveData = {
     name: this.journalName,
@@ -138,6 +139,11 @@ export class JournalNewPage implements OnInit {
     const tempAutosave = await Preferences.get({key: 'autosave'});
     if (tempAutosave.value) {
       this.autosave = (tempAutosave.value === 'true');
+    }
+
+    const tempStreak = await Preferences.get({key: 'streaks'});
+    if (tempStreak.value) {
+      this.streakData = JSON.parse(tempStreak.value);
     }
   }
 
@@ -355,6 +361,18 @@ export class JournalNewPage implements OnInit {
     } catch (e) {
       this.tryToEncrypt(this.saveData, toast);
       console.error('Unable to make directory', e);
+    }
+
+    if (this.streakData) {
+      const dayBefore = moment().subtract(1, 'days');
+      if (this.streakData.streak == 0 || this.streakData.streak == null) {
+        await Preferences.set({key: "streaks", value: JSON.stringify({ lastDate: moment(), streak: 1 })});
+      } else if (this.streakData.lastDate.isSame(dayBefore, 'day')) {
+        this.streakData = { lastDate: moment(), streak: this.streakData + 1 };
+        await Preferences.set({key: "streaks", value: JSON.stringify(this.streakData)});
+      }
+    } else {
+      await Preferences.set({key: "streaks", value: JSON.stringify({ lastDate: moment(), streak: 1 })});
     }
   }
 

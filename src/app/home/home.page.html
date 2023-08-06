@@ -24,24 +24,25 @@
   </ion-grid>
 
   <div *ngIf="currentPage === 'Home'">
-    <ion-card style="margin-bottom: 0; margin-top: 8px;">
-      <ion-card-content class="details-card">
-        <ion-grid style="--ion-grid-padding: 0;">
-          <ion-row class="ion-justify-content-around">
-            <ion-col size="4">
-              <p class="emoji">🔥</p>
-              <p>streak</p>
-            </ion-col>
-          </ion-row>
-          <ion-row class="ion-justify-content-around">
-            <ion-col size="4">
-              <h1>2</h1>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-card-content>
-    </ion-card>
-
+    <div *ngIf="streakData.streak > 0">
+      <ion-card style="margin-bottom: 0; margin-top: 8px;">
+        <ion-card-content class="details-card">
+          <ion-grid style="--ion-grid-padding: 0;">
+            <ion-row class="ion-justify-content-around">
+              <ion-col size="4">
+                <p class="emoji">🔥</p>
+                <p>streak</p>
+              </ion-col>
+            </ion-row>
+            <ion-row class="ion-justify-content-around">
+              <ion-col size="4">
+                <h1>{{ streakData.streak }}</h1>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </div>
 
     <ion-grid>
       <ion-row>
