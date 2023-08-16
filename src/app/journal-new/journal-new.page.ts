@@ -238,17 +238,17 @@ export class JournalNewPage implements OnInit {
         });
       }
       try {
-        const result = await Filesystem.writeFile({
+        await Filesystem.writeFile({
           path: 'Mirror-app/mirrorJournals.txt',
           data: JSON.stringify(newData),
           directory: Directory.Documents,
           encoding: Encoding.UTF8
         });
+        await Preferences.set({key: "mirrorJournalListCache", value: JSON.stringify(newData)});
         toast.present();
         this.unsaved = false;
         this.first = false;
         this.previouslySaved = true;
-        // console.log('Wrote file', result);
       } catch (e) {
         console.error('Unable to write file', e);
       }
@@ -259,19 +259,18 @@ export class JournalNewPage implements OnInit {
         locked: this.lockState
       }];
       try {
-        const result = await Filesystem.writeFile({
+        await Filesystem.writeFile({
           path: 'Mirror-app/mirrorJournals.txt',
           data: JSON.stringify(journals),
           directory: Directory.Documents,
           encoding: Encoding.UTF8
         });
+        await Preferences.set({key: "mirrorJournalListCache", value: JSON.stringify(journals)});
         Haptics.impact({style: ImpactStyle.Light});
-        // this.taptic.notification({type: 'success'});
         toast.present();
         this.unsaved = false;
         this.first = false;
         this.previouslySaved = true;
-        // console.log('Wrote file', result);
       } catch (e) {
         console.error('Unable to write file', e);
       }

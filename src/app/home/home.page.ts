@@ -29,8 +29,9 @@ import { Keyboard, KeyboardStyle } from '@capacitor/keyboard';
 })
 
 export class HomePage implements OnInit {
-  showJournals = false;
+  showJournals = true;
   journals = [];
+  cachedJournals = [];
   currentPage = "Home";
   dateFormatted = [];
   journalContentFormatted = [];
@@ -77,9 +78,9 @@ export class HomePage implements OnInit {
     this.checkMenuPlacement();
 
     this.platform.ready().then(() => {
-      this.loadJournal();
+      this.loadJournalView();
       this.loadStreakData();
-
+      this.loadMenuPlacement();
     }).catch((err) => {
       console.log('Error loading platform: ' + JSON.stringify(err));
     });
@@ -112,6 +113,12 @@ export class HomePage implements OnInit {
     return new Date(b.date).getTime() - new Date(a.date).getTime();
   }
 
+  pushNext(parent, child) {
+    if (child.length < parent.length) {
+      child.push(parent[child.length]);
+    }
+  }
+
   async deleteJournal(data) {
     const contents = await Filesystem.readFile({
       path: 'Mirror-app/mirrorJournals.txt',
@@ -128,13 +135,13 @@ export class HomePage implements OnInit {
             directory: Directory.Documents
           });
           try {
-            const result = await Filesystem.writeFile({
+            await Filesystem.writeFile({
               path: 'Mirror-app/' + data.id + '.txt',
               data: JSON.stringify(outParsed),
               directory: Directory.Documents,
               encoding: Encoding.UTF8
             });
-            // console.log('Wrote file', result);
+            await Preferences.set({key: "mirrorJournalListCache", value: JSON.stringify(outParsed)});
           } catch (e) {
             console.error('Unable to write file', e);
           }
@@ -143,13 +150,8 @@ export class HomePage implements OnInit {
     }
   }
 
-  async loadNextJournal(id, numberLoaded) {
-    const contents = await Filesystem.readFile({
-      path: 'Mirror-app/' + id + '.txt',
-      directory: Directory.Documents,
-      encoding: Encoding.UTF8
-    });
-    const output = JSON.parse(contents.data);
+  async loadJournalData(data) {
+    const output = JSON.parse(data["data"]);
     /* tslint:disable:no-string-literal */
     if (!output['locked'] || (this.passcode !== undefined && output['locked'])) {
       if (output['locked']) {
@@ -163,43 +165,16 @@ export class HomePage implements OnInit {
           this.private.push(output);
         }
       }
-      output['id'] = id;
-      this.journals.push(output);
+      this.dateFormatted.push(moment(output.date).format('LLLL'));
+      this.journalContentFormatted.push(this.stripJournalContent(output.content));
       this.showJournals = this.journals.length > 0;
-      this.dateFormatted = [];
-      this.journalContentFormatted = [];
-      this.journals.forEach((item, index) => {
-        // Todo: Yeah no I was right this is gross.
-        const timeToExpireString = this.journals[index].expire.split(' ');
-        const timeToExpireMoment = moment(this.journals[index].date);
-        const hourDiff = moment().diff(timeToExpireMoment, 'hours');
-        let hoursToCountdown;
-        if (timeToExpireString[1] === 'Days' || timeToExpireString[1] === 'Day') {
-          hoursToCountdown = timeToExpireString[0] * 24;
-        } else if (timeToExpireString[1] === 'Weeks' || timeToExpireString[1] === 'Week') {
-          hoursToCountdown = (timeToExpireString[0] * 7) * 24;
-        } else if (timeToExpireString[1] === 'Months' || timeToExpireString[1] === 'Month') {
-          hoursToCountdown = (timeToExpireString[0] * 30) * 24;
-        } else if (timeToExpireString[1] === 'Years' || timeToExpireString[1] === 'Year') {
-          hoursToCountdown = (timeToExpireString[0] * 365) * 24;
-        }
-        const hoursLeft = Math.round(hoursToCountdown - hourDiff);
-        if (hoursLeft < 0) {
-          this.deleteJournal(this.journals[index]);
-          this.journalsLoaded -= 1;
-          this.sortedJournals = this.sortedJournals.filter(returnableObjects => returnableObjects.date !== this.journals[index].date);
-        } else {
-          this.dateFormatted.push(moment(this.journals[index].date).format('LLLL'));
-          this.journalContentFormatted.push(this.stripJournalContent(this.journals[index].content));
-        }
-      });
-      this.loadNextFiveJournals(numberLoaded + 1);
+      return true;
     } else {
-      this.loadNextFiveJournals(numberLoaded);
+      return false;
     }
   }
 
-  async loadMemory(id) {
+  async loadMemory(id) { // TODO: Get from cache
     const contents = await Filesystem.readFile({
       path: 'Mirror-app/' + id + '.txt',
       directory: Directory.Documents,
@@ -221,44 +196,109 @@ export class HomePage implements OnInit {
     }
   }
 
-  async loadPrivate(id) {
-    const contents = await Filesystem.readFile({
-      path: 'Mirror-app/' + id + '.txt',
-      directory: Directory.Documents,
-      encoding: Encoding.UTF8
-    });
-    const output = JSON.parse(contents.data);
-    /* tslint:disable:no-string-literal */
-    if (!output['locked'] || (this.passcode !== undefined && output['locked'])) {
-      if (output['locked']) {
-        output['content'] = CryptoJS.AES.decrypt(output['content'], this.passcode).toString(CryptoJS.enc.Utf8);
-        if (output['notes']) {
-          output['notes'] = CryptoJS.AES.decrypt(output['notes'], this.passcode).toString(CryptoJS.enc.Utf8);
-        }
-      }
-      output['id'] = id;
-      this.dateFormattedPrivates.push(moment(output.date).format('LLLL'));
-      this.journalContentFormattedPrivates.push(this.stripJournalContent(output.content));
-      this.private.push(output);
+  async loadJournalCache() {
+    try {
+      const contents = await Filesystem.readFile({ // todo: make sure it's newest first
+        path: 'Mirror-app/mirrorJournalsCache.txt',
+        directory: Directory.Documents,
+        encoding: Encoding.UTF8
+      });
+
+      this.cachedJournals = contents.data ? JSON.parse(contents.data) : [];
+    } catch (e) {
+      this.cachedJournals = [];
+      this.saveJournalCache();
     }
   }
 
-  loadNextFiveJournals(numberLoaded) {
-    for (const i in this.sortedJournals) {
-      if (this.sortedJournals.hasOwnProperty(i)) {
-        if (((parseInt(i) + 1) > this.journalsLoaded) && (numberLoaded <= 5)) {
-          this.loadNextJournal(this.sortedJournals[i].id, numberLoaded);
-          this.journalsLoaded += 1;
+  async loadJournalListCache() {
+    const mirrorJournalListCache = await Preferences.get({key: "mirrorJournalListCache"});
+
+    if (mirrorJournalListCache.value) {
+      this.sortedJournals = JSON.parse(mirrorJournalListCache.value);
+    } else {
+      try {
+        const mirrorJournalListFile = await Filesystem.readFile({
+          path: 'Mirror-app/mirrorJournals.txt',
+          directory: Directory.Documents,
+          encoding: Encoding.UTF8,
+        });
+
+        this.sortedJournals = JSON.parse(mirrorJournalListFile.data);
+        await Preferences.set({key: "mirrorJournalListCache", value: JSON.stringify(this.sortedJournals)});
+      } catch (e) {
+        console.error('file read err', e);
+        this.createMirrorJournals();
+        this.showJournals = false;
+      }
+    }
+  }
+
+  async saveJournalCache() {
+    await Filesystem.writeFile({
+      path: 'Mirror-app/mirrorJournalsCache.txt',
+      data: JSON.stringify(this.cachedJournals),
+      directory: Directory.Documents,
+      encoding: Encoding.UTF8
+    });
+  }
+
+  async getNextJournalForCache() {
+    let index = 0;
+    if (this.journals.length > 0) {
+      const lastItemId = JSON.parse(JSON.parse(this.journals[this.journals.length - 1]).data).id;
+      if (lastItemId) {
+        index = this.sortedJournals.findIndex(obj => obj.id === lastItemId) + 1;
+      }
+    }
+
+    if (index !== -1 && index < this.sortedJournals.length - 1) {
+      let nextJournal = this.sortedJournals[index + 1];
+
+      const contents = await Filesystem.readFile({
+        path: 'Mirror-app/' + nextJournal.id + '.txt',
+        directory: Directory.Documents,
+        encoding: Encoding.UTF8
+      });
+
+      this.cachedJournals.push(contents);
+    }
+  }
+
+  async loadJournals(numberToLoad) {
+    let originalCachedJournals = this.cachedJournals;
+    if (this.sortedJournals.length >= this.journals.length) {
+      for (let i = 0; i < numberToLoad; i++) {
+        if (this.journals.length >= this.sortedJournals.length) {
           break;
+        }
+
+        if (this.cachedJournals.length > this.journals.length) {
+          this.pushNext(this.cachedJournals, this.journals);
+          const loaded = await this.loadJournalData(this.journals[this.journals.length - 1]);
+         
+          if (loaded) {
+            this.journalsLoaded += 1;
+          } else {
+            i--;
+          }
+        } else {
+          await this.getNextJournalForCache();
+          i--;
         }
       }
     }
+
     this.showLoadmore = this.journalsLoaded < this.sortedJournals.length;
+
+    if (this.cachedJournals != originalCachedJournals) {
+      this.saveJournalCache();
+    }
   }
 
   loadData(event) {
     setTimeout(() => {
-      this.loadNextFiveJournals(1);
+      this.loadJournals(5);
       event.target.complete();
 
       if (!this.showLoadmore) {
@@ -279,6 +319,13 @@ export class HomePage implements OnInit {
     }
   }
 
+  async loadMenuPlacement() {
+    const tempMenuLabel = await Preferences.get({key: 'menuLabel'});
+    if (tempMenuLabel.value) {
+      this.menuLabel = (tempMenuLabel.value === 'true');
+    }
+  }
+
   async createMirrorJournals() {
     try {
       await Filesystem.mkdir({
@@ -287,14 +334,14 @@ export class HomePage implements OnInit {
         recursive: false // like mkdir -p
       });
       try {
-        const result = await Filesystem.writeFile({
+        await Filesystem.writeFile({
           path: 'Mirror-app/mirrorJournals.txt',
           data: '[]',
           directory: Directory.Documents,
           encoding: Encoding.UTF8
         });
+        await Preferences.set({key: "mirrorJournalListCache", value: '[]'});
         this.showWelcomeSceen();
-        // console.log('Wrote file', result);
       } catch (e) {
         console.error('Unable to write file', e);
       }
@@ -318,42 +365,25 @@ export class HomePage implements OnInit {
     }
   }
 
-  generatePrivate(journals) {
-    this.private = [];
-    for (const journal of journals) {
-      if (journal.locked) {
-        this.loadPrivate(journal.id);
-      }
-    }
-  }
-
-  async loadJournal() {
-    const tempMenuLabel = await Preferences.get({key: 'menuLabel'});
-    if (tempMenuLabel.value) {
-      this.menuLabel = (tempMenuLabel.value === 'true');
-    }
+  resetJouranl() {
     this.dateFormatted = [];
     this.journalContentFormatted = [];
     this.journals = [];
     this.showJournals = false;
     this.journalsLoaded = 0;
-    Filesystem.readFile({
-      path: 'Mirror-app/mirrorJournals.txt',
-      directory: Directory.Documents,
-      encoding: Encoding.UTF8
-    }).then(contents => {
-      this.sortedJournals = JSON.parse(contents.data);
-      this.sortedJournals.sort((a, b) => {
-        return Number(new Date(b.date)) - Number(new Date(a.date));
-      });
-      this.generateMemories(this.sortedJournals);
-      // this.generatePrivate(this.sortedJournals);
-      this.loadNextFiveJournals(1);
-    }).catch(e => {
-      console.error('file read err', e);
-      this.createMirrorJournals();
-      this.showJournals = false;
+  }
+
+  async loadJournalView() {
+    this.resetJouranl();
+    await this.loadJournalCache();
+    await this.loadJournalListCache();
+
+    this.sortedJournals.sort((a, b) => {
+      return Number(new Date(b.date)) - Number(new Date(a.date));
     });
+
+    this.generateMemories(this.sortedJournals);
+    this.loadJournals(5);
   }
 
   async showWelcomeSceen() {
@@ -376,10 +406,7 @@ export class HomePage implements OnInit {
     this.routerOutlet.swipeGesture = true;
   }
 
-  // loadedJournals
-
-
-// example of adding a transition when pushing a new page
+  // example of adding a transition when pushing a new page
   openJournalPage(page: any, journalToNavigate: any, action= 'none') {
     Haptics.impact({style: ImpactStyle.Light});
     let navigationExtras: NavigationExtras;
@@ -425,7 +452,7 @@ export class HomePage implements OnInit {
       this.passcode = undefined;
       this.lockIcon = 'lock-closed-outline';
       this.lockDesc = 'Unlock';
-      this.loadJournal();
+      this.loadJournalView();
 
       this.checkMenuPlacement();
     });
@@ -441,7 +468,7 @@ export class HomePage implements OnInit {
       if (dataReturned !== null && dataReturned.data !== '') {
         this.passcode = dataReturned.data;
       }
-      this.loadJournal();
+      this.loadJournalView();
     });
     return await modal.present();
   }
@@ -464,7 +491,6 @@ export class HomePage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
-            // console.log('Confirm Cancel');
             this.passcode = undefined;
             this.currentPage = 'Home';
             Haptics.impact({style: ImpactStyle.Light});
@@ -477,7 +503,7 @@ export class HomePage implements OnInit {
               this.lockIcon = 'lock-open-outline';
               this.lockDesc = 'Lock';
               Haptics.notification({type: NotificationType.Success});
-              this.loadJournal();
+              this.loadJournalView();
             } else {
               this.passcode = undefined;
               Haptics.notification({type: NotificationType.Error});
@@ -504,7 +530,7 @@ export class HomePage implements OnInit {
       this.passcode = undefined;
       this.lockIcon = 'lock-closed-outline';
       this.lockDesc = 'Unlock';
-      this.loadJournal();
+      this.loadJournalView();
     }
   }
 
@@ -516,10 +542,6 @@ export class HomePage implements OnInit {
         this.unlockLockJournals(true);
       }
     }
-  }
-
-  get lockedJournalsCount(): number {
-    return this.journals.filter(journal => journal.locked).length;
   }
   
 }

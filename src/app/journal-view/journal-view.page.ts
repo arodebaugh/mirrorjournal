@@ -160,12 +160,13 @@ export class JournalViewPage implements OnInit {
             directory: Directory.Documents
           });
           try {
-            const result = await Filesystem.writeFile({
+            await Filesystem.writeFile({
               path: 'Mirror-app/mirrorJournals.txt',
               data: JSON.stringify(outParsed),
               directory: Directory.Documents,
               encoding: Encoding.UTF8
             });
+            await Preferences.set({key: "mirrorJournalListCache", value: JSON.stringify(outParsed)});
             Haptics.notification({type: NotificationType.Success});
             toast.present();
             this.navCtrl.navigateBack('/');
