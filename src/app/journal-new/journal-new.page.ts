@@ -299,6 +299,7 @@ export class JournalNewPage implements OnInit {
       }
     } else {
       this.journalID = this.guid();
+      this.saveData.id = this.journalID;
       const fileName = 'Mirror-app/' + this.journalID + '.txt';
       try {
         const result = await Filesystem.writeFile({

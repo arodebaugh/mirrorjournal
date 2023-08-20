@@ -31,6 +31,7 @@ import { Keyboard, KeyboardStyle } from '@capacitor/keyboard';
 export class HomePage implements OnInit {
   showJournals = true;
   journals = [];
+  journalsFromCache = [];
   cachedJournals = [];
   currentPage = "Home";
   dateFormatted = [];
@@ -44,6 +45,7 @@ export class HomePage implements OnInit {
   showLoadmore = false;
   todaysDate = moment().format('dddd, MMMM Do');
   passcode: string;
+  lastId: string;
   lockIcon = 'lock-closed-outline';
   lockDesc = 'Unlock';
   memories = [];
@@ -167,6 +169,7 @@ export class HomePage implements OnInit {
       }
       this.dateFormatted.push(moment(output.date).format('LLLL'));
       this.journalContentFormatted.push(this.stripJournalContent(output.content));
+      this.journals.push(output);
       this.showJournals = this.journals.length > 0;
       return true;
     } else {
@@ -197,6 +200,10 @@ export class HomePage implements OnInit {
   }
 
   async loadJournalCache() {
+    await Filesystem.deleteFile({
+      path: 'Mirror-app/mirrorJournalsCache.txt',
+      directory: Directory.Documents
+    });
     try {
       const contents = await Filesystem.readFile({ // todo: make sure it's newest first
         path: 'Mirror-app/mirrorJournalsCache.txt',
@@ -245,15 +252,19 @@ export class HomePage implements OnInit {
 
   async getNextJournalForCache() {
     let index = 0;
-    if (this.journals.length > 0) {
-      const lastItemId = JSON.parse(JSON.parse(this.journals[this.journals.length - 1]).data).id;
-      if (lastItemId) {
+    if (this.journals[this.journals.length - 1]) {
+      const lastItemId = this.journals[this.journals.length - 1].id;
+      const lastItemDate = this.journals[this.journals.length - 1].date;
+      if (lastItemId && lastItemId !== "") {
         index = this.sortedJournals.findIndex(obj => obj.id === lastItemId) + 1;
+      } else if (lastItemDate && lastItemDate !== "") { // Just here as a backup
+        index = this.sortedJournals.findIndex(obj => obj.date === lastItemDate) + 1;
       }
     }
 
     if (index !== -1 && index < this.sortedJournals.length - 1) {
-      let nextJournal = this.sortedJournals[index + 1];
+      let nextJournal = this.sortedJournals[index];
+      this.lastId = nextJournal.id;
 
       const contents = await Filesystem.readFile({
         path: 'Mirror-app/' + nextJournal.id + '.txt',
@@ -266,16 +277,16 @@ export class HomePage implements OnInit {
   }
 
   async loadJournals(numberToLoad) {
-    let originalCachedJournals = this.cachedJournals;
-    if (this.sortedJournals.length >= this.journals.length) {
-      for (let i = 0; i < numberToLoad; i++) {
+    let originalCachedJournals = JSON.parse(JSON.stringify(this.cachedJournals));
+    if (this.sortedJournals.length >= this.journalsFromCache.length) {
+      for (let i = 0; (i + 1) < numberToLoad; i++) {
         if (this.journals.length >= this.sortedJournals.length) {
           break;
         }
 
-        if (this.cachedJournals.length > this.journals.length) {
-          this.pushNext(this.cachedJournals, this.journals);
-          const loaded = await this.loadJournalData(this.journals[this.journals.length - 1]);
+        if (this.cachedJournals.length > this.journalsFromCache.length) {
+          this.pushNext(this.cachedJournals, this.journalsFromCache);
+          const loaded = await this.loadJournalData(this.journalsFromCache[this.journalsFromCache.length - 1]);
          
           if (loaded) {
             this.journalsLoaded += 1;
@@ -369,8 +380,10 @@ export class HomePage implements OnInit {
     this.dateFormatted = [];
     this.journalContentFormatted = [];
     this.journals = [];
+    this.journalsFromCache = [];
     this.showJournals = false;
     this.journalsLoaded = 0;
+    this.lastId = "";
   }
 
   async loadJournalView() {
