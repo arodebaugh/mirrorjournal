@@ -54,6 +54,7 @@ export class HomePage implements OnInit {
   disableClickCard = false;
   search = '';
   streakData = {lastDate: moment(), streak: 0};
+  journalIndex = 0;
   fabPos = 1; // 0 start, 1 center, 2 end
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
 
@@ -132,10 +133,6 @@ export class HomePage implements OnInit {
       if (outParsed.hasOwnProperty(i)) {
         if (outParsed[i].id === data.id) {
           outParsed = outParsed.filter(returnableObjects => returnableObjects.id !== data.id);
-          await Filesystem.deleteFile({
-            path: 'Mirror-app/' + data.id + '.txt',
-            directory: Directory.Documents
-          });
           try {
             await Filesystem.writeFile({
               path: 'Mirror-app/' + data.id + '.txt',
@@ -251,19 +248,8 @@ export class HomePage implements OnInit {
   }
 
   async getNextJournalForCache() {
-    let index = 0;
-    if (this.journals[this.journals.length - 1]) {
-      const lastItemId = this.journals[this.journals.length - 1].id;
-      const lastItemDate = this.journals[this.journals.length - 1].date;
-      if (lastItemId && lastItemId !== "") {
-        index = this.sortedJournals.findIndex(obj => obj.id === lastItemId) + 1;
-      } else if (lastItemDate && lastItemDate !== "") { // Just here as a backup
-        index = this.sortedJournals.findIndex(obj => obj.date === lastItemDate) + 1;
-      }
-    }
-
-    if (index !== -1 && index < this.sortedJournals.length - 1) {
-      let nextJournal = this.sortedJournals[index];
+    if (this.journalIndex < this.sortedJournals.length - 1) {
+      let nextJournal = this.sortedJournals[this.journalIndex];
       this.lastId = nextJournal.id;
 
       const contents = await Filesystem.readFile({
@@ -273,18 +259,21 @@ export class HomePage implements OnInit {
       });
 
       this.cachedJournals.push(contents);
+      return true;
     }
+    return false;
   }
 
   async loadJournals(numberToLoad) {
     let originalCachedJournals = JSON.parse(JSON.stringify(this.cachedJournals));
     if (this.sortedJournals.length >= this.journalsFromCache.length) {
-      for (let i = 0; (i + 1) < numberToLoad; i++) {
+      for (let i = 0; i < numberToLoad; i++) {
         if (this.journals.length >= this.sortedJournals.length) {
           break;
         }
 
         if (this.cachedJournals.length > this.journalsFromCache.length) {
+          this.journalIndex++;
           this.pushNext(this.cachedJournals, this.journalsFromCache);
           const loaded = await this.loadJournalData(this.journalsFromCache[this.journalsFromCache.length - 1]);
          
@@ -294,8 +283,12 @@ export class HomePage implements OnInit {
             i--;
           }
         } else {
-          await this.getNextJournalForCache();
+          const getNextJournalForCacheValue = await this.getNextJournalForCache();
           i--;
+
+          if (!getNextJournalForCacheValue) {
+            break;
+          }
         }
       }
     }
@@ -384,6 +377,7 @@ export class HomePage implements OnInit {
     this.showJournals = false;
     this.journalsLoaded = 0;
     this.lastId = "";
+    this.journalIndex = 0;
   }
 
   async loadJournalView() {
