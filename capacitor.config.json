@@ -20,5 +20,8 @@
       "SplashScreen": "screen",
       "SplashScreenDelay": "3000"
     }
+  },
+  "ios": {
+    "preferredContentMode": "mobile"
   }
 }

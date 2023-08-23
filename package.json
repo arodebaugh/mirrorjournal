@@ -39,6 +39,7 @@
     "@capacitor/local-notifications": "^5.0.5",
     "@capacitor/preferences": "^5.0.5",
     "@capacitor/splash-screen": "^5.0.5",
+    "@capacitor/text-zoom": "^5.0.6",
     "@ionic/angular": "^7.2.1",
     "@kolkov/angular-editor": "3.0.0-beta.0",
     "@types/crypto-js": "^3.1.47",

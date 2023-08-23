@@ -4,6 +4,7 @@ import { IonicModule, Platform } from '@ionic/angular';
 import { ThemeWatchService } from './theme-watch.service';
 import { Preferences } from '@capacitor/preferences';
 import { SplashScreen } from '@capacitor/splash-screen';
+import { TextZoom } from '@capacitor/text-zoom';
 
 @Component({
   selector: 'app-root',
@@ -35,5 +36,8 @@ export class AppComponent {
     this.themeWatch.getEmittedValue().subscribe(item => {
       this.theme = item;
     });
+
+    const preferredZoom = await TextZoom.getPreferred();
+    await TextZoom.set({ value: preferredZoom.value });
   }
 }

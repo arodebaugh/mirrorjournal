@@ -241,12 +241,33 @@ export class JournalNewPage implements OnInit {
     if (this.journalID) {
       const fileName = 'Mirror-app/' + this.journalID + '.txt';
       try {
-        const result = await Filesystem.writeFile({
+        await Filesystem.writeFile({
           path: fileName,
           data: JSON.stringify(this.saveData),
           directory: Directory.Documents,
           encoding: Encoding.UTF8
         });
+
+        // edit cache
+        const contents = await Filesystem.readFile({
+          path: 'Mirror-app/mirrorJournalsCache.txt',
+          directory: Directory.Documents,
+          encoding: Encoding.UTF8
+        });
+
+        const cachedJournals = contents.data ? JSON.parse(contents.data) : [];
+        const cachedJournalsEditIndex = cachedJournals.findIndex(obj => JSON.parse(obj.data).id === this.journalID);
+        if (cachedJournalsEditIndex !== -1) {
+          cachedJournals.splice(cachedJournalsEditIndex, 1, { data: JSON.stringify(this.saveData) });
+        }
+
+        await Filesystem.writeFile({
+          path: 'Mirror-app/mirrorJournalsCache.txt',
+          data: JSON.stringify(cachedJournals),
+          directory: Directory.Documents,
+          encoding: Encoding.UTF8
+        });
+
         Haptics.impact({style: ImpactStyle.Light});
         this.unsaved = false;
         this.first = false;
