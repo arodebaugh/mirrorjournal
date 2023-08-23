@@ -17,8 +17,8 @@
   <ion-grid>
     <ion-row class="ion-justify-content-around">
       <ion-col size="2"><ion-button fill="clear" color="dark" [id]="(currentPage === 'Home') ? 'selected-page' : ''" (click)="setSelectedPage('Home')">Home</ion-button></ion-col>
+      <ion-col size="2"><ion-button fill="clear" color="dark" [id]="(currentPage === 'Search') ? 'selected-page' : ''" (click)="setSelectedPage('Search');resetFilteredJournal();">Search</ion-button></ion-col>
       <ion-col size="3"><ion-button fill="clear" color="dark" [id]="(currentPage === 'Memories') ? 'selected-page' : ''" (click)="setSelectedPage('Memories')">Memories <ion-badge *ngIf="memories.length > 0" style="margin-left: 4px;" color="danger">{{ memories.length }}</ion-badge></ion-button></ion-col>
-      <!--<ion-col size="3"><ion-button fill="clear" color="dark" [id]="(currentPage === 'Reflections') ? 'selected-page' : ''" (click)="setSelectedPage('Reflections')">Reflections</ion-button></ion-col>-->
       <ion-col size="3"><ion-button fill="clear" color="dark" [id]="(currentPage === 'Private') ? 'selected-page' : ''" (click)="setSelectedPage('Private')">Private</ion-button></ion-col>
     </ion-row>
   </ion-grid>
@@ -76,6 +76,42 @@
               loadingText="Loading more journal entries...">
       </ion-infinite-scroll-content>
     </ion-infinite-scroll>
+    <br/><br/><br/><br/>
+  </div>
+
+  <div *ngIf="currentPage === 'Search'">
+    <ion-grid>
+      <ion-row>
+        <ion-col><ion-searchbar (ionInput)="search($event.target.value)"></ion-searchbar></ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col sizeLg="6" sizeMd="6" sizeXs="12" *ngFor="let journal of filteredJournal; let i = index;">
+          <ion-card style="margin-bottom: 0; margin-top: 8px;">
+            <ion-card-header>
+              <ion-grid style="--ion-grid-padding: 0;">
+                <ion-row class="ion-justify-content-center">
+                  <ion-col size="11" offset="0" style="--ion-grid-column-padding: 0;" (click)="openJournalPage('/tabs/journalView', journal)">
+                    <ion-card-title>{{ journal.name }}</ion-card-title>
+                  </ion-col>
+                  <ion-col size="1" offset="0" style="--ion-grid-column-padding: 0;">
+                    <ion-icon name="ellipsis-horizontal-outline" (click)="presentCardOptions($event, journal)"></ion-icon>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+              <ion-card-subtitle (click)="openJournalPage('/tabs/journalView', journal)">{{ journal.date }}</ion-card-subtitle>
+              <ion-card-subtitle (click)="openJournalPage('/tabs/journalView', journal)" *ngIf="journal.locked"><ion-badge color="danger">Private</ion-badge></ion-card-subtitle>
+            </ion-card-header>
+
+            <ion-card-content (click)="openJournalPage('/tabs/journalView', journal)" [innerHTML]="journal.content | words : 25">
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
     <br/><br/><br/><br/>
   </div>
 

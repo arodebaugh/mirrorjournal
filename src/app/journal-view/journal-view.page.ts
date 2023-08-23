@@ -145,38 +145,59 @@ export class JournalViewPage implements OnInit {
 
   async deleteJournal(toast) {
     const data = this.data;
+
+    // Delete file
+    await Filesystem.deleteFile({
+      path: 'Mirror-app/' + data.id + '.txt',
+      directory: Directory.Documents
+    });
+
+    // Remove journal from directory file
     const contents = await Filesystem.readFile({
       path: 'Mirror-app/mirrorJournals.txt',
       directory: Directory.Documents,
       encoding: Encoding.UTF8
     });
     let outParsed = JSON.parse(contents.data);
-    for (const i in outParsed) {
-      if (outParsed.hasOwnProperty(i)) {
-        if (outParsed[i].id === data.id) {
-          outParsed = outParsed.filter(returnableObjects => returnableObjects.id !== data.id);
-          await Filesystem.deleteFile({
-            path: 'Mirror-app/' + data.id + '.txt',
-            directory: Directory.Documents
-          });
-          try {
-            const result = await Filesystem.writeFile({
-              path: 'Mirror-app/mirrorJournals.txt',
-              data: JSON.stringify(outParsed),
-              directory: Directory.Documents,
-              encoding: Encoding.UTF8
-            });
-            Haptics.notification({type: NotificationType.Success});
-            toast.present();
-            this.navCtrl.navigateBack('/');
-            // console.log('Wrote file', result);
-          } catch (e) {
-            console.error('Unable to write file', e);
-          }
-        }
+    outParsed = outParsed.filter(returnableObjects => returnableObjects.id !== data.id);
+
+    try {
+      await Filesystem.writeFile({
+        path: 'Mirror-app/mirrorJournals.txt',
+        data: JSON.stringify(outParsed),
+        directory: Directory.Documents,
+        encoding: Encoding.UTF8
+      });
+      await Preferences.set({key: "mirrorJournalListCache", value: JSON.stringify(outParsed)});
+      
+      // Remove journal from cache file
+      const cacheContents = await Filesystem.readFile({
+        path: 'Mirror-app/mirrorJournalsCache.txt',
+        directory: Directory.Documents,
+        encoding: Encoding.UTF8
+      });
+      let cacheOutParsed = JSON.parse(cacheContents.data);
+      let filteredOutParsed = cacheOutParsed.filter(returnableObjects => JSON.parse(returnableObjects.data).id !== data.id);
+      if (filteredOutParsed.length === cacheOutParsed.length) {
+        // No journal with matching id was found, filter by date instead
+        filteredOutParsed = cacheOutParsed.filter(returnableObjects => JSON.parse(returnableObjects.data).date !== data.date);
       }
+      await Filesystem.writeFile({
+        path: 'Mirror-app/mirrorJournalsCache.txt',
+        data: JSON.stringify(filteredOutParsed),
+        directory: Directory.Documents,
+        encoding: Encoding.UTF8
+      });
+    } catch (e) {
+      console.error('Unable to write file', e);
     }
+
+    // Success
+    Haptics.notification({type: NotificationType.Success});
+    toast.present();
+    this.navCtrl.navigateBack('/');
   }
+  
 
   async trashJournal() {
     const toast = await this.toastController.create({

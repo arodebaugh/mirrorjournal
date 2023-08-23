@@ -25,6 +25,12 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
+@supports (font: -apple-system-body) {
+  html {
+    font: -apple-system-body !important;
+  }
+}
+
 .highlight {
   color: #ffff00;
 }

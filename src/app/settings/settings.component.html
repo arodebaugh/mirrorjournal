@@ -151,6 +151,10 @@
         <ion-icon name="cloud-outline" slot="start"></ion-icon>
         <ion-label>Move from old Mirror Journal</ion-label>
       </ion-item>
+      <ion-item (click)="deleteCache()" detail="true">
+        <ion-icon name="trash-outline" slot="start"></ion-icon>
+        <ion-label>(DEV) Delete cache</ion-label>
+      </ion-item>
       <!--<ion-item>
         <ion-icon *ngIf="authType == 'FaceID'" name="scan-outline" slot="start"></ion-icon>
         <ion-icon *ngIf="authType == 'TouchID'" name="finger-print-outline" slot="start"></ion-icon>

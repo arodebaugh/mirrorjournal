@@ -148,53 +148,13 @@ export class JournalNewPage implements OnInit {
   }
 
   async checkUnsavedChanges() {
-
     if (this.unsaved && !this.first) {
       // Prompt the user to save changes
       this.presentUnsavedPrompt();
     } else {
       // Navigate back
-      this.navCtrl.back();
+      this.navCtrl.navigateRoot('/');
     }
-  }
-
-  async setExpire() {
-    const picker = await this.pickerController.create({
-      columns: this.getColumns(2, 11, options),
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel'
-        },
-        {
-          text: 'Confirm',
-          handler: (value) => {
-            // console.log(`Got Value ` + JSON.stringify(value));
-            if (value['col-1'].text === 'Never') {
-              Haptics.impact({style: ImpactStyle.Light});
-              // this.taptic.selection();
-              this.expireLabelText = 'Never';
-            } else if (value['col-0'].text === '') {
-              Haptics.notification({type: NotificationType.Error});
-              // this.taptic.notification({type: 'error'});
-              alert('Please set a number value!');
-            } else {
-              Haptics.impact({style: ImpactStyle.Light});
-              // this.taptic.selection();
-              if (parseInt(value['col-0'].text) > 1) {
-                this.expireLabelText = value['col-0'].text + ' ' + value['col-1'].text;
-              } else {
-                this.expireLabelText = value['col-0'].text + ' ' + (value['col-1'].text).slice(0, -1);
-              }
-            }
-            this.unsaved = true;
-            this.first = false;
-          }
-        }
-      ]
-    });
-
-    await picker.present();
   }
 
   getColumns(numColumns, numOptions, columnOptions) {
@@ -238,17 +198,17 @@ export class JournalNewPage implements OnInit {
         });
       }
       try {
-        const result = await Filesystem.writeFile({
+        await Filesystem.writeFile({
           path: 'Mirror-app/mirrorJournals.txt',
           data: JSON.stringify(newData),
           directory: Directory.Documents,
           encoding: Encoding.UTF8
         });
+        await Preferences.set({key: "mirrorJournalListCache", value: JSON.stringify(newData)});
         toast.present();
         this.unsaved = false;
         this.first = false;
         this.previouslySaved = true;
-        // console.log('Wrote file', result);
       } catch (e) {
         console.error('Unable to write file', e);
       }
@@ -259,19 +219,18 @@ export class JournalNewPage implements OnInit {
         locked: this.lockState
       }];
       try {
-        const result = await Filesystem.writeFile({
+        await Filesystem.writeFile({
           path: 'Mirror-app/mirrorJournals.txt',
           data: JSON.stringify(journals),
           directory: Directory.Documents,
           encoding: Encoding.UTF8
         });
+        await Preferences.set({key: "mirrorJournalListCache", value: JSON.stringify(journals)});
         Haptics.impact({style: ImpactStyle.Light});
-        // this.taptic.notification({type: 'success'});
         toast.present();
         this.unsaved = false;
         this.first = false;
         this.previouslySaved = true;
-        // console.log('Wrote file', result);
       } catch (e) {
         console.error('Unable to write file', e);
       }
@@ -282,16 +241,34 @@ export class JournalNewPage implements OnInit {
     if (this.journalID) {
       const fileName = 'Mirror-app/' + this.journalID + '.txt';
       try {
-        const result = await Filesystem.writeFile({
+        await Filesystem.writeFile({
           path: fileName,
           data: JSON.stringify(this.saveData),
           directory: Directory.Documents,
           encoding: Encoding.UTF8
         });
-        // console.log('Wrote file', result);
+
+        // edit cache
+        const contents = await Filesystem.readFile({
+          path: 'Mirror-app/mirrorJournalsCache.txt',
+          directory: Directory.Documents,
+          encoding: Encoding.UTF8
+        });
+
+        const cachedJournals = contents.data ? JSON.parse(contents.data) : [];
+        const cachedJournalsEditIndex = cachedJournals.findIndex(obj => JSON.parse(obj.data).id === this.journalID);
+        if (cachedJournalsEditIndex !== -1) {
+          cachedJournals.splice(cachedJournalsEditIndex, 1, { data: JSON.stringify(this.saveData) });
+        }
+
+        await Filesystem.writeFile({
+          path: 'Mirror-app/mirrorJournalsCache.txt',
+          data: JSON.stringify(cachedJournals),
+          directory: Directory.Documents,
+          encoding: Encoding.UTF8
+        });
+
         Haptics.impact({style: ImpactStyle.Light});
-        // this.taptic.notification({type: 'success'});
-        // toast.present();
         this.unsaved = false;
         this.first = false;
         this.previouslySaved = true;
@@ -300,6 +277,7 @@ export class JournalNewPage implements OnInit {
       }
     } else {
       this.journalID = this.guid();
+      this.saveData.id = this.journalID;
       const fileName = 'Mirror-app/' + this.journalID + '.txt';
       try {
         const result = await Filesystem.writeFile({
@@ -308,6 +286,28 @@ export class JournalNewPage implements OnInit {
           directory: Directory.Documents,
           encoding: Encoding.UTF8
         });
+
+        // add to cache
+        try {
+          const contents = await Filesystem.readFile({
+            path: 'Mirror-app/mirrorJournalsCache.txt',
+            directory: Directory.Documents,
+            encoding: Encoding.UTF8
+          });
+
+          const cachedJournals = contents.data ? JSON.parse(contents.data) : [];
+          cachedJournals.unshift({data: JSON.stringify(this.saveData)});
+
+          await Filesystem.writeFile({
+            path: 'Mirror-app/mirrorJournalsCache.txt',
+            data: JSON.stringify(cachedJournals),
+            directory: Directory.Documents,
+            encoding: Encoding.UTF8
+          });
+        } catch (e) {
+          console.log(e);
+        }
+
         this.writeToMasterDir(saveData, toast);
         console.log('Wrote file', result);
       } catch (e) {
@@ -468,6 +468,10 @@ export class JournalNewPage implements OnInit {
         this.mood = dataReturned.data;
         this.unsaved = true;
         this.first = false;
+
+        if (this.previouslySaved && this.autosave) {
+          this.saveJournalPrompt();
+        }
       }
     });
     return await modal.present();
@@ -488,6 +492,10 @@ export class JournalNewPage implements OnInit {
         this.activity = dataReturned.data;
         this.unsaved = true;
         this.first = false;
+
+        if (this.previouslySaved && this.autosave) {
+          this.saveJournalPrompt();
+        }
       }
     });
     return await modal.present();
@@ -639,6 +647,10 @@ export class JournalNewPage implements OnInit {
       }
       this.unsaved = true;
       this.first = false;
+
+      if (this.previouslySaved && this.autosave) {
+        this.saveJournalPrompt();
+      }
     });
     return await modal.present();
   }
@@ -667,12 +679,20 @@ export class JournalNewPage implements OnInit {
     this.mood = null;
     this.unsaved = true;
     this.first = false;
+
+    if (this.previouslySaved && this.autosave) {
+      this.saveJournalPrompt();
+    }
   }
 
   clearActivity() {
     this.activity = null;
     this.unsaved = true;
     this.first = false;
+
+    if (this.previouslySaved && this.autosave) {
+      this.saveJournalPrompt();
+    }
   }
 
   resetJournal() {
