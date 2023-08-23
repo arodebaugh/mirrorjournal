@@ -287,10 +287,7 @@ export class JournalNewPage implements OnInit {
           directory: Directory.Documents,
           encoding: Encoding.UTF8
         });
-        // console.log('Wrote file', result);
         Haptics.impact({style: ImpactStyle.Light});
-        // this.taptic.notification({type: 'success'});
-        // toast.present();
         this.unsaved = false;
         this.first = false;
         this.previouslySaved = true;
@@ -308,6 +305,28 @@ export class JournalNewPage implements OnInit {
           directory: Directory.Documents,
           encoding: Encoding.UTF8
         });
+
+        // add to cache
+        try {
+          const contents = await Filesystem.readFile({
+            path: 'Mirror-app/mirrorJournalsCache.txt',
+            directory: Directory.Documents,
+            encoding: Encoding.UTF8
+          });
+
+          const cachedJournals = contents.data ? JSON.parse(contents.data) : [];
+          cachedJournals.unshift({data: JSON.stringify(this.saveData)});
+
+          await Filesystem.writeFile({
+            path: 'Mirror-app/mirrorJournalsCache.txt',
+            data: JSON.stringify(cachedJournals),
+            directory: Directory.Documents,
+            encoding: Encoding.UTF8
+          });
+        } catch (e) {
+          console.log(e);
+        }
+
         this.writeToMasterDir(saveData, toast);
         console.log('Wrote file', result);
       } catch (e) {

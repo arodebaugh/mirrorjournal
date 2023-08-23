@@ -33,6 +33,7 @@ export class HomePage implements OnInit {
   journals = [];
   journalsFromCache = [];
   cachedJournals = [];
+  filteredJournal = [];
   currentPage = "Home";
   dateFormatted = [];
   journalContentFormatted = [];
@@ -52,7 +53,6 @@ export class HomePage implements OnInit {
   private = [];
   menuLabel = false;
   disableClickCard = false;
-  search = '';
   streakData = {lastDate: moment(), streak: 0};
   journalIndex = 0;
   fabPos = 1; // 0 start, 1 center, 2 end
@@ -197,12 +197,8 @@ export class HomePage implements OnInit {
   }
 
   async loadJournalCache() {
-    await Filesystem.deleteFile({
-      path: 'Mirror-app/mirrorJournalsCache.txt',
-      directory: Directory.Documents
-    });
     try {
-      const contents = await Filesystem.readFile({ // todo: make sure it's newest first
+      const contents = await Filesystem.readFile({
         path: 'Mirror-app/mirrorJournalsCache.txt',
         directory: Directory.Documents,
         encoding: Encoding.UTF8
@@ -374,10 +370,15 @@ export class HomePage implements OnInit {
     this.journalContentFormatted = [];
     this.journals = [];
     this.journalsFromCache = [];
+    this.filteredJournal = [];
     this.showJournals = false;
     this.journalsLoaded = 0;
     this.lastId = "";
     this.journalIndex = 0;
+  }
+
+  resetFilteredJournal() {
+    this.filteredJournal = [];
   }
 
   async loadJournalView() {
@@ -407,6 +408,23 @@ export class HomePage implements OnInit {
       backdropDismiss: false
     });
     await modal.present();
+  }
+
+  search(query) {
+    this.filteredJournal = this.cachedJournals.filter(item => {
+      return !JSON.parse(item.data).locked &&
+        (JSON.parse(item.data).name.toLowerCase().includes(query.toLowerCase()) ||
+        moment(JSON.parse(item.data).date).format('LLLL').toLowerCase().includes(query.toLowerCase()) ||
+        JSON.parse(item.data).content.toLowerCase().includes(query.toLowerCase()));
+    })
+    .map(item => JSON.parse(item.data))
+    .map(item => {
+      return {
+        ...item,
+        date: moment(item.date).format('LLLL'),
+        content: this.stripJournalContent(item.content)
+      };
+    });
   }
 
   ionViewWillLeave() {
