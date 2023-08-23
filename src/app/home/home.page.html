@@ -16,8 +16,8 @@
 
   <ion-grid>
     <ion-row class="ion-justify-content-around">
-      <ion-col size="3"><ion-button fill="clear" color="dark" [id]="(currentPage === 'Home') ? 'selected-page' : ''" (click)="setSelectedPage('Home')">Home</ion-button></ion-col>
-      <ion-col size="3"><ion-button fill="clear" color="dark" [id]="(currentPage === 'Search') ? 'selected-page' : ''" (click)="setSelectedPage('Search');resetFilteredJournal();">Search</ion-button></ion-col>
+      <ion-col size="2"><ion-button fill="clear" color="dark" [id]="(currentPage === 'Home') ? 'selected-page' : ''" (click)="setSelectedPage('Home')">Home</ion-button></ion-col>
+      <ion-col size="2"><ion-button fill="clear" color="dark" [id]="(currentPage === 'Search') ? 'selected-page' : ''" (click)="setSelectedPage('Search');resetFilteredJournal();">Search</ion-button></ion-col>
       <ion-col size="3"><ion-button fill="clear" color="dark" [id]="(currentPage === 'Memories') ? 'selected-page' : ''" (click)="setSelectedPage('Memories')">Memories <ion-badge *ngIf="memories.length > 0" style="margin-left: 4px;" color="danger">{{ memories.length }}</ion-badge></ion-button></ion-col>
       <ion-col size="3"><ion-button fill="clear" color="dark" [id]="(currentPage === 'Private') ? 'selected-page' : ''" (click)="setSelectedPage('Private')">Private</ion-button></ion-col>
     </ion-row>
