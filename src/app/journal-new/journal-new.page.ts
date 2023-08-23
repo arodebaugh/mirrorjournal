@@ -148,53 +148,13 @@ export class JournalNewPage implements OnInit {
   }
 
   async checkUnsavedChanges() {
-
     if (this.unsaved && !this.first) {
       // Prompt the user to save changes
       this.presentUnsavedPrompt();
     } else {
       // Navigate back
-      this.navCtrl.back();
+      this.navCtrl.navigateRoot('/');
     }
-  }
-
-  async setExpire() {
-    const picker = await this.pickerController.create({
-      columns: this.getColumns(2, 11, options),
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel'
-        },
-        {
-          text: 'Confirm',
-          handler: (value) => {
-            // console.log(`Got Value ` + JSON.stringify(value));
-            if (value['col-1'].text === 'Never') {
-              Haptics.impact({style: ImpactStyle.Light});
-              // this.taptic.selection();
-              this.expireLabelText = 'Never';
-            } else if (value['col-0'].text === '') {
-              Haptics.notification({type: NotificationType.Error});
-              // this.taptic.notification({type: 'error'});
-              alert('Please set a number value!');
-            } else {
-              Haptics.impact({style: ImpactStyle.Light});
-              // this.taptic.selection();
-              if (parseInt(value['col-0'].text) > 1) {
-                this.expireLabelText = value['col-0'].text + ' ' + value['col-1'].text;
-              } else {
-                this.expireLabelText = value['col-0'].text + ' ' + (value['col-1'].text).slice(0, -1);
-              }
-            }
-            this.unsaved = true;
-            this.first = false;
-          }
-        }
-      ]
-    });
-
-    await picker.present();
   }
 
   getColumns(numColumns, numOptions, columnOptions) {
@@ -487,6 +447,10 @@ export class JournalNewPage implements OnInit {
         this.mood = dataReturned.data;
         this.unsaved = true;
         this.first = false;
+
+        if (this.previouslySaved && this.autosave) {
+          this.saveJournalPrompt();
+        }
       }
     });
     return await modal.present();
@@ -507,6 +471,10 @@ export class JournalNewPage implements OnInit {
         this.activity = dataReturned.data;
         this.unsaved = true;
         this.first = false;
+
+        if (this.previouslySaved && this.autosave) {
+          this.saveJournalPrompt();
+        }
       }
     });
     return await modal.present();
@@ -658,6 +626,10 @@ export class JournalNewPage implements OnInit {
       }
       this.unsaved = true;
       this.first = false;
+
+      if (this.previouslySaved && this.autosave) {
+        this.saveJournalPrompt();
+      }
     });
     return await modal.present();
   }
@@ -686,12 +658,20 @@ export class JournalNewPage implements OnInit {
     this.mood = null;
     this.unsaved = true;
     this.first = false;
+
+    if (this.previouslySaved && this.autosave) {
+      this.saveJournalPrompt();
+    }
   }
 
   clearActivity() {
     this.activity = null;
     this.unsaved = true;
     this.first = false;
+
+    if (this.previouslySaved && this.autosave) {
+      this.saveJournalPrompt();
+    }
   }
 
   resetJournal() {

@@ -26,9 +26,6 @@
           <ion-label (click)="presentEmojiModalActivity()">{{activity}}️ Activity</ion-label>
           <ion-icon *ngIf="activity !== null" (click)="clearActivity()" name="close-outline"></ion-icon>
         </ion-chip>
-        <ion-chip color="primary">
-          <ion-label (click)="setExpire()">⌛ {{ expireLabelText }}</ion-label>
-        </ion-chip>
         <ion-chip color="primary" (click)="changeLockState()">
           <ion-label>{{ lockState ? '🔒 Locked' : '🔓 Unlocked'}}</ion-label>
         </ion-chip>
