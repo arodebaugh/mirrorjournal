@@ -69,7 +69,6 @@ export class JournalNewPage implements OnInit {
   lockState = false;
   modalUp = false;
   memories = true;
-  fontsize = 'default';
   unsaved = true;
   first = true;
   autosave = true;
@@ -126,16 +125,7 @@ export class JournalNewPage implements OnInit {
     this.modalUp = false;
     this.unsaved = true;
     this.first = true;
-    const tempFontsize = await Preferences.get({key: 'fontsize'});
-    if (tempFontsize.value) {
-      this.fontsize = tempFontsize.value;
-      if (this.fontsize === 'default') {
-        this.fontsize = '';
-      } else {
-        this.fontsize = this.fontsize + 'px';
-      }
-    }
-
+    
     const tempAutosave = await Preferences.get({key: 'autosave'});
     if (tempAutosave.value) {
       this.autosave = (tempAutosave.value === 'true');

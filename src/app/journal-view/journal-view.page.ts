@@ -22,7 +22,6 @@ export class JournalViewPage implements OnInit {
   timeToExpire: string;
   passcode: string;
   menuLabel = false;
-  fontsize = '';
   fabPos = 1;
 
   constructor(private platform: Platform, private modalController: ModalController, private alertController: AlertController, private routerOutlet: IonRouterOutlet, private toastController: ToastController, private route: ActivatedRoute, private router: Router, private navCtrl: NavController, private nativeStorage: NativeStorage) {
@@ -68,16 +67,6 @@ export class JournalViewPage implements OnInit {
   }
 
   async ionViewDidEnter() {
-    const tempFontsize = await Preferences.get({key: 'fontsize'});
-    if (tempFontsize.value) {
-      this.fontsize = tempFontsize.value;
-      if (this.fontsize === 'default') {
-        this.fontsize = '';
-      } else {
-        this.fontsize = this.fontsize + 'px';
-      }
-    }
-
     const tempMenuplacment = await Preferences.get({key: 'menuplacement'});
     if (tempMenuplacment.value) {
       this.fabPos = parseInt(tempMenuplacment.value);

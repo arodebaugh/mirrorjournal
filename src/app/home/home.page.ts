@@ -61,10 +61,10 @@ export class HomePage implements OnInit {
   constructor(private modalController: ModalController, private popoverController: PopoverController, private alertController: AlertController, private platform: Platform, private routerOutlet: IonRouterOutlet, private navCtrl: NavController, private nativeStorage: NativeStorage) { }
 
   async ngOnInit() {
-    const tempHide12new = await Preferences.get({key: 'hide12new'});
-    if (tempHide12new.value !== 'true') {
+    const tempHide2new = await Preferences.get({key: 'hide2new'});
+    if (tempHide2new.value !== 'true') {
       this.showWhatsNew();
-      await Preferences.set({key: 'hide12new', value: 'true'});
+      await Preferences.set({key: 'hide2new', value: 'true'});
     }
 
     this.platform.ready().then(() => {

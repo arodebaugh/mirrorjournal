@@ -41,8 +41,8 @@
 
   <div id="journal-display">
     <div (click)="expandEditor()" id="editorExpand">
-      <ion-text [style.font-size]="fontsize" style="margin-left: 10px; color: rgb(147, 152, 158)" *ngIf="journalContent === '' && !modalUp">What are you thinking about?</ion-text>
-      <div style="margin-left: 10px;" [style.font-size]="fontsize" [innerHTML]="journalContent" *ngIf="journalContent !== '' || modalUp"></div>
+      <ion-text style="margin-left: 10px; color: rgb(147, 152, 158)" *ngIf="journalContent === '' && !modalUp">What are you thinking about?</ion-text>
+      <div style="margin-left: 10px;" [innerHTML]="journalContent" *ngIf="journalContent !== '' || modalUp"></div>
     </div>
   </div>
 </ion-content>
