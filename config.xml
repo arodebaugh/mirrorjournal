@@ -2,7 +2,7 @@
 <widget id="com.cosmicwebservicesllc.mirrorapp" version="0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Mirror Journal</name>
     <description>A journal designed for self-reflection and secrecy.</description>
-    <author email="ajr439@drexel.edu" href="https://cosmicwebservices.info">Cosmic Web Services LLC.</author>
+    <author email="ajr439@drexel.edu" href="https://andrewrodebaugh.dev">Andrew Rodebaugh</author>
     <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />

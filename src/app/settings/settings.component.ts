@@ -28,7 +28,6 @@ export class SettingsComponent implements OnInit {
   pro = false;
   time = '17:00';
   theme = 'default';
-  fontsize = 'default';
   menuplacment = '1';
 
   constructor(private platform: Platform, private appRate: AppRate, private alertController: AlertController,  private ref: ChangeDetectorRef, private modalController: ModalController, private emailComposer: EmailComposer, private themeWatch: ThemeWatchService) { }
@@ -51,10 +50,6 @@ export class SettingsComponent implements OnInit {
       this.theme = tempTheme.value;
     }
 
-    const tempFontsize = await Preferences.get({key: 'fontsize'});
-    if (tempFontsize.value) {
-      this.fontsize = tempFontsize.value;
-    }
     const tempMenuplacement = await Preferences.get({key: 'menuplacement'});
     if (tempMenuplacement.value) {
       this.menuplacment = tempMenuplacement.value;
@@ -164,10 +159,6 @@ export class SettingsComponent implements OnInit {
   async changeTheme() {
     await Preferences.set({key: 'theme', value: String(this.theme)});
     this.themeWatch.change(this.theme);
-  }
-
-  async changeFontsize() {
-    await Preferences.set({key: 'fontsize', value: String(this.fontsize)});
   }
 
   async changeMenuplacement() {

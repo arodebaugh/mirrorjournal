@@ -14,7 +14,6 @@ export class PopupEditorComponent implements OnInit {
   @Input() journalContent = '';
   @Input() fullscreen = false;
   editor: any;
-  fontsize = '';
 
   constructor(private modalController: ModalController, private platform: Platform) { }
 
@@ -29,21 +28,7 @@ export class PopupEditorComponent implements OnInit {
     });
   }
 
-  async ionViewDidEnter() {
-    // todo: fix font size
-    const tempFontsize = await Preferences.get({key: 'fontsize'});
-    if (tempFontsize.value) {
-      this.fontsize = tempFontsize.value;
-      if (this.fontsize === 'default') {
-        this.fontsize = '16px';
-      } else {
-        this.fontsize = this.fontsize + 'px';
-      }
-    } else {
-      this.fontsize = '16px';
-    }
-    // this.editorConfig.defaultFontSize = this.fontsize;
-  }
+  async ionViewDidEnter() { }
 
   async dismiss() {
     Haptics.impact({style: ImpactStyle.Light});

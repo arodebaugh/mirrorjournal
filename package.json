@@ -1,7 +1,7 @@
 {
   "name": "mirror-app",
   "version": "0.0.1",
-  "author": "Cosmic Web Services LLC",
+  "author": "Andrew Rodebaugh",
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
