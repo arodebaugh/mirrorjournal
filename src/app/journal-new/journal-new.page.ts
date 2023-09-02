@@ -357,8 +357,8 @@ export class JournalNewPage implements OnInit {
       const dayBefore = moment().subtract(1, 'days');
       if (this.streakData.streak == 0 || this.streakData.streak == null) {
         await Preferences.set({key: "streaks", value: JSON.stringify({ lastDate: moment(), streak: 1 })});
-      } else if (this.streakData.lastDate.isSame(dayBefore, 'day')) {
-        this.streakData = { lastDate: moment(), streak: this.streakData + 1 };
+      } else if (moment(this.streakData.lastDate).isSame(dayBefore, 'day')) {
+        this.streakData = { lastDate: moment(), streak: this.streakData.streak + 1 };
         await Preferences.set({key: "streaks", value: JSON.stringify(this.streakData)});
       }
     } else {
