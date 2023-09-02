@@ -3,6 +3,7 @@ import {
   AlertController,
   IonInfiniteScroll,
   IonRouterOutlet,
+  IonSearchbar,
   ModalController,
   NavController,
   Platform,
@@ -56,7 +57,9 @@ export class HomePage implements OnInit {
   streakData = {lastDate: moment(), streak: 0};
   journalIndex = 0;
   fabPos = 1; // 0 start, 1 center, 2 end
+  
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
+  @ViewChild('searchbar') searchbar: IonSearchbar;
 
   constructor(private modalController: ModalController, private popoverController: PopoverController, private alertController: AlertController, private platform: Platform, private routerOutlet: IonRouterOutlet, private navCtrl: NavController, private nativeStorage: NativeStorage) { }
 
@@ -312,7 +315,7 @@ export class HomePage implements OnInit {
     const tempStreak = await Preferences.get({key: 'streaks'});
     if (tempStreak.value) {
       this.streakData = JSON.parse(tempStreak.value);
-      if (this.streakData.lastDate.isBefore(dayBefore, 'day')) {
+      if (moment(this.streakData.lastDate).isBefore(dayBefore, 'day')) {
         this.streakData = { lastDate: moment(), streak: 0 };
         await Preferences.set({key: "streaks", value: JSON.stringify(this.streakData)});
       }
@@ -377,8 +380,11 @@ export class HomePage implements OnInit {
     this.journalIndex = 0;
   }
 
-  resetFilteredJournal() {
+  async resetFilteredJournal() {
     this.filteredJournal = [];
+    setTimeout(() => {
+      this.searchbar.setFocus();
+    }, 150);
   }
 
   async loadJournalView() {

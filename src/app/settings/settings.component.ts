@@ -26,7 +26,9 @@ export class SettingsComponent implements OnInit {
   authType = 'FaceID';
   secureWithID = false;
   pro = false;
-  time = '17:00';
+  time = new Date(new Date().setHours(Number('17:00'.split(':')[0]), Number('17:00'.split(':')[1]))).toISOString();
+
+
   theme = 'default';
   menuplacment = '1';
 
@@ -54,19 +56,6 @@ export class SettingsComponent implements OnInit {
     if (tempMenuplacement.value) {
       this.menuplacment = tempMenuplacement.value;
     }
-
-    /*this.localNotifications.getScheduledIds().then(out => {
-      if (out[0] === 1) {
-        this.notifications = true;
-        this.localNotifications.get(1).then(noti => {
-          const minute = (noti.trigger.every['minute'].toString().length <= 1) ? '0' + noti.trigger.every['minute'].toString() : noti.trigger.every['minute'].toString();
-          const hour = (noti.trigger.every['hour'].toString().length <= 1) ? '0' + noti.trigger.every['hour'].toString() : noti.trigger.every['hour'].toString();
-          this.time = hour + ':' + minute;
-        }).catch(err => {
-          alert(JSON.stringify(err));
-        });
-      }
-    });*/
   }
 
   async whatsNew() {
@@ -165,15 +154,34 @@ export class SettingsComponent implements OnInit {
     await Preferences.set({key: 'menuplacement', value: String(this.menuplacment)});
   }
 
-  /*async schedule() {
-    if (this.notifications) {
-      LocalNotifications.schedule({
+  async schedule() {
+    LocalNotifications.schedule({ notifications: [
+      {
         id: 1,
-        text: '👋 It\'s your scheduled journaling time!',
-        trigger: { every: { hour: parseInt(this.time.split(':')[0]), minute: parseInt(this.time.split(':')[1]) } }
-      });
+        title: 'Mirror Journal',
+        body: '👋 It\'s your scheduled journaling time!',
+        schedule: { allowWhileIdle: true, on: { hour: parseInt(this.time.split(':')[0]), minute: parseInt(this.time.split(':')[1]) } }
+      }
+    ]
+    });
+  }
+
+  async setNotifications(out) {
+    this.notifications = out.value;
+
+    const permission = await LocalNotifications.checkPermissions();
+    if (permission.display === 'denied') {
+        await LocalNotifications.requestPermissions();
     }
-  }*/
+
+    alert(this.notifications);
+
+    if (this.notifications) {
+      this.schedule();
+    } else {
+      LocalNotifications.cancel({ notifications: [{id: 1}]});
+    }
+  }
 
   async setAutosave() {
     if (this.autosave === true) {
@@ -182,22 +190,6 @@ export class SettingsComponent implements OnInit {
       await Preferences.set({key: 'autosave', value: 'false'});
     }
   }
-
-  /*setNotifications() {
-    this.localNotifications.hasPermission().then(out => {
-      if (out) {
-        this.schedule();
-      } else {
-        this.localNotifications.requestPermission().then(() => {
-          this.schedule();
-        }).catch(err => {
-          alert('Error: ' + JSON.stringify(err));
-        });
-      }
-    }).catch(err => {
-      alert('Error: ' + JSON.stringify(err));
-    });
-  }*/
 
   syncFromOldMirrorJournal() {
     let warn = confirm("Warning: This may replace any journals in your iCloud Drive! Proceed with caution.");
