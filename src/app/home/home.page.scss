@@ -20,12 +20,22 @@ ion-title {
 
 .details-card h1 {
     font-size: 30px;
-    color: white;
     text-align: center;
+    color: black;
 }
 
 .details-card p {
-    color: white;
     text-align: center;
+    color: black;
+}
+
+@media (prefers-color-scheme: dark) {
+    .details-card p {
+        color: white;
+    }
+
+    .details-card h1 {
+        color: white;
+    }
 }
   

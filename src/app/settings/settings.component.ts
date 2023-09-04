@@ -119,13 +119,14 @@ export class SettingsComponent implements OnInit {
 
   contactUs() {
     Haptics.impact({style: ImpactStyle.Light});
-    const email = {
+    window.open("https://forms.gle/JoK62zj9ENuzQCYe7");
+    /*const email = {
       to: 'help@mirrorjournal.app',
       subject: 'Mirror App Contact on ' + moment().format('LLLL'),
       body: '',
       isHtml: true
     };
-    this.emailComposer.open(email);
+    this.emailComposer.open(email);*/
   }
 
   async customIcon() {
