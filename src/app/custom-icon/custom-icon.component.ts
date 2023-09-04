@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppIcon } from '@capacitor-community/app-icon';
 
 @Component({
   selector: 'app-custom-icon',
