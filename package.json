@@ -13,7 +13,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular-eslint/schematics": "^1.0.0",
+    "@angular-eslint/schematics": "^16.1.1",
     "@angular/common": "^14.3.0",
     "@angular/core": "^14.3.0",
     "@angular/forms": "^14.3.0",
