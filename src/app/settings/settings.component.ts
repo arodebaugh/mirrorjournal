@@ -135,7 +135,7 @@ export class SettingsComponent implements OnInit {
 
   async deleteCache() {
     await Filesystem.deleteFile({
-      path: 'Mirror-app/mirrorJournalsCache.txt',
+      path: 'Mirror-Journal-app/mirrorJournalsCache.txt',
       directory: Directory.Documents
     });
 

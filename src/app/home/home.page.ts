@@ -127,7 +127,7 @@ export class HomePage implements OnInit {
 
   async deleteJournal(data) {
     const contents = await Filesystem.readFile({
-      path: 'Mirror-app/mirrorJournals.txt',
+      path: 'Mirror-Journal-app/mirrorJournals.txt',
       directory: Directory.Documents,
       encoding: Encoding.UTF8
     });
@@ -138,12 +138,11 @@ export class HomePage implements OnInit {
           outParsed = outParsed.filter(returnableObjects => returnableObjects.id !== data.id);
           try {
             await Filesystem.writeFile({
-              path: 'Mirror-app/' + data.id + '.txt',
+              path: 'Mirror-Journal-app/' + data.id + '.txt',
               data: JSON.stringify(outParsed),
               directory: Directory.Documents,
               encoding: Encoding.UTF8
             });
-            await Preferences.set({key: "mirrorJournalListCache", value: JSON.stringify(outParsed)});
           } catch (e) {
             console.error('Unable to write file', e);
           }
@@ -179,7 +178,7 @@ export class HomePage implements OnInit {
 
   async loadMemory(id) { // TODO: Get from cache
     const contents = await Filesystem.readFile({
-      path: 'Mirror-app/' + id + '.txt',
+      path: 'Mirror-Journal-app/' + id + '.txt',
       directory: Directory.Documents,
       encoding: Encoding.UTF8
     });
@@ -202,7 +201,7 @@ export class HomePage implements OnInit {
   async loadJournalCache() {
     try {
       const contents = await Filesystem.readFile({
-        path: 'Mirror-app/mirrorJournalsCache.txt',
+        path: 'Mirror-Journal-app/mirrorJournalsCache.txt',
         directory: Directory.Documents,
         encoding: Encoding.UTF8
       });
@@ -214,32 +213,26 @@ export class HomePage implements OnInit {
     }
   }
 
-  async loadJournalListCache() {
-    const mirrorJournalListCache = await Preferences.get({key: "mirrorJournalListCache"});
+  async loadJournalList() {
+    try {
+      const mirrorJournalListFile = await Filesystem.readFile({
+        path: 'Mirror-Journal-app/mirrorJournals.txt',
+        directory: Directory.Documents,
+        encoding: Encoding.UTF8,
+      });
+      alert(JSON.stringify(mirrorJournalListFile));
 
-    if (mirrorJournalListCache.value) {
-      this.sortedJournals = JSON.parse(mirrorJournalListCache.value);
-    } else {
-      try {
-        const mirrorJournalListFile = await Filesystem.readFile({
-          path: 'Mirror-app/mirrorJournals.txt',
-          directory: Directory.Documents,
-          encoding: Encoding.UTF8,
-        });
-
-        this.sortedJournals = JSON.parse(mirrorJournalListFile.data);
-        await Preferences.set({key: "mirrorJournalListCache", value: JSON.stringify(this.sortedJournals)});
-      } catch (e) {
-        console.error('file read err', e);
-        this.createMirrorJournals();
-        this.showJournals = false;
-      }
+      this.sortedJournals = JSON.parse(mirrorJournalListFile.data);
+    } catch (e) {
+      console.error('file read err', e);
+      this.createMirrorJournals();
+      this.showJournals = false;
     }
   }
 
   async saveJournalCache() {
     await Filesystem.writeFile({
-      path: 'Mirror-app/mirrorJournalsCache.txt',
+      path: 'Mirror-Journal-app/mirrorJournalsCache.txt',
       data: JSON.stringify(this.cachedJournals),
       directory: Directory.Documents,
       encoding: Encoding.UTF8
@@ -252,7 +245,7 @@ export class HomePage implements OnInit {
       this.lastId = nextJournal.id;
 
       const contents = await Filesystem.readFile({
-        path: 'Mirror-app/' + nextJournal.id + '.txt',
+        path: 'Mirror-Journal-app/' + nextJournal.id + '.txt',
         directory: Directory.Documents,
         encoding: Encoding.UTF8
       });
@@ -332,18 +325,17 @@ export class HomePage implements OnInit {
   async createMirrorJournals() {
     try {
       await Filesystem.mkdir({
-        path: 'Mirror-app',
+        path: 'Mirror-Journal-app',
         directory: Directory.Documents,
         recursive: false // like mkdir -p
       });
       try {
         await Filesystem.writeFile({
-          path: 'Mirror-app/mirrorJournals.txt',
+          path: 'Mirror-Journal-app/mirrorJournals.txt',
           data: '[]',
           directory: Directory.Documents,
           encoding: Encoding.UTF8
         });
-        await Preferences.set({key: "mirrorJournalListCache", value: '[]'});
         this.showWelcomeSceen();
       } catch (e) {
         console.error('Unable to write file', e);
@@ -390,7 +382,7 @@ export class HomePage implements OnInit {
   async loadJournalView() {
     this.resetJouranl();
     await this.loadJournalCache();
-    await this.loadJournalListCache();
+    await this.loadJournalList();
 
     this.sortedJournals.sort((a, b) => {
       return Number(new Date(b.date)) - Number(new Date(a.date));

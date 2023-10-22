@@ -137,13 +137,13 @@ export class JournalViewPage implements OnInit {
 
     // Delete file
     await Filesystem.deleteFile({
-      path: 'Mirror-app/' + data.id + '.txt',
+      path: 'Mirror-Journal-app/' + data.id + '.txt',
       directory: Directory.Documents
     });
 
     // Remove journal from directory file
     const contents = await Filesystem.readFile({
-      path: 'Mirror-app/mirrorJournals.txt',
+      path: 'Mirror-Journal-app/mirrorJournals.txt',
       directory: Directory.Documents,
       encoding: Encoding.UTF8
     });
@@ -152,16 +152,15 @@ export class JournalViewPage implements OnInit {
 
     try {
       await Filesystem.writeFile({
-        path: 'Mirror-app/mirrorJournals.txt',
+        path: 'Mirror-Journal-app/mirrorJournals.txt',
         data: JSON.stringify(outParsed),
         directory: Directory.Documents,
         encoding: Encoding.UTF8
       });
-      await Preferences.set({key: "mirrorJournalListCache", value: JSON.stringify(outParsed)});
       
       // Remove journal from cache file
       const cacheContents = await Filesystem.readFile({
-        path: 'Mirror-app/mirrorJournalsCache.txt',
+        path: 'Mirror-Journal-app/mirrorJournalsCache.txt',
         directory: Directory.Documents,
         encoding: Encoding.UTF8
       });
@@ -172,7 +171,7 @@ export class JournalViewPage implements OnInit {
         filteredOutParsed = cacheOutParsed.filter(returnableObjects => JSON.parse(returnableObjects.data).date !== data.date);
       }
       await Filesystem.writeFile({
-        path: 'Mirror-app/mirrorJournalsCache.txt',
+        path: 'Mirror-Journal-app/mirrorJournalsCache.txt',
         data: JSON.stringify(filteredOutParsed),
         directory: Directory.Documents,
         encoding: Encoding.UTF8
@@ -264,7 +263,7 @@ export class JournalViewPage implements OnInit {
   }
 
   async saveNoteToFile(saveData, toast) {
-    const fileName = 'Mirror-app/' + this.data.id + '.txt';
+    const fileName = 'Mirror-Journal-app/' + this.data.id + '.txt';
     try {
       const result = await Filesystem.writeFile({
         path: fileName,

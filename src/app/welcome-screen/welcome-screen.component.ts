@@ -52,7 +52,7 @@ export class WelcomeScreenComponent implements OnInit {
 
   async getAllJournalsForCache() {
     const mirrorJournalListFile = await Filesystem.readFile({
-      path: 'Mirror-app/mirrorJournals.txt',
+      path: 'Mirror-Journal-app/mirrorJournals.txt',
       directory: Directory.Documents,
       encoding: Encoding.UTF8,
     });
@@ -63,7 +63,7 @@ export class WelcomeScreenComponent implements OnInit {
       let nextJournal = this.sortedJournals[i];
 
       const contents = await Filesystem.readFile({
-        path: 'Mirror-app/' + nextJournal.id + '.txt',
+        path: 'Mirror-Journal-app/' + nextJournal.id + '.txt',
         directory: Directory.Documents,
         encoding: Encoding.UTF8
       });
@@ -72,7 +72,7 @@ export class WelcomeScreenComponent implements OnInit {
     }
 
     await Filesystem.writeFile({
-      path: 'Mirror-app/mirrorJournalsCache.txt',
+      path: 'Mirror-Journal-app/mirrorJournalsCache.txt',
       data: JSON.stringify(this.cachedJournals),
       directory: Directory.Documents,
       encoding: Encoding.UTF8
