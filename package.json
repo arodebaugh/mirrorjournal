@@ -61,7 +61,7 @@
     "cordova-plugin-telerik-imagepicker": "^2.3.6",
     "cordova-plugin-theme-detection": "^1.3.0",
     "cordova-res": "^0.15.2",
-    "crypto-js": "^4.0.0",
+    "crypto-js": "^4.2.0",
     "ionicons": "^5.2.3",
     "jquery": "^3.5.1",
     "moment": "^2.29.1",
