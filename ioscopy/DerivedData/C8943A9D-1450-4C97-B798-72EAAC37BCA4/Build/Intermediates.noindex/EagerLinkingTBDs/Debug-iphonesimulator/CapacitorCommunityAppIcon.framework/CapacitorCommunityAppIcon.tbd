@@ -1,0 +1,26 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ arm64-ios-simulator ]
+flags:           [ not_app_extension_safe ]
+install-name:    '@rpath/CapacitorCommunityAppIcon.framework/CapacitorCommunityAppIcon'
+swift-abi-version: 7
+exports:
+  - targets:         [ arm64-ios-simulator ]
+    symbols:         [ '_$s25CapacitorCommunityAppIcon0cD0C03setD08iconName20suppressNotification_ySSSg_SbSo13CAPPluginCallCtF', 
+                       '_$s25CapacitorCommunityAppIcon0cD0C03setD08iconName20suppressNotification_ySSSg_SbSo13CAPPluginCallCtFTq', 
+                       '_$s25CapacitorCommunityAppIcon0cD0C11isSupportedyySo13CAPPluginCallCF', 
+                       '_$s25CapacitorCommunityAppIcon0cD0C11isSupportedyySo13CAPPluginCallCFTq', 
+                       '_$s25CapacitorCommunityAppIcon0cD0C5resetyySo13CAPPluginCallCF', 
+                       '_$s25CapacitorCommunityAppIcon0cD0C5resetyySo13CAPPluginCallCFTq', 
+                       '_$s25CapacitorCommunityAppIcon0cD0C6bridge8pluginId0F4NameAC0A017CAPBridgeProtocol_p_S2StcfC', 
+                       '_$s25CapacitorCommunityAppIcon0cD0C6bridge8pluginId0F4NameAC0A017CAPBridgeProtocol_p_S2Stcfc', 
+                       '_$s25CapacitorCommunityAppIcon0cD0C6changeyySo13CAPPluginCallCF', 
+                       '_$s25CapacitorCommunityAppIcon0cD0C6changeyySo13CAPPluginCallCFTq', 
+                       '_$s25CapacitorCommunityAppIcon0cD0C7getNameyySo13CAPPluginCallCF', 
+                       '_$s25CapacitorCommunityAppIcon0cD0C7getNameyySo13CAPPluginCallCFTq', 
+                       '_$s25CapacitorCommunityAppIcon0cD0CACycfC', '_$s25CapacitorCommunityAppIcon0cD0CACycfc', 
+                       '_$s25CapacitorCommunityAppIcon0cD0CMa', '_$s25CapacitorCommunityAppIcon0cD0CMn', 
+                       '_$s25CapacitorCommunityAppIcon0cD0CN', '_$s25CapacitorCommunityAppIcon0cD0CfD', 
+                       _CapacitorCommunityAppIconVersionNumber, _CapacitorCommunityAppIconVersionString ]
+    objc-classes:    [ AppIcon, PodsDummy_CapacitorCommunityAppIcon ]
+...

@@ -1,0 +1,23 @@
+{
+  'version': 0,
+  'use-external-names': 'false',
+  'case-sensitive': 'false',
+  'roots': [{
+    'type': 'directory',
+    'name': "/Users/andrewrodebaugh/Downloads/think-app-master/ios/DerivedData/C8943A9D-1450-4C97-B798-72EAAC37BCA4/Build/Products/Debug-iphonesimulator/Capacitor/Capacitor.framework/Modules"
+    'contents': [{
+      'type': 'file',
+      'name': "module.modulemap",
+      'external-contents': "/Users/andrewrodebaugh/Downloads/think-app-master/ios/DerivedData/C8943A9D-1450-4C97-B798-72EAAC37BCA4/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/Capacitor.build/unextended-module.modulemap",
+    }]
+    },
+    {
+    'type': 'directory',
+    'name': "/Users/andrewrodebaugh/Downloads/think-app-master/ios/DerivedData/C8943A9D-1450-4C97-B798-72EAAC37BCA4/Build/Products/Debug-iphonesimulator/Capacitor/Capacitor.framework/Headers"
+    'contents': [{
+      'type': 'file',
+      'name': "Capacitor-Swift.h",
+      'external-contents': "/Users/andrewrodebaugh/Downloads/think-app-master/ios/DerivedData/C8943A9D-1450-4C97-B798-72EAAC37BCA4/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/Capacitor.build/unextended-interface-header.h",
+    }]
+    }]
+}

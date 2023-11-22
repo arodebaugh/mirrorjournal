@@ -1,0 +1,9 @@
+version: "Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)"
+options: "8b9328746ba81d5a35921d323b51c27e2b14b36fb835c49c63ef752dd3ebf13d"
+build_start_time: [1692830032, 631668000]
+build_end_time: [1692830038, 638975000]
+inputs:
+  ? "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/local-notifications/ios/Plugin/LocalNotificationsHandler.swift"
+  : [1690040753, 944426584]
+  ? "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/local-notifications/ios/Plugin/LocalNotificationsPlugin.swift"
+  : [1690040753, 944863247]

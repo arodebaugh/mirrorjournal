@@ -1,0 +1,57 @@
+Target dependency graph (16 targets)
+CapacitorCordova in Pods, no dependencies
+Capacitor in Pods, depends on:
+CapacitorCordova in Pods (explicit)
+AparajitaCapacitorDarkMode in Pods, depends on:
+Capacitor in Pods (explicit)
+CapacitorCommunityAppIcon in Pods, depends on:
+Capacitor in Pods (explicit)
+CapacitorDialog in Pods, depends on:
+Capacitor in Pods (explicit)
+CapacitorFilesystem in Pods, depends on:
+Capacitor in Pods (explicit)
+CapacitorHaptics in Pods, depends on:
+Capacitor in Pods (explicit)
+CapacitorKeyboard in Pods, depends on:
+Capacitor in Pods (explicit)
+CapacitorLocalNotifications in Pods, depends on:
+Capacitor in Pods (explicit)
+CapacitorPreferences in Pods, depends on:
+Capacitor in Pods (explicit)
+CapacitorSplashScreen in Pods, depends on:
+Capacitor in Pods (explicit)
+CapacitorTextZoom in Pods, depends on:
+Capacitor in Pods (explicit)
+CordovaPlugins in Pods, depends on:
+CapacitorCordova in Pods (explicit)
+CordovaPluginsResources in Pods, no dependencies
+Pods-App in Pods, depends on:
+AparajitaCapacitorDarkMode in Pods (explicit)
+Capacitor in Pods (explicit)
+CapacitorCommunityAppIcon in Pods (explicit)
+CapacitorCordova in Pods (explicit)
+CapacitorDialog in Pods (explicit)
+CapacitorFilesystem in Pods (explicit)
+CapacitorHaptics in Pods (explicit)
+CapacitorKeyboard in Pods (explicit)
+CapacitorLocalNotifications in Pods (explicit)
+CapacitorPreferences in Pods (explicit)
+CapacitorSplashScreen in Pods (explicit)
+CapacitorTextZoom in Pods (explicit)
+CordovaPlugins in Pods (explicit)
+CordovaPluginsResources in Pods (explicit)
+App in App, depends on:
+Pods-App in Pods (implicit dependency via file 'Pods_App.framework' in build phase 'Link Binary')
+AparajitaCapacitorDarkMode in Pods (implicit dependency via options '-framework AparajitaCapacitorDarkMode' in build setting 'OTHER_LDFLAGS')
+Capacitor in Pods (implicit dependency via options '-framework Capacitor' in build setting 'OTHER_LDFLAGS')
+CapacitorCommunityAppIcon in Pods (implicit dependency via options '-framework CapacitorCommunityAppIcon' in build setting 'OTHER_LDFLAGS')
+CapacitorDialog in Pods (implicit dependency via options '-framework CapacitorDialog' in build setting 'OTHER_LDFLAGS')
+CapacitorFilesystem in Pods (implicit dependency via options '-framework CapacitorFilesystem' in build setting 'OTHER_LDFLAGS')
+CapacitorHaptics in Pods (implicit dependency via options '-framework CapacitorHaptics' in build setting 'OTHER_LDFLAGS')
+CapacitorKeyboard in Pods (implicit dependency via options '-framework CapacitorKeyboard' in build setting 'OTHER_LDFLAGS')
+CapacitorLocalNotifications in Pods (implicit dependency via options '-framework CapacitorLocalNotifications' in build setting 'OTHER_LDFLAGS')
+CapacitorPreferences in Pods (implicit dependency via options '-framework CapacitorPreferences' in build setting 'OTHER_LDFLAGS')
+CapacitorSplashScreen in Pods (implicit dependency via options '-framework CapacitorSplashScreen' in build setting 'OTHER_LDFLAGS')
+CapacitorTextZoom in Pods (implicit dependency via options '-framework CapacitorTextZoom' in build setting 'OTHER_LDFLAGS')
+CapacitorCordova in Pods (implicit dependency via options '-framework Cordova' in build setting 'OTHER_LDFLAGS')
+CordovaPlugins in Pods (implicit dependency via options '-framework CordovaPlugins' in build setting 'OTHER_LDFLAGS')

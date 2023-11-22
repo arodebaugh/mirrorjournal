@@ -1,0 +1,9 @@
+version: "Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)"
+options: "29acbd2d66480193d9090f1776bb3038a2c57bc31cdff28da03f6ef021547bc6"
+build_start_time: [1693851640, 318231000]
+build_end_time: [1693851642, 856310000]
+inputs:
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/splash-screen/ios/Plugin/SplashScreen.swift": [1690040753, 169255857]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/splash-screen/ios/Plugin/SplashScreenConfig.swift": [1690040753, 169689562]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/splash-screen/ios/Plugin/SplashScreenPlugin.swift": [1690040753, 169847436]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/splash-screen/ios/Plugin/SplashScreenSettings.swift": [1690040753, 170212058]

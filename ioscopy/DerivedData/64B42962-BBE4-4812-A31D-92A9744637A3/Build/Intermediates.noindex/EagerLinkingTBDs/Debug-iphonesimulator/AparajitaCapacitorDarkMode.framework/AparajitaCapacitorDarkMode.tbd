@@ -1,0 +1,55 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ arm64-ios-simulator ]
+flags:           [ not_app_extension_safe ]
+install-name:    '@rpath/AparajitaCapacitorDarkMode.framework/AparajitaCapacitorDarkMode'
+swift-abi-version: 7
+exports:
+  - targets:         [ arm64-ios-simulator ]
+    symbols:         [ '_$s26AparajitaCapacitorDarkMode0cD6NativeC02iscD0yySo13CAPPluginCallCF', 
+                       '_$s26AparajitaCapacitorDarkMode0cD6NativeC02iscD0yySo13CAPPluginCallCFTq', 
+                       '_$s26AparajitaCapacitorDarkMode0cD6NativeC03setecD8ListeneryySo13CAPPluginCallCF', 
+                       '_$s26AparajitaCapacitorDarkMode0cD6NativeC03setecD8ListeneryySo13CAPPluginCallCFTq', 
+                       '_$s26AparajitaCapacitorDarkMode0cD6NativeC10traitsView33_A2A9C89FA42284BE8A4E024E68A286B6LLAA06TraitsG0CSgvM', 
+                       '_$s26AparajitaCapacitorDarkMode0cD6NativeC10traitsView33_A2A9C89FA42284BE8A4E024E68A286B6LLAA06TraitsG0CSgvg', 
+                       '_$s26AparajitaCapacitorDarkMode0cD6NativeC10traitsView33_A2A9C89FA42284BE8A4E024E68A286B6LLAA06TraitsG0CSgvpfi', 
+                       '_$s26AparajitaCapacitorDarkMode0cD6NativeC10traitsView33_A2A9C89FA42284BE8A4E024E68A286B6LLAA06TraitsG0CSgvs', 
+                       '_$s26AparajitaCapacitorDarkMode0cD6NativeC12listenerCall33_A2A9C89FA42284BE8A4E024E68A286B6LLSo09CAPPluginG0CSgvM', 
+                       '_$s26AparajitaCapacitorDarkMode0cD6NativeC12listenerCall33_A2A9C89FA42284BE8A4E024E68A286B6LLSo09CAPPluginG0CSgvg', 
+                       '_$s26AparajitaCapacitorDarkMode0cD6NativeC12listenerCall33_A2A9C89FA42284BE8A4E024E68A286B6LLSo09CAPPluginG0CSgvpfi', 
+                       '_$s26AparajitaCapacitorDarkMode0cD6NativeC12listenerCall33_A2A9C89FA42284BE8A4E024E68A286B6LLSo09CAPPluginG0CSgvs', 
+                       '_$s26AparajitaCapacitorDarkMode0cD6NativeC14resumeObserver33_A2A9C89FA42284BE8A4E024E68A286B6LLSo8NSObject_pSgvM', 
+                       '_$s26AparajitaCapacitorDarkMode0cD6NativeC14resumeObserver33_A2A9C89FA42284BE8A4E024E68A286B6LLSo8NSObject_pSgvg', 
+                       '_$s26AparajitaCapacitorDarkMode0cD6NativeC14resumeObserver33_A2A9C89FA42284BE8A4E024E68A286B6LLSo8NSObject_pSgvpfi', 
+                       '_$s26AparajitaCapacitorDarkMode0cD6NativeC14resumeObserver33_A2A9C89FA42284BE8A4E024E68A286B6LLSo8NSObject_pSgvs', 
+                       '_$s26AparajitaCapacitorDarkMode0cD6NativeC4loadyyF', '_$s26AparajitaCapacitorDarkMode0cD6NativeC6bridge8pluginId0G4NameAC0B017CAPBridgeProtocol_p_S2StcfC', 
+                       '_$s26AparajitaCapacitorDarkMode0cD6NativeC6bridge8pluginId0G4NameAC0B017CAPBridgeProtocol_p_S2Stcfc', 
+                       '_$s26AparajitaCapacitorDarkMode0cD6NativeCACycfC', '_$s26AparajitaCapacitorDarkMode0cD6NativeCACycfc', 
+                       '_$s26AparajitaCapacitorDarkMode0cD6NativeCMa', '_$s26AparajitaCapacitorDarkMode0cD6NativeCMn', 
+                       '_$s26AparajitaCapacitorDarkMode0cD6NativeCN', '_$s26AparajitaCapacitorDarkMode0cD6NativeCfD', 
+                       '_$s26AparajitaCapacitorDarkMode10TraitsViewC10withBridgeAC0B017CAPBridgeProtocol_pSg_tcfC', 
+                       '_$s26AparajitaCapacitorDarkMode10TraitsViewC10withBridgeAC0B017CAPBridgeProtocol_pSg_tcfCTq', 
+                       '_$s26AparajitaCapacitorDarkMode10TraitsViewC10withBridgeAC0B017CAPBridgeProtocol_pSg_tcfc', 
+                       '_$s26AparajitaCapacitorDarkMode10TraitsViewC14interfaceStyle33_7B342BD32F68B15CB3102F1675B597BALLSo015UIUserInterfaceH0VvM', 
+                       '_$s26AparajitaCapacitorDarkMode10TraitsViewC14interfaceStyle33_7B342BD32F68B15CB3102F1675B597BALLSo015UIUserInterfaceH0Vvg', 
+                       '_$s26AparajitaCapacitorDarkMode10TraitsViewC14interfaceStyle33_7B342BD32F68B15CB3102F1675B597BALLSo015UIUserInterfaceH0Vvpfi', 
+                       '_$s26AparajitaCapacitorDarkMode10TraitsViewC14interfaceStyle33_7B342BD32F68B15CB3102F1675B597BALLSo015UIUserInterfaceH0Vvs', 
+                       '_$s26AparajitaCapacitorDarkMode10TraitsViewC18appearanceListenerySo20UIUserInterfaceStyleVcSgvM', 
+                       '_$s26AparajitaCapacitorDarkMode10TraitsViewC18appearanceListenerySo20UIUserInterfaceStyleVcSgvMTq', 
+                       '_$s26AparajitaCapacitorDarkMode10TraitsViewC18appearanceListenerySo20UIUserInterfaceStyleVcSgvg', 
+                       '_$s26AparajitaCapacitorDarkMode10TraitsViewC18appearanceListenerySo20UIUserInterfaceStyleVcSgvgTq', 
+                       '_$s26AparajitaCapacitorDarkMode10TraitsViewC18appearanceListenerySo20UIUserInterfaceStyleVcSgvpMV', 
+                       '_$s26AparajitaCapacitorDarkMode10TraitsViewC18appearanceListenerySo20UIUserInterfaceStyleVcSgvpWvd', 
+                       '_$s26AparajitaCapacitorDarkMode10TraitsViewC18appearanceListenerySo20UIUserInterfaceStyleVcSgvpfi', 
+                       '_$s26AparajitaCapacitorDarkMode10TraitsViewC18appearanceListenerySo20UIUserInterfaceStyleVcSgvs', 
+                       '_$s26AparajitaCapacitorDarkMode10TraitsViewC18appearanceListenerySo20UIUserInterfaceStyleVcSgvsTq', 
+                       '_$s26AparajitaCapacitorDarkMode10TraitsViewC24traitCollectionDidChangeyySo07UITraitH0CSgF', 
+                       '_$s26AparajitaCapacitorDarkMode10TraitsViewC5coderACSgSo7NSCoderC_tcfC', 
+                       '_$s26AparajitaCapacitorDarkMode10TraitsViewC5coderACSgSo7NSCoderC_tcfc', 
+                       '_$s26AparajitaCapacitorDarkMode10TraitsViewC5frameACSo6CGRectV_tcfC', 
+                       '_$s26AparajitaCapacitorDarkMode10TraitsViewC5frameACSo6CGRectV_tcfc', 
+                       '_$s26AparajitaCapacitorDarkMode10TraitsViewCMa', '_$s26AparajitaCapacitorDarkMode10TraitsViewCMn', 
+                       '_$s26AparajitaCapacitorDarkMode10TraitsViewCN', '_$s26AparajitaCapacitorDarkMode10TraitsViewCfD', 
+                       _AparajitaCapacitorDarkModeVersionNumber, _AparajitaCapacitorDarkModeVersionString ]
+    objc-classes:    [ DarkModeNative, PodsDummy_AparajitaCapacitorDarkMode, _TtC26AparajitaCapacitorDarkMode10TraitsView ]
+...

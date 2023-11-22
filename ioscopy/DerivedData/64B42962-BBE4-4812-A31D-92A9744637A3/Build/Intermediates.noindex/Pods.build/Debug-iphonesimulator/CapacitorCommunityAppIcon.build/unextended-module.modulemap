@@ -1,0 +1,10 @@
+framework module CapacitorCommunityAppIcon {
+  umbrella header "CapacitorCommunityAppIcon-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module CapacitorCommunityAppIcon.__Swift {
+  exclude header "CapacitorCommunityAppIcon-Swift.h"
+}

@@ -1,0 +1,29 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-ios-simulator ]
+flags:           [ not_app_extension_safe ]
+install-name:    '@rpath/Cordova.framework/Cordova'
+exports:
+  - targets:         [ x86_64-ios-simulator ]
+    symbols:         [ _CDVLocalNotification, _CDVPageDidLoadNotification, _CDVPluginHandleOpenURLNotification, 
+                       _CDVPluginHandleOpenURLWithAppSourceAndAnnotationNotification, 
+                       _CDVPluginResetNotification, _CDVRemoteNotification, _CDVRemoteNotificationError, 
+                       _CDVViewDidAppearNotification, _CDVViewDidDisappearNotification, 
+                       _CDVViewDidLayoutSubviewsNotification, _CDVViewWillAppearNotification, 
+                       _CDVViewWillDisappearNotification, _CDVViewWillLayoutSubviewsNotification, 
+                       _CDVViewWillTransitionToSizeNotification, _CordovaVersionNumber, 
+                       _CordovaVersionString, _SWIFT_CDVCommandStatus_CLASS_NOT_FOUND_EXCEPTION, 
+                       _SWIFT_CDVCommandStatus_ERROR, _SWIFT_CDVCommandStatus_ILLEGAL_ACCESS_EXCEPTION, 
+                       _SWIFT_CDVCommandStatus_INSTANTIATION_EXCEPTION, _SWIFT_CDVCommandStatus_INVALID_ACTION, 
+                       _SWIFT_CDVCommandStatus_IO_EXCEPTION, _SWIFT_CDVCommandStatus_JSON_EXCEPTION, 
+                       _SWIFT_CDVCommandStatus_MALFORMED_URL_EXCEPTION, _SWIFT_CDVCommandStatus_NO_RESULT, 
+                       _SWIFT_CDVCommandStatus_OK, _kCDVAssetsLibraryPrefixes, _massageMessage, 
+                       _messageFromArrayBuffer, _messageFromMultipart ]
+    objc-classes:    [ AppDelegate, CDVCommandDelegateImpl, CDVConfigParser, CDVInvokedUrlCommand, 
+                       CDVPlugin, CDVPluginManager, CDVPluginResult, CDVURLProtocol, 
+                       CDVViewController, PodsDummy_CapacitorCordova ]
+    objc-ivars:      [ CDVCommandDelegateImpl._commandQueue, CDVCommandDelegateImpl._delayResponses, 
+                       CDVConfigParser.featureName, CDVInvokedUrlCommand._arguments, 
+                       CDVInvokedUrlCommand._callbackId, CDVInvokedUrlCommand._className, 
+                       CDVInvokedUrlCommand._methodName ]
+...

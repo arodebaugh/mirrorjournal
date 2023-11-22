@@ -1,0 +1,13 @@
+version: "Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)"
+options: "d3f8eebf05609f00ca61a5cc74d8d435b5466e6bd5827f75cded46e50225b8cb"
+build_start_time: [1693851627, 465482000]
+build_end_time: [1693851642, 795662000]
+inputs:
+  ? "/Users/andrewrodebaugh/Downloads/think-app-master/ios/capacitor-cordova-ios-plugins/sources/CordovaPluginAes256Encryption/AES256.swift"
+  : [1693851612, 741515621]
+  ? "/Users/andrewrodebaugh/Downloads/think-app-master/ios/capacitor-cordova-ios-plugins/sources/CordovaPluginAes256Encryption/AES256CBC.swift"
+  : [1693851612, 745434873]
+  ? "/Users/andrewrodebaugh/Downloads/think-app-master/ios/capacitor-cordova-ios-plugins/sources/CordovaPluginAes256Encryption/PBKDF2.swift"
+  : [1693851612, 766933614]
+  ? "/Users/andrewrodebaugh/Downloads/think-app-master/ios/capacitor-cordova-ios-plugins/sources/CordovaPluginThemeDetection/ThemeDetection.swift"
+  : [1693851612, 898058830]

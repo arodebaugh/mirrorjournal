@@ -1,0 +1,7 @@
+version: "Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)"
+options: "d726d09c05d09f9f81d891200cf2118a694540125a9791e5a2e14fd3e16ddc0c"
+build_start_time: [1693851640, 330466000]
+build_end_time: [1693851642, 899774000]
+inputs:
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/preferences/ios/Plugin/Preferences.swift": [1690040753, 119531441]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/preferences/ios/Plugin/PreferencesPlugin.swift": [1690040753, 121590842]

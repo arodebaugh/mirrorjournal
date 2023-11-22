@@ -1,0 +1,23 @@
+{
+  'version': 0,
+  'use-external-names': 'false',
+  'case-sensitive': 'false',
+  'roots': [{
+    'type': 'directory',
+    'name': "/Users/andrewrodebaugh/Downloads/think-app-master/ios/DerivedData/64B42962-BBE4-4812-A31D-92A9744637A3/Build/Products/Debug-iphonesimulator/CapacitorSplashScreen/CapacitorSplashScreen.framework/Modules"
+    'contents': [{
+      'type': 'file',
+      'name': "module.modulemap",
+      'external-contents': "/Users/andrewrodebaugh/Downloads/think-app-master/ios/DerivedData/64B42962-BBE4-4812-A31D-92A9744637A3/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorSplashScreen.build/unextended-module.modulemap",
+    }]
+    },
+    {
+    'type': 'directory',
+    'name': "/Users/andrewrodebaugh/Downloads/think-app-master/ios/DerivedData/64B42962-BBE4-4812-A31D-92A9744637A3/Build/Products/Debug-iphonesimulator/CapacitorSplashScreen/CapacitorSplashScreen.framework/Headers"
+    'contents': [{
+      'type': 'file',
+      'name': "CapacitorSplashScreen-Swift.h",
+      'external-contents': "/Users/andrewrodebaugh/Downloads/think-app-master/ios/DerivedData/64B42962-BBE4-4812-A31D-92A9744637A3/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorSplashScreen.build/unextended-interface-header.h",
+    }]
+    }]
+}

@@ -1,0 +1,7 @@
+version: "Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)"
+options: "e8247afa4553ed2d65753e895b2341d8e75d6c02143ccf20efe179fe365315ae"
+build_start_time: [1692830036, 823761000]
+build_end_time: [1692830038, 720705000]
+inputs:
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@aparajita/capacitor-dark-mode/ios/Plugin/Plugin.swift": [1690496965, 262161509]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@aparajita/capacitor-dark-mode/ios/Plugin/TraitsView.swift": [1690496965, 264686301]

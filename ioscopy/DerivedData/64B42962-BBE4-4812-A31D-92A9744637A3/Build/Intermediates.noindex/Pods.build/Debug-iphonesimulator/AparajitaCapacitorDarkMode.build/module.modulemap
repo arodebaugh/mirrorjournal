@@ -1,0 +1,11 @@
+framework module AparajitaCapacitorDarkMode {
+  umbrella header "AparajitaCapacitorDarkMode-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module AparajitaCapacitorDarkMode.Swift {
+  header "AparajitaCapacitorDarkMode-Swift.h"
+  requires objc
+}

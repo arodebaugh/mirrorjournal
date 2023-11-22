@@ -1,0 +1,6 @@
+version: "Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)"
+options: "f74fa1afa5884f0dda6e4f159a92e9d5715783658b4be30844e436152da765b8"
+build_start_time: [1693851641, 508057000]
+build_end_time: [1693851643, 59520000]
+inputs:
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor-community/app-icon/ios/Plugin/Plugin.swift": [1690494813, 441851662]

@@ -1,0 +1,11 @@
+framework module CapacitorTextZoom {
+  umbrella header "CapacitorTextZoom-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module CapacitorTextZoom.Swift {
+  header "CapacitorTextZoom-Swift.h"
+  requires objc
+}

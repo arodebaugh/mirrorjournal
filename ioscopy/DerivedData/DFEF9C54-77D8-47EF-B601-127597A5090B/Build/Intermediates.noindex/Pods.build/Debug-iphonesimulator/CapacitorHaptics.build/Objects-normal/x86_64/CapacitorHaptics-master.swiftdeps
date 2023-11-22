@@ -1,0 +1,7 @@
+version: "Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)"
+options: "fc40666d3b52150bdc7248bbf24b5c7f13c97dcceb57737869468d86a31c7132"
+build_start_time: [1693851170, 274539000]
+build_end_time: [1693851172, 452862000]
+inputs:
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/haptics/ios/Plugin/Haptics.swift": [1690040753, 575714454]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/haptics/ios/Plugin/HapticsPlugin.swift": [1690040753, 575926327]

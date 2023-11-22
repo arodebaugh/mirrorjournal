@@ -1,0 +1,6 @@
+version: "Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)"
+options: "907f19f44ee5099ea9c133211b1dbe6e7db42fb5c38dd9df2abdbdb0ec6ef6e1"
+build_start_time: [1693851643, 809983000]
+build_end_time: [1693851652, 951153000]
+inputs:
+  "/Users/andrewrodebaugh/Downloads/think-app-master/ios/App/App/AppDelegate.swift": [1687007894, 520397672]

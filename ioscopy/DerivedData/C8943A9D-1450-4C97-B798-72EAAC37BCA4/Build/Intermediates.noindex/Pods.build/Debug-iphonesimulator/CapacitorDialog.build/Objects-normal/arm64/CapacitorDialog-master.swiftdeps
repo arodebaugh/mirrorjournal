@@ -1,0 +1,6 @@
+version: "Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)"
+options: "681d489f9e6341ba13b38db21f80ed70851d1909f52d12248ba7b63d5d20f944"
+build_start_time: [1693851640, 798867000]
+build_end_time: [1693851642, 927259000]
+inputs:
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/dialog/ios/Plugin/DialogPlugin.swift": [1688859589, 212966900]

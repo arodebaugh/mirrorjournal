@@ -1,0 +1,68 @@
+{
+  "buildCommand" : {
+    "command" : "build",
+    "skipDependencies" : false,
+    "style" : "buildOnly"
+  },
+  "configuredTargets" : [
+    {
+      "guid" : "0ca3007d900a678c2b4d53418799ee3d34df47fa015b7e467e67e9235d8a1297"
+    }
+  ],
+  "containerPath" : "/Users/andrewrodebaugh/Downloads/think-app-master/ios/App/App.xcworkspace",
+  "continueBuildingAfterErrors" : false,
+  "enableIndexBuildArena" : false,
+  "hideShellScriptEnvironment" : false,
+  "parameters" : {
+    "action" : "build",
+    "activeArchitecture" : "arm64",
+    "activeRunDestination" : {
+      "disableOnlyActiveArch" : false,
+      "platform" : "iphonesimulator",
+      "sdk" : "iphonesimulator16.4",
+      "sdkVariant" : "iphonesimulator",
+      "supportedArchitectures" : [
+        "arm64",
+        "x86_64"
+      ],
+      "targetArchitecture" : "arm64"
+    },
+    "arenaInfo" : {
+      "buildIntermediatesPath" : "/Users/andrewrodebaugh/Downloads/think-app-master/ios/DerivedData/C8943A9D-1450-4C97-B798-72EAAC37BCA4/Build/Intermediates.noindex",
+      "buildProductsPath" : "/Users/andrewrodebaugh/Downloads/think-app-master/ios/DerivedData/C8943A9D-1450-4C97-B798-72EAAC37BCA4/Build/Products",
+      "derivedDataPath" : "/Users/andrewrodebaugh/Downloads/think-app-master/ios/DerivedData/C8943A9D-1450-4C97-B798-72EAAC37BCA4",
+      "indexDataStoreFolderPath" : "/Users/andrewrodebaugh/Downloads/think-app-master/ios/DerivedData/C8943A9D-1450-4C97-B798-72EAAC37BCA4/Index.noindex/DataStore",
+      "indexEnableDataStore" : true,
+      "indexPCHPath" : "/Users/andrewrodebaugh/Downloads/think-app-master/ios/DerivedData/C8943A9D-1450-4C97-B798-72EAAC37BCA4/Index.noindex/PrecompiledHeaders",
+      "pchPath" : "/Users/andrewrodebaugh/Downloads/think-app-master/ios/DerivedData/C8943A9D-1450-4C97-B798-72EAAC37BCA4/Build/Intermediates.noindex/PrecompiledHeaders"
+    },
+    "configurationName" : "Debug",
+    "overrides" : {
+      "commandLine" : {
+        "table" : {
+
+        }
+      },
+      "synthesized" : {
+        "table" : {
+          "ACTION" : "build",
+          "ASSETCATALOG_FILTER_FOR_DEVICE_MODEL" : "iPad14,5",
+          "ASSETCATALOG_FILTER_FOR_DEVICE_OS_VERSION" : "16.4",
+          "ASSETCATALOG_FILTER_FOR_THINNING_DEVICE_CONFIGURATION" : "iPad14,5",
+          "BUILD_ACTIVE_RESOURCES_ONLY" : "YES",
+          "ENABLE_PREVIEWS" : "NO",
+          "TARGET_DEVICE_IDENTIFIER" : "C8943A9D-1450-4C97-B798-72EAAC37BCA4",
+          "TARGET_DEVICE_MODEL" : "iPad14,5",
+          "TARGET_DEVICE_OS_VERSION" : "16.4",
+          "TARGET_DEVICE_PLATFORM_NAME" : "iphonesimulator"
+        }
+      }
+    }
+  },
+  "schemeCommand" : "launch",
+  "showNonLoggedProgress" : true,
+  "useDryRun" : false,
+  "useImplicitDependencies" : true,
+  "useLegacyBuildLocations" : false,
+  "useParallelTargets" : true
+}

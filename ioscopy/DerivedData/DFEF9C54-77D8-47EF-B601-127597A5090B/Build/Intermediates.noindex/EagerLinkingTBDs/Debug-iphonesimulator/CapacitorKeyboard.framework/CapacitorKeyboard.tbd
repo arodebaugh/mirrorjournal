@@ -1,0 +1,12 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-ios-simulator ]
+flags:           [ not_app_extension_safe ]
+install-name:    '@rpath/CapacitorKeyboard.framework/CapacitorKeyboard'
+exports:
+  - targets:         [ x86_64-ios-simulator ]
+    symbols:         [ _CapacitorKeyboardVersionNumber, _CapacitorKeyboardVersionString, 
+                       _UIClassString, _UITraitsClassString, _WKClassString, _hideTimer, 
+                       _stageManagerOffset ]
+    objc-classes:    [ KeyboardPlugin, PodsDummy_CapacitorKeyboard ]
+...

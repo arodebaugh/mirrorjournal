@@ -1,0 +1,26 @@
+--- !tapi-tbd
+tbd-version:     4
+targets:         [ x86_64-ios-simulator ]
+flags:           [ not_app_extension_safe ]
+install-name:    '@rpath/CapacitorTextZoom.framework/CapacitorTextZoom'
+swift-abi-version: 7
+exports:
+  - targets:         [ x86_64-ios-simulator ]
+    symbols:         [ '_$s17CapacitorTextZoom0bC0C12baseFontSizeSdvMZ', '_$s17CapacitorTextZoom0bC0C12baseFontSizeSdvau', 
+                       '_$s17CapacitorTextZoom0bC0C12baseFontSizeSdvgZ', '_$s17CapacitorTextZoom0bC0C12baseFontSizeSdvpZ', 
+                       '_$s17CapacitorTextZoom0bC0C12baseFontSizeSdvsZ', '_$s17CapacitorTextZoom0bC0C17preferredFontSizeSdyF', 
+                       '_$s17CapacitorTextZoom0bC0C17preferredFontSizeSdyFTq', '_$s17CapacitorTextZoom0bC0CACycfC', 
+                       '_$s17CapacitorTextZoom0bC0CACycfc', '_$s17CapacitorTextZoom0bC0CMa', 
+                       '_$s17CapacitorTextZoom0bC0CMn', '_$s17CapacitorTextZoom0bC0CN', 
+                       '_$s17CapacitorTextZoom0bC0CfD', '_$s17CapacitorTextZoom0bC6PluginC04textC033_32C3878C4B7AF7A4C29F74F71EC3655CLLAA0bC0Cvpfi', 
+                       '_$s17CapacitorTextZoom0bC6PluginC12getPreferredyySo13CAPPluginCallCF', 
+                       '_$s17CapacitorTextZoom0bC6PluginC12getPreferredyySo13CAPPluginCallCFTq', 
+                       '_$s17CapacitorTextZoom0bC6PluginC6bridge8pluginId0F4NameAC0A017CAPBridgeProtocol_p_S2StcfC', 
+                       '_$s17CapacitorTextZoom0bC6PluginC6bridge8pluginId0F4NameAC0A017CAPBridgeProtocol_p_S2Stcfc', 
+                       '_$s17CapacitorTextZoom0bC6PluginCACycfC', '_$s17CapacitorTextZoom0bC6PluginCACycfc', 
+                       '_$s17CapacitorTextZoom0bC6PluginCMa', '_$s17CapacitorTextZoom0bC6PluginCMn', 
+                       '_$s17CapacitorTextZoom0bC6PluginCN', '_$s17CapacitorTextZoom0bC6PluginCfD', 
+                       _CapacitorTextZoomVersionNumber, _CapacitorTextZoomVersionString, 
+                       _Swift51Overrides ]
+    objc-classes:    [ PodsDummy_CapacitorTextZoom, TextZoomPlugin, _TtC17CapacitorTextZoom8TextZoom ]
+...

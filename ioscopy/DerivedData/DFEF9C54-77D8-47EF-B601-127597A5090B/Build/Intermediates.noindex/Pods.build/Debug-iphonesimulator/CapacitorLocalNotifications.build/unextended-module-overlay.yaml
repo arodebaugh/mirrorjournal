@@ -1,0 +1,23 @@
+{
+  'version': 0,
+  'use-external-names': 'false',
+  'case-sensitive': 'false',
+  'roots': [{
+    'type': 'directory',
+    'name': "/Users/andrewrodebaugh/Downloads/think-app-master/ios/DerivedData/DFEF9C54-77D8-47EF-B601-127597A5090B/Build/Products/Debug-iphonesimulator/CapacitorLocalNotifications/CapacitorLocalNotifications.framework/Modules"
+    'contents': [{
+      'type': 'file',
+      'name': "module.modulemap",
+      'external-contents': "/Users/andrewrodebaugh/Downloads/think-app-master/ios/DerivedData/DFEF9C54-77D8-47EF-B601-127597A5090B/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorLocalNotifications.build/unextended-module.modulemap",
+    }]
+    },
+    {
+    'type': 'directory',
+    'name': "/Users/andrewrodebaugh/Downloads/think-app-master/ios/DerivedData/DFEF9C54-77D8-47EF-B601-127597A5090B/Build/Products/Debug-iphonesimulator/CapacitorLocalNotifications/CapacitorLocalNotifications.framework/Headers"
+    'contents': [{
+      'type': 'file',
+      'name': "CapacitorLocalNotifications-Swift.h",
+      'external-contents': "/Users/andrewrodebaugh/Downloads/think-app-master/ios/DerivedData/DFEF9C54-77D8-47EF-B601-127597A5090B/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/CapacitorLocalNotifications.build/unextended-interface-header.h",
+    }]
+    }]
+}

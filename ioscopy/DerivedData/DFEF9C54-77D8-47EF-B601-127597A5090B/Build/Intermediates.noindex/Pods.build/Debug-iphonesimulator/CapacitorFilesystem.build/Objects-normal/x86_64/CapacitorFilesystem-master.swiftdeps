@@ -1,0 +1,7 @@
+version: "Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)"
+options: "3085b0cddfd2d75d8baab573ec406daf662eedfc70e7a3bc30c4653162e3add7"
+build_start_time: [1693851170, 276899000]
+build_end_time: [1693851172, 441397000]
+inputs:
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/filesystem/ios/Plugin/Filesystem.swift": [1688859599, 409766583]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/filesystem/ios/Plugin/FilesystemPlugin.swift": [1688859599, 410876706]

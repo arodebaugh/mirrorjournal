@@ -1,0 +1,7 @@
+version: "Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)"
+options: "0db2a406fcf9b85ea390eb709192a821d6afde84ab4d2bac33f3e48540db10a0"
+build_start_time: [1693851169, 751038000]
+build_end_time: [1693851172, 349914000]
+inputs:
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/text-zoom/ios/Plugin/TextZoom.swift": [1692829772, 238665335]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/text-zoom/ios/Plugin/TextZoomPlugin.swift": [1692829772, 238899415]

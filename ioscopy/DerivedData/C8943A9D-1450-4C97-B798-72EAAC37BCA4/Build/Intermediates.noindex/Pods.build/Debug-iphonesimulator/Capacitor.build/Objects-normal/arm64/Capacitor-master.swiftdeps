@@ -1,0 +1,53 @@
+version: "Apple Swift version 5.8.1 (swiftlang-5.8.0.124.5 clang-1403.0.22.11.100)"
+options: "d7779a798fbe8d61b38fe9b0ec77f35e02ee994c70d09a881b15b6cd010467fb"
+build_start_time: [1693851627, 589050000]
+build_end_time: [1693851642, 366460000]
+inputs:
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/AppUUID.swift": [1690040753, 289429533]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/Array+Capacitor.swift": [1690040753, 289495615]
+  ? "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/CAPApplicationDelegateProxy.swift"
+  : [1690040753, 291797848]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/CAPBridge.swift": [1690040753, 292172929]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/CAPBridgeDelegate.swift": [1690040753, 292359011]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/CAPBridgeProtocol.swift": [1690040753, 294081581]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/CAPBridgeViewController.swift": [1690040753, 295419862]
+  ? "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/CAPBridgedPlugin+getMethod.swift"
+  : [1690040753, 292764674]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/CAPFile.swift": [1690040753, 295870442]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/CAPInstanceConfiguration.swift": [1690040753, 295979775]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/CAPInstanceDescriptor.swift": [1690040753, 302342727]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/CAPInstancePlugin.swift": [1690040753, 303378219]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/CAPLog.swift": [1690040753, 303421594]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/CAPNotifications.swift": [1690040753, 304484252]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/CAPPlugin+LoadInstance.swift": [1690040753, 304718834]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/CAPPluginCall.swift": [1690040753, 304825541]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/CAPWebView.swift": [1690040753, 305097581]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/CapacitorBridge.swift": [1690040753, 290229318]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/CapacitorExtension.swift": [1690040753, 291074395]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/Data+Capacitor.swift": [1690040753, 305657327]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/DocLinks.swift": [1690040753, 306098990]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/JS.swift": [1690040753, 306485404]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/JSExport.swift": [1690040753, 306604611]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/JSTypes.swift": [1690040753, 306894651]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/KeyPath.swift": [1690040753, 306940400]
+  ? "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/NotificationHandlerProtocol.swift"
+  : [1690040753, 307394897]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/NotificationRouter.swift": [1690040753, 307535896]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/PluginCallResult.swift": [1690040753, 307592062]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/PluginConfig.swift": [1690040753, 307621437]
+  ? "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/Plugins/CapacitorCookieManager.swift"
+  : [1690040753, 290781189]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/Plugins/CapacitorCookies.swift": [1690040753, 290917688]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/Plugins/CapacitorHttp.swift": [1690040753, 291229352]
+  ? "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/Plugins/CapacitorUrlRequest.swift"
+  : [1690040753, 291288019]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/Plugins/Console.swift": [1690040753, 305467911]
+  ? "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/Plugins/HttpRequestHandler.swift"
+  : [1690040753, 306265739]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/Plugins/WebView.swift": [1690040753, 308480722]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/Router.swift": [1690040753, 307766894]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/TmpViewController.swift": [1690040753, 308145600]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/UIColor.swift": [1690040753, 308373681]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/WKWebView+Capacitor.swift": [1690040753, 309595964]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/WebViewAssetHandler.swift": [1690040753, 308648721]
+  "/Users/andrewrodebaugh/Downloads/think-app-master/node_modules/@capacitor/ios/Capacitor/Capacitor/WebViewDelegationHandler.swift": [1690040753, 309106342]
