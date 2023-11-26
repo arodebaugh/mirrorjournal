@@ -1,7 +1,6 @@
 {
   "appId": "com.cosmicwebservicesllc.mirrorapp",
   "appName": "Mirror Journal",
-  "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
   "plugins": {

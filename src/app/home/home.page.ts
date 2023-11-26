@@ -220,7 +220,6 @@ export class HomePage implements OnInit {
         directory: Directory.Documents,
         encoding: Encoding.UTF8,
       });
-      alert(JSON.stringify(mirrorJournalListFile));
 
       this.sortedJournals = JSON.parse(mirrorJournalListFile.data);
     } catch (e) {
