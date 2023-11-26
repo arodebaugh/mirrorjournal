@@ -11,6 +11,8 @@ import {WhatsNewComponent} from '../whats-new/whats-new.component';
 import { Preferences } from '@capacitor/preferences';
 import { Filesystem } from '@capacitor/filesystem';
 import { LocalNotifications } from '@capacitor/local-notifications';
+import { CustomIconComponent } from '../custom-icon/custom-icon.component';
+import { AppIcon } from '@capacitor-community/app-icon';
 
 const PRODUCT_PRO_KEY = 'mirrorjournalpro';
 
@@ -27,12 +29,21 @@ export class SettingsComponent implements OnInit {
   secureWithID = false;
   pro = false;
   time = new Date(new Date().setHours(Number('17:00'.split(':')[0]), Number('17:00'.split(':')[1]))).toISOString();
-
-
+  icons = [
+    { name: 'classic-icon', src: '../assets/icons/classic-icon.png' },
+    { name: 'classicitunes-icon', src: '../assets/icons/classicitunes-icon.png' },
+    { name: 'classickrita-icon', src: '../assets/icons/classickrita-icon.png' },
+    { name: 'classicpride-icon', src: '../assets/icons/classicpride-icon.png' },
+    { name: 'classictrans-icon', src: '../assets/icons/classictrans-icon.png' },
+    { name: 'mirror-icon', src: '../assets/icons/mirror-icon.png' },
+    { name: 'mirrorfab-icon', src: '../assets/icons/mirrorfab-icon.png' },
+    { name: 'mirrorpride-icon', src: '../assets/icons/mirrorpride-icon.png' },
+    { name: 'mirrortrans-icon', src: '../assets/icons/mirrortrans-icon.png' },
+  ];
   theme = 'default';
   menuplacment = '1';
 
-  constructor(private platform: Platform, private appRate: AppRate, private alertController: AlertController,  private ref: ChangeDetectorRef, private modalController: ModalController, private emailComposer: EmailComposer, private themeWatch: ThemeWatchService) { }
+  constructor(private platform: Platform, private appRate: AppRate, private alertController: AlertController,  private ref: ChangeDetectorRef, private modalController: ModalController, private emailComposer: EmailComposer, private themeWatch: ThemeWatchService, private modalCtrl: ModalController) { }
 
   async ngOnInit() {
     const tempMenuLabel = await Preferences.get({key: 'menuLabel'});
@@ -192,15 +203,16 @@ export class SettingsComponent implements OnInit {
     }
   }
 
-  syncFromOldMirrorJournal() {
-    let warn = confirm("Warning: This may replace any journals in your iCloud Drive! Proceed with caution.");
-    if (warn) {
-      Filesystem.syncToDrive({}).then(()=> {
-        alert("Success!")
-      }).catch(err => {
-        alert("There was an error: " + JSON.stringify(err))
-      });
-    }
+  async openIconModal() {
+    const { value } = await AppIcon.getName();
+    const modal = await this.modalCtrl.create({
+      component: CustomIconComponent,
+      componentProps: {
+        icons: this.icons,
+        currentIcon: value
+      }
+    });
+    return await modal.present();
   }
 }
 
