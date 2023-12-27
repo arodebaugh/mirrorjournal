@@ -13,6 +13,8 @@ import { Filesystem } from '@capacitor/filesystem';
 import { LocalNotifications } from '@capacitor/local-notifications';
 import { CustomIconComponent } from '../custom-icon/custom-icon.component';
 import { AppIcon } from '@capacitor-community/app-icon';
+import { CreditsPageComponent } from '../credits-page/credits-page.component';
+import { TipPageComponent } from '../tip-page/tip-page.component';
 
 const PRODUCT_PRO_KEY = 'mirrorjournalpro';
 
@@ -67,6 +69,22 @@ export class SettingsComponent implements OnInit {
     if (tempMenuplacement.value) {
       this.menuplacment = tempMenuplacement.value;
     }
+  }
+
+  async credits() {
+    const modal = await this.modalController.create({
+      component: CreditsPageComponent,
+      backdropDismiss: false
+    });
+    await modal.present();
+  }
+
+  async tipUs() {
+    const modal = await this.modalController.create({
+      component: TipPageComponent,
+      backdropDismiss: false
+    });
+    await modal.present();
   }
 
   async whatsNew() {
@@ -138,10 +156,6 @@ export class SettingsComponent implements OnInit {
       isHtml: true
     };
     this.emailComposer.open(email);*/
-  }
-
-  async customIcon() {
-    alert('hey');
   }
 
   async deleteCache() {

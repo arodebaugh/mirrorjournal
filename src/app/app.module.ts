@@ -31,11 +31,13 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { register } from 'swiper/element/bundle';
 import { QuillModule } from 'ngx-quill';
 import { CustomIconComponent } from './custom-icon/custom-icon.component';
+import { CreditsPageComponent } from './credits-page/credits-page.component';
+import { TipPageComponent } from './tip-page/tip-page.component';
 
 register();
 
 @NgModule({
-    declarations: [AppComponent, EmojiPickerComponent, JournalHelpComponent, CardQuickOptionsComponent, NotesListComponent, PopupEditorComponent, RichTextEditorComponent, WelcomeScreenComponent, NewAnalyzeComponent, ImageSettingsComponent, SettingsComponent, PasswordDialogComponent, WhatsNewComponent, CustomIconComponent],
+    declarations: [AppComponent, EmojiPickerComponent, JournalHelpComponent, CardQuickOptionsComponent, NotesListComponent, PopupEditorComponent, RichTextEditorComponent, WelcomeScreenComponent, NewAnalyzeComponent, ImageSettingsComponent, SettingsComponent, PasswordDialogComponent, WhatsNewComponent, CustomIconComponent, CreditsPageComponent, TipPageComponent],
     imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, TruncateModule, HttpClientModule, FormsModule, 
         QuillModule.forRoot({
             modules: {

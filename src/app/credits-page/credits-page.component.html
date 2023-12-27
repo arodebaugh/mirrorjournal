@@ -1,0 +1,152 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="close()">Close</ion-button>
+    </ion-buttons>
+    <ion-title>Credits</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-lg="6">
+        <ion-card>
+          <img src="../assets/credits/andrew-rodebaugh-image.jpeg" alt="Andrew Rodebaugh" class="card-image">
+          <ion-card-header>
+            <ion-card-title class="ion-text-center">Andrew Rodebaugh</ion-card-title>
+          </ion-card-header>
+          <ion-card-content class="ion-text-center">
+            <p>Programmer, Designer</p>
+            <p><a href="https://andrewrodebaugh.dev">andrewrodebaugh.dev</a></p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="12" size-lg="6">
+        <ion-card>
+          <img src="../assets/credits/phoenix-satterfield-image.jpg" alt="Phoenix Satterfield" class="card-image">
+          <ion-card-header>
+            <ion-card-title class="ion-text-center">Phoenix Satterfield</ion-card-title>
+          </ion-card-header>
+          <ion-card-content class="ion-text-center">
+            <p>Art</p>
+            <p><a href="https://phlickery.myportfolio.com">phlickery.myportfolio.com</a></p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <h2>Open source libraries used</h2>
+
+  <ion-list>
+    <ion-item button (click)="openLink('https://www.npmjs.com/package/@angular-eslint/schematics')">
+      @angular-eslint/schematics
+    </ion-item>
+    <ion-item button (click)="openLink('https://www.npmjs.com/package/@angular/common')">
+      @angular/common
+    </ion-item>
+    <ion-item button (click)="openLink('https://www.npmjs.com/package/@angular/core')">
+      @angular/core
+    </ion-item>
+    <ion-item button (click)="openLink('https://www.npmjs.com/package/@angular/forms')">
+      @angular/forms
+    </ion-item>
+    <ion-item button (click)="openLink('https://www.npmjs.com/package/@angular/platform-browser')">
+      @angular/platform-browser
+    </ion-item>
+    <ion-item button (click)="openLink('https://www.npmjs.com/package/@angular/platform-browser-dynamic')">
+      @angular/platform-browser-dynamic
+    </ion-item>
+    <ion-item button (click)="openLink('https://www.npmjs.com/package/@angular/router')">
+      @angular/router
+    </ion-item>
+    <ion-item button (click)="openLink('https://www.npmjs.com/package/@aparajita/capacitor-dark-mode')">
+      @aparajita/capacitor-dark-mode
+    </ion-item>
+    <ion-item button (click)="openLink('https://www.npmjs.com/package/@awesome-cordova-plugins/aes-256')">
+      @awesome-cordova-plugins/aes-256
+    </ion-item>
+    <ion-item button (click)="openLink('https://www.npmjs.com/package/@angular-devkit/build-angular')">
+      @angular-devkit/build-angular
+    </ion-item>
+    <ion-item button (click)="openLink('https://www.npmjs.com/package/@angular-eslint/builder')">
+      @angular-eslint/builder
+    </ion-item>
+    <ion-item button (click)="openLink('https://www.npmjs.com/package/@angular-eslint/eslint-plugin')">
+      @angular-eslint/eslint-plugin
+    </ion-item>
+    <ion-item button (click)="openLink('https://www.npmjs.com/package/@angular-eslint/eslint-plugin-template')">
+      @angular-eslint/eslint-plugin-template
+    </ion-item>
+    <ion-item button (click)="openLink('https://www.npmjs.com/package/@angular/cli')">
+      @angular/cli
+    </ion-item>
+    <ion-item button (click)="openLink('https://www.npmjs.com/package/@angular/compiler')">
+      @angular/compiler
+    </ion-item>
+    <ion-item button (click)="openLink('https://www.npmjs.com/package/@angular/compiler-cli')">
+      @angular/compiler-cli
+    </ion-item>
+    <ion-item button (click)="openLink('https://www.npmjs.com/package/@angular/language-service')">
+      @angular/language-service
+    </ion-item>
+    <ion-item button (click)="openLink('https://www.npmjs.com/package/@capacitor/assets')">
+      @capacitor/assets
+    </ion-item>
+    <ion-item button (click)="openLink('https://www.npmjs.com/package/@capacitor/cli')">
+      @capacitor/cli
+    </ion-item>
+    <ion-item button (click)="openLink('https://www.npmjs.com/package/@ionic/angular-toolkit')">
+      @ionic/angular-toolkit
+    </ion-item>
+    <ion-item button (click)="openLink('https://www.npmjs.com/package/@types/jasmine')">
+      @types/jasmine
+    </ion-item>
+    <ion-item button (click)="openLink('https://www.npmjs.com/package/@types/jasminewd2')">
+      @types/jasminewd2
+    </ion-item>
+    <ion-item button (click)="openLink('https://www.npmjs.com/package/@types/node')">
+      @types/node
+    </ion-item>
+    <ion-item button (click)="openLink('https://www.npmjs.com/package/@typescript-eslint/parser')">
+      @typescript-eslint/parser
+    </ion-item>
+    <ion-item button (click)="openLink('https://www.npmjs.com/package/jasmine-core')">
+      jasmine-core
+    </ion-item>
+    <ion-item button (click)="openLink('https://www.npmjs.com/package/jasmine-spec-reporter')">
+      jasmine-spec-reporter
+    </ion-item>
+    <ion-item button (click)="openLink('https://www.npmjs.com/package/jetifier')">
+      jetifier
+    </ion-item>
+    <ion-item button (click)="openLink('https://www.npmjs.com/package/karma')">
+      karma
+    </ion-item>
+    <ion-item button (click)="openLink('https://www.npmjs.com/package/karma-chrome-launcher')">
+      karma-chrome-launcher
+    </ion-item>
+    <ion-item button (click)="openLink('https://www.npmjs.com/package/karma-coverage-istanbul-reporter')">
+      karma-coverage-istanbul-reporter
+    </ion-item>
+    <ion-item button (click)="openLink('https://www.npmjs.com/package/karma-jasmine')">
+      karma-jasmine
+    </ion-item>
+    <ion-item button (click)="openLink('https://www.npmjs.com/package/karma-jasmine-html-reporter')">
+      karma-jasmine-html-reporter
+    </ion-item>
+    <ion-item button (click)="openLink('https://www.npmjs.com/package/protractor')">
+      protractor
+    </ion-item>
+    <ion-item button (click)="openLink('https://www.npmjs.com/package/ts-node')">
+      ts-node
+    </ion-item>
+    <ion-item button (click)="openLink('https://www.npmjs.com/package/typescript')">
+      typescript
+    </ion-item>
+  </ion-list>
+  <br>
+  
+</ion-content>

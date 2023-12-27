@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="close()">Close</ion-button>
+    </ion-buttons>
+    <ion-title>Tip us</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item button *ngFor="let p of products" (click)="purchase(p)" detail="false">
+      <ion-label class="ion-text-wrap">
+        {{ p.title }}
+        <p>{{ p.description }}</p>
+      </ion-label>
+      <ion-button disabled="true" *ngIf="p.owned" slot="end">
+        OWNED
+      </ion-button>
+      <ion-button *ngIf="!p.owned" slot="end">
+        {{ p.price }} {{ p.currency }}
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="full" (click)="restore()">Restore</ion-button>
+</ion-content>
