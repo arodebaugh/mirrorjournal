@@ -26,7 +26,6 @@ export class CustomIconComponent {
       // Only for debugging!
       this.store.verbosity = this.store.DEBUG;
 
-      this.registerProducts();
       this.setupListeners();
 
       // Get the real product information
@@ -34,25 +33,6 @@ export class CustomIconComponent {
         this.ref.detectChanges();
       });
     });
-  }
-
-  registerProducts() {
-    this.store.register({
-      id: PRODUCT_TIP_TIER_1,
-      type: this.store.NON_CONSUMABLE,
-    });
-
-    this.store.register({
-      id: PRODUCT_TIP_TIER_2,
-      type: this.store.NON_CONSUMABLE,
-    });
-
-    this.store.register({
-      id: PRODUCT_TIP_TIER_3,
-      type: this.store.NON_CONSUMABLE,
-    });
-
-    this.store.refresh();
   }
 
   setupListeners() {
