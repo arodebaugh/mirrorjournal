@@ -127,7 +127,7 @@ export class HomePage implements OnInit {
 
   async deleteJournal(data) {
     const contents = await Filesystem.readFile({
-      path: 'Mirror-Journal-app/mirrorJournals.txt',
+      path: 'Mirror-Journal-Documents/mirrorJournals.txt',
       directory: Directory.Documents,
       encoding: Encoding.UTF8
     });
@@ -138,7 +138,7 @@ export class HomePage implements OnInit {
           outParsed = outParsed.filter(returnableObjects => returnableObjects.id !== data.id);
           try {
             await Filesystem.writeFile({
-              path: 'Mirror-Journal-app/' + data.id + '.txt',
+              path: 'Mirror-Journal-Documents/' + data.id + '.txt',
               data: JSON.stringify(outParsed),
               directory: Directory.Documents,
               encoding: Encoding.UTF8
@@ -178,7 +178,7 @@ export class HomePage implements OnInit {
 
   async loadMemory(id) { // TODO: Get from cache
     const contents = await Filesystem.readFile({
-      path: 'Mirror-Journal-app/' + id + '.txt',
+      path: 'Mirror-Journal-Documents/' + id + '.txt',
       directory: Directory.Documents,
       encoding: Encoding.UTF8
     });
@@ -201,7 +201,7 @@ export class HomePage implements OnInit {
   async loadJournalCache() {
     try {
       const contents = await Filesystem.readFile({
-        path: 'Mirror-Journal-app/mirrorJournalsCache.txt',
+        path: 'Mirror-Journal-Documents/mirrorJournalsCache.txt',
         directory: Directory.Documents,
         encoding: Encoding.UTF8
       });
@@ -216,7 +216,7 @@ export class HomePage implements OnInit {
   async loadJournalList() {
     try {
       const mirrorJournalListFile = await Filesystem.readFile({
-        path: 'Mirror-Journal-app/mirrorJournals.txt',
+        path: 'Mirror-Journal-Documents/mirrorJournals.txt',
         directory: Directory.Documents,
         encoding: Encoding.UTF8,
       });
@@ -231,7 +231,7 @@ export class HomePage implements OnInit {
 
   async saveJournalCache() {
     await Filesystem.writeFile({
-      path: 'Mirror-Journal-app/mirrorJournalsCache.txt',
+      path: 'Mirror-Journal-Documents/mirrorJournalsCache.txt',
       data: JSON.stringify(this.cachedJournals),
       directory: Directory.Documents,
       encoding: Encoding.UTF8
@@ -244,7 +244,7 @@ export class HomePage implements OnInit {
       this.lastId = nextJournal.id;
 
       const contents = await Filesystem.readFile({
-        path: 'Mirror-Journal-app/' + nextJournal.id + '.txt',
+        path: 'Mirror-Journal-Documents/' + nextJournal.id + '.txt',
         directory: Directory.Documents,
         encoding: Encoding.UTF8
       });
@@ -324,13 +324,13 @@ export class HomePage implements OnInit {
   async createMirrorJournals() {
     try {
       await Filesystem.mkdir({
-        path: 'Mirror-Journal-app',
+        path: 'Mirror-Journal-Documents',
         directory: Directory.Documents,
         recursive: false // like mkdir -p
       });
       try {
         await Filesystem.writeFile({
-          path: 'Mirror-Journal-app/mirrorJournals.txt',
+          path: 'Mirror-Journal-Documents/mirrorJournals.txt',
           data: '[]',
           directory: Directory.Documents,
           encoding: Encoding.UTF8

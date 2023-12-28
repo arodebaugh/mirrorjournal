@@ -69,6 +69,18 @@ export class SettingsComponent implements OnInit {
     if (tempMenuplacement.value) {
       this.menuplacment = tempMenuplacement.value;
     }
+
+    const pendingNotifications = await LocalNotifications.getPending();
+    const dailyNotification = pendingNotifications.notifications.find(notification => notification.id === 1);
+  
+    if (dailyNotification) {
+      this.notifications = true;
+      const scheduledTime = dailyNotification.schedule.on;
+  
+      this.time = new Date(new Date().setHours(scheduledTime.hour, scheduledTime.minute)).toISOString();
+    } else {
+      this.notifications = false;
+    }
   }
 
   async credits() {
@@ -96,28 +108,18 @@ export class SettingsComponent implements OnInit {
   }
 
   rate() {
-    // TODO: Need to figure out or find new plugin.
-    alert("TODO");
-    /*this.appRate.setPreferences({
-      displayAppName: 'Mirror Journal',
+    this.appRate.setPreferences({
+      displayAppName: 'Mirror Journal 2',
       callbacks: {
         handleNegativeFeedback() {
           this.contactUs();
         },
-        ios: '1524166698'
-      })
-    this.appRate.preferences = {
-      displayAppName: 'Mirror Journal',
-      callbacks: {
-        handleNegativeFeedback() {
-          this.contactUs();
-        }
+      },
+      storeAppURL: {
+        ios: ""
       }
-    };
-    this.appRate.preferences.storeAppURL = {
-      ios: '1524166698'
-    };
-    this.appRate.promptForRating(true);*/
+    });
+    this.appRate.promptForRating(true);
   }
 
   privacyPolicy() {
@@ -148,19 +150,18 @@ export class SettingsComponent implements OnInit {
 
   contactUs() {
     Haptics.impact({style: ImpactStyle.Light});
-    window.open("https://forms.gle/JoK62zj9ENuzQCYe7");
-    /*const email = {
+    const email = {
       to: 'help@mirrorjournal.app',
       subject: 'Mirror App Contact on ' + moment().format('LLLL'),
       body: '',
       isHtml: true
     };
-    this.emailComposer.open(email);*/
+    this.emailComposer.open(email);
   }
 
   async deleteCache() {
     await Filesystem.deleteFile({
-      path: 'Mirror-Journal-app/mirrorJournalsCache.txt',
+      path: 'Mirror-Journal-Documents/mirrorJournalsCache.txt',
       directory: Directory.Documents
     });
 
@@ -181,26 +182,24 @@ export class SettingsComponent implements OnInit {
   }
 
   async schedule() {
-    LocalNotifications.schedule({ notifications: [
+    await LocalNotifications.schedule({ notifications: [
       {
         id: 1,
         title: 'Mirror Journal',
         body: '👋 It\'s your scheduled journaling time!',
-        schedule: { allowWhileIdle: true, on: { hour: parseInt(this.time.split(':')[0]), minute: parseInt(this.time.split(':')[1]) } }
+        schedule: { allowWhileIdle: true, on: { hour: parseInt(this.time.split(':')[0]), minute: parseInt(this.time.split(':')[1]) }, every: 'day', repeats: true }
       }
     ]
+    }).catch(err => {
+      alert("Error: " + JSON.stringify(err));
     });
   }
 
-  async setNotifications(out) {
-    this.notifications = out.value;
-
+  async setNotifications() {
     const permission = await LocalNotifications.checkPermissions();
     if (permission.display === 'denied') {
         await LocalNotifications.requestPermissions();
     }
-
-    alert(this.notifications);
 
     if (this.notifications) {
       this.schedule();

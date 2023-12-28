@@ -137,13 +137,13 @@ export class JournalViewPage implements OnInit {
 
     // Delete file
     await Filesystem.deleteFile({
-      path: 'Mirror-Journal-app/' + data.id + '.txt',
+      path: 'Mirror-Journal-Documents/' + data.id + '.txt',
       directory: Directory.Documents
     });
 
     // Remove journal from directory file
     const contents = await Filesystem.readFile({
-      path: 'Mirror-Journal-app/mirrorJournals.txt',
+      path: 'Mirror-Journal-Documents/mirrorJournals.txt',
       directory: Directory.Documents,
       encoding: Encoding.UTF8
     });
@@ -152,7 +152,7 @@ export class JournalViewPage implements OnInit {
 
     try {
       await Filesystem.writeFile({
-        path: 'Mirror-Journal-app/mirrorJournals.txt',
+        path: 'Mirror-Journal-Documents/mirrorJournals.txt',
         data: JSON.stringify(outParsed),
         directory: Directory.Documents,
         encoding: Encoding.UTF8
@@ -160,7 +160,7 @@ export class JournalViewPage implements OnInit {
       
       // Remove journal from cache file
       const cacheContents = await Filesystem.readFile({
-        path: 'Mirror-Journal-app/mirrorJournalsCache.txt',
+        path: 'Mirror-Journal-Documents/mirrorJournalsCache.txt',
         directory: Directory.Documents,
         encoding: Encoding.UTF8
       });
@@ -171,7 +171,7 @@ export class JournalViewPage implements OnInit {
         filteredOutParsed = cacheOutParsed.filter(returnableObjects => JSON.parse(returnableObjects.data).date !== data.date);
       }
       await Filesystem.writeFile({
-        path: 'Mirror-Journal-app/mirrorJournalsCache.txt',
+        path: 'Mirror-Journal-Documents/mirrorJournalsCache.txt',
         data: JSON.stringify(filteredOutParsed),
         directory: Directory.Documents,
         encoding: Encoding.UTF8
@@ -263,7 +263,7 @@ export class JournalViewPage implements OnInit {
   }
 
   async saveNoteToFile(saveData, toast) {
-    const fileName = 'Mirror-Journal-app/' + this.data.id + '.txt';
+    const fileName = 'Mirror-Journal-Documents/' + this.data.id + '.txt';
     try {
       const result = await Filesystem.writeFile({
         path: fileName,

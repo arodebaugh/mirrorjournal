@@ -28,6 +28,10 @@ export class PopupEditorComponent implements OnInit {
     });
   }
 
+  setFocus(editor) {
+    setTimeout(() => editor.focus());
+  }
+
   async ionViewDidEnter() { }
 
   async dismiss() {
