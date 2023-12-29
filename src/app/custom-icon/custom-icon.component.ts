@@ -17,6 +17,7 @@ export class CustomIconComponent {
   @Input() icons: any[];
   @Input() currentIcon: string;
 
+  products: IAPProduct[] = [];
   ownsTipTier1 = false;
   ownsTipTier2 = false;
   ownsTipTier3 = false;
@@ -30,6 +31,10 @@ export class CustomIconComponent {
 
       // Get the real product information
       this.store.ready(() => {
+        this.products = this.store.products;
+        this.ownsTipTier1 = this.products.find(product => product.id === PRODUCT_TIP_TIER_1).owned;
+        this.ownsTipTier2 = this.products.find(product => product.id === PRODUCT_TIP_TIER_2).owned;
+        this.ownsTipTier3 = this.products.find(product => product.id === PRODUCT_TIP_TIER_3).owned;
         this.ref.detectChanges();
       });
     });

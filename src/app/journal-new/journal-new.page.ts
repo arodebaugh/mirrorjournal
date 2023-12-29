@@ -572,15 +572,6 @@ export class JournalNewPage implements OnInit {
     await alert.present();
   }
 
-  async help(ev: any) {
-    const popover = await this.popoverController.create({
-      component: JournalHelpComponent,
-      event: ev,
-      translucent: true
-    });
-    return await popover.present();
-  }
-
   async askForPasscode() {
     const alert = await this.alertController.create({
       message: 'What is your passcode?',
