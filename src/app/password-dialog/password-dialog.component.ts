@@ -84,7 +84,7 @@ export class PasswordDialogComponent implements OnInit {
 
   async readJournal(id) {
     return new Promise((resolve, reject) => {
-      const fileName = 'Mirror-Journal-Documents/' + id + '.txt';
+      const fileName = 'Mirror-Journal-app/' + id + '.txt';
       Filesystem.readFile({
         path: fileName,
         directory: Directory.Documents,
@@ -99,7 +99,7 @@ export class PasswordDialogComponent implements OnInit {
 
   async saveJournal(id, data) {
     return new Promise((resolve, reject) => {
-      const fileName = 'Mirror-Journal-Documents/' + id + '.txt';
+      const fileName = 'Mirror-Journal-app/' + id + '.txt';
       Filesystem.writeFile({
         path: fileName,
         data: data,
@@ -147,11 +147,11 @@ export class PasswordDialogComponent implements OnInit {
       toast.color = 'success';
 
       Filesystem.stat({
-        path: 'Mirror-Journal-Documents/mirrorJournals.txt',
+        path: 'Mirror-Journal-app/mirrorJournals.txt',
         directory: Directory.Documents
       }).then(() => {
         Filesystem.readFile({
-          path: 'Mirror-Journal-Documents/mirrorJournals.txt',
+          path: 'Mirror-Journal-app/mirrorJournals.txt',
           directory: Directory.Documents,
           encoding: Encoding.UTF8
         }).then(out => {
