@@ -408,19 +408,20 @@ export class HomePage implements OnInit {
   }
 
   search(query) {
-    this.filteredJournal = this.cachedJournals.filter(item => {
-      return !JSON.parse(item.data).locked &&
-        (JSON.parse(item.data).name.toLowerCase().includes(query.toLowerCase()) ||
-        moment(JSON.parse(item.data).date).format('LLLL').toLowerCase().includes(query.toLowerCase()) ||
-        JSON.parse(item.data).content.toLowerCase().includes(query.toLowerCase()));
-    })
-    .map(item => JSON.parse(item.data))
-    .map(item => {
-      return {
-        ...item,
-        date: moment(item.date).format('LLLL'),
-        content: this.stripJournalContent(item.content)
-      };
+    this.filteredJournal = this.cachedJournals.map(item => JSON.parse(item.data))
+      .filter(({ locked, name, date, content }) => {
+        let lowerQuery = query.toLowerCase();
+        return !locked &&
+          (name.toLowerCase().includes(lowerQuery) ||
+          moment(date).format('LLLL').toLowerCase().includes(lowerQuery) ||
+          (content && content.toLowerCase().includes(lowerQuery)));
+      })
+      .map(item => {
+        return {
+          ...item,
+          date: moment(item.date).format('LLLL'),
+          content: this.stripJournalContent(item.content)
+        };
     });
   }
 
@@ -552,6 +553,7 @@ export class HomePage implements OnInit {
       this.passcode = undefined;
       this.lockIcon = 'lock-closed-outline';
       this.lockDesc = 'Unlock';
+      this.private = [];
       this.loadJournalView();
     }
   }

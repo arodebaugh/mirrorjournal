@@ -27,10 +27,7 @@ export class NewAnalyzeComponent implements OnInit {
       buttons: [
         {
           text: 'Close',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
+          role: 'cancel'
         }
       ]
     });
@@ -39,18 +36,14 @@ export class NewAnalyzeComponent implements OnInit {
 
   ngOnInit() {
     const allTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'h7', 'i', 'strike', 'u', 'b', 'p', 'ul', 'li', 'ol', 'em', 's', 'strong'];
-    console.log(this.newNote);
     if (this.newNote) {
       this.noteData = [];
       let splitText = this.data['content'].replaceAll('<', ' <') .replaceAll('>', '> ').split(' ');
       splitText = splitText.filter(e => e !== '');
-      const newText = [];
-      console.log(JSON.stringify(splitText));
       const styles = [];
       splitText.forEach((item, index) => {
         if (item.includes('</') && item.includes('>')) {
           const tag = item.replace('</', '').replace('>', '');
-          console.log('end: ' + JSON.stringify(styles));
           if (styles.includes(tag)) {
             styles.splice(styles.indexOf(tag), 1);
             splitText[index] = item.replace('</' + tag + '>', '');
@@ -105,10 +98,7 @@ export class NewAnalyzeComponent implements OnInit {
         {
           text: 'Cancel',
           role: 'cancel',
-          cssClass: 'secondary',
-          handler: () => {
-            console.log('Confirm Cancel');
-          }
+          cssClass: 'secondary'
         }, {
           text: 'Ok',
           handler: (out) => {
@@ -186,7 +176,6 @@ export class NewAnalyzeComponent implements OnInit {
     if (leftSide.length === 0) {
       if (rightSide.length > 0) {
         this.noteData = this.insertAfterIndex(this.noteData, dataIndex, {text: rightSide, highlight: false, note: ''});
-        console.log('right: ' + JSON.stringify(this.noteData));
       }
     } else {
       if (end) {
