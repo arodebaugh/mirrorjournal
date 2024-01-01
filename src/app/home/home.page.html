@@ -67,7 +67,11 @@
                 </ion-row>
               </ion-grid>
               <ion-card-subtitle (click)="openJournalPage('/tabs/journalView', journal)">{{ dateFormatted[i] }}</ion-card-subtitle>
-              <ion-card-subtitle (click)="openJournalPage('/tabs/journalView', journal)" *ngIf="journal.locked"><ion-badge color="danger">Private</ion-badge></ion-card-subtitle>
+              <ion-card-subtitle (click)="openJournalPage('/tabs/journalView', journal)">
+                <ion-badge class="ion-margin-end" color="danger" *ngIf="journal.private">PRIVATE</ion-badge>
+                <ion-badge class="ion-margin-end" color="primary" *ngIf="journal.mood">{{ journal.mood }} Mood</ion-badge>
+                <ion-badge class="ion-margin-end" color="primary" *ngIf="journal.activity">{{ journal.activity }} Activity</ion-badge>
+              </ion-card-subtitle>
             </ion-card-header>
 
             <ion-card-content (click)="openJournalPage('/tabs/journalView', journal)" [innerHTML]="journalContentFormatted[i] | words : 25">
@@ -110,7 +114,11 @@
                   </ion-row>
                 </ion-grid>
                 <ion-card-subtitle (click)="openJournalPage('/tabs/journalView', journal)">{{ journal.date }}</ion-card-subtitle>
-                <ion-card-subtitle (click)="openJournalPage('/tabs/journalView', journal)" *ngIf="journal.locked"><ion-badge color="danger">Private</ion-badge></ion-card-subtitle>
+                <ion-card-subtitle (click)="openJournalPage('/tabs/journalView', journal)">
+                  <ion-badge class="ion-margin-end" color="danger" *ngIf="journal.private">PRIVATE</ion-badge>
+                  <ion-badge class="ion-margin-end" color="primary" *ngIf="journal.mood">{{ journal.mood }} Mood</ion-badge>
+                  <ion-badge class="ion-margin-end" color="primary" *ngIf="journal.activity">{{ journal.activity }} Activity</ion-badge>
+                </ion-card-subtitle>
               </ion-card-header>
 
               <ion-card-content (click)="openJournalPage('/tabs/journalView', journal)" [innerHTML]="journal.content | words : 25">
@@ -146,11 +154,22 @@
             </ion-col>
           </ion-row>
           <ion-card-subtitle (click)="openJournalPage('/tabs/journalView', journal)">{{ dateFormattedMemories[i] }}</ion-card-subtitle>
-          <ion-card-subtitle *ngIf="journal.locked" (click)="openJournalPage('/tabs/journalView', journal)"><ion-badge color="danger">Private</ion-badge></ion-card-subtitle>
+          <ion-card-subtitle (click)="openJournalPage('/tabs/journalView', journal)">
+            <ion-badge class="ion-margin-end" color="danger" *ngIf="journal.private">PRIVATE</ion-badge>
+            <ion-badge class="ion-margin-end" color="primary" *ngIf="journal.mood">{{ journal.mood }} Mood</ion-badge>
+            <ion-badge class="ion-margin-end" color="primary" *ngIf="journal.activity">{{ journal.activity }} Activity</ion-badge>
+          </ion-card-subtitle>
         </ion-card-header>
 
         <ion-card-content (click)="openJournalPage('/tabs/journalView', journal)" [innerHTML]="journalContentFormattedMemories[i] | words : 25">
         </ion-card-content>
+
+        <ion-card-footer>
+          <ion-button expand="full" (click)="openJournalPage('/tabs/journalView', journal, 'create');">
+            <ion-icon slot="start" name="search-outline"></ion-icon>
+            Create note
+          </ion-button>
+        </ion-card-footer>
       </ion-card>
     </div>
     

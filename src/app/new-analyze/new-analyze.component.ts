@@ -35,7 +35,7 @@ export class NewAnalyzeComponent implements OnInit {
   }
 
   ngOnInit() {
-    const allTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'h7', 'i', 'strike', 'u', 'b', 'p', 'ul', 'li', 'ol', 'em', 's', 'strong'];
+    const allTags = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'h7', 'i', 'strike', 'u', 'b', 'ul', 'li', 'ol', 'em', 's', 'strong'];
     if (this.newNote) {
       this.noteData = [];
       let splitText = this.data['content'].replaceAll('<', ' <') .replaceAll('>', '> ').split(' ');

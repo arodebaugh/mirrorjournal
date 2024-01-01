@@ -409,12 +409,16 @@ export class HomePage implements OnInit {
 
   search(query) {
     this.filteredJournal = this.cachedJournals.map(item => JSON.parse(item.data))
-      .filter(({ locked, name, date, content }) => {
+      .filter(({ locked, name, date, content, mood, activity }) => {
         let lowerQuery = query.toLowerCase();
         return !locked &&
-          (name.toLowerCase().includes(lowerQuery) ||
-          moment(date).format('LLLL').toLowerCase().includes(lowerQuery) ||
-          (content && content.toLowerCase().includes(lowerQuery)));
+          (
+            (name && name.toLowerCase().includes(lowerQuery)) ||
+            (date && moment(date).format('LLLL').toLowerCase().includes(lowerQuery)) ||
+            (content && content.toLowerCase().includes(lowerQuery))) ||
+            (mood && mood.toLowerCase().includes(lowerQuery)) ||
+            (activity && activity.toLowerCase().includes(lowerQuery)
+          );
       })
       .map(item => {
         return {
