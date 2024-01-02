@@ -411,22 +411,17 @@ export class HomePage implements OnInit {
   }
 
   search(query: string) {
-    let queryParts = query.toLowerCase().split(' ');
     this.filteredJournal = this.cachedJournals.map(item => JSON.parse(item.data))
       .filter(({ locked, name, date, content, mood, activity }) => {
-        if (locked) return false;
-        for (let part of queryParts) {
-          if ((name && name.toLowerCase().includes(part)) ||
-              (date && moment(date).format('LLLL').toLowerCase().includes(part)) ||
-              (content && content.toLowerCase().includes(part)) ||
-              (mood && ("mood: " + mood).toLowerCase().includes(part)) ||
-              (activity && ("activity: " + activity).toLowerCase().includes(part))) {
-            continue;
-          } else {
-            return false;
-          }
-        }
-        return true;
+        let lowerQuery = query.toLowerCase();
+        return !locked &&
+          (
+            (name && name.toLowerCase().includes(lowerQuery)) ||
+            (date && moment(date).format('LLLL').toLowerCase().includes(lowerQuery)) ||
+            (content && content.toLowerCase().includes(lowerQuery))) ||
+            (mood && ("mood: " + mood).toLowerCase().includes(lowerQuery)) ||
+            (activity && ("activity: " + activity).toLowerCase().includes(lowerQuery)
+          );
       })
       .map(item => {
         return {
@@ -435,7 +430,7 @@ export class HomePage implements OnInit {
           content: this.stripJournalContent(item.content)
         };
     });
-  }  
+  }
 
   searchFor(query: string) {
     this.setSelectedPage('Search');
