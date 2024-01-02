@@ -67,10 +67,10 @@
                 </ion-row>
               </ion-grid>
               <ion-card-subtitle (click)="openJournalPage('/tabs/journalView', journal)">{{ dateFormatted[i] }}</ion-card-subtitle>
-              <ion-card-subtitle (click)="openJournalPage('/tabs/journalView', journal)">
-                <ion-badge class="ion-margin-end" color="danger" *ngIf="journal.private">PRIVATE</ion-badge>
-                <ion-badge class="ion-margin-end" color="primary" *ngIf="journal.mood">{{ journal.mood }} Mood</ion-badge>
-                <ion-badge class="ion-margin-end" color="primary" *ngIf="journal.activity">{{ journal.activity }} Activity</ion-badge>
+              <ion-card-subtitle>
+                <ion-badge class="ion-margin-end" color="danger" *ngIf="journal.private" (click)="setSelectedPage('Private')">PRIVATE</ion-badge>
+                <ion-badge class="ion-margin-end" color="primary" *ngIf="journal.mood" (click)="searchFor('mood: ' + journal.mood)">{{ journal.mood }} Mood</ion-badge>
+                <ion-badge class="ion-margin-end" color="primary" *ngIf="journal.activity" (click)="searchFor('activity: ' + journal.activity)">{{ journal.activity }} Activity</ion-badge>
               </ion-card-subtitle>
             </ion-card-header>
 
@@ -93,7 +93,7 @@
   <div *ngIf="currentPage === 'Search'">
     <ion-grid>
       <ion-row>
-        <ion-col><ion-searchbar #searchbar (ionInput)="search($event.target.value)"></ion-searchbar></ion-col>
+        <ion-col><ion-searchbar [(ngModel)]="searchValue" #searchbar (ionInput)="search($event.target.value)"></ion-searchbar></ion-col>
       </ion-row>
     </ion-grid>
 
@@ -114,10 +114,10 @@
                   </ion-row>
                 </ion-grid>
                 <ion-card-subtitle (click)="openJournalPage('/tabs/journalView', journal)">{{ journal.date }}</ion-card-subtitle>
-                <ion-card-subtitle (click)="openJournalPage('/tabs/journalView', journal)">
-                  <ion-badge class="ion-margin-end" color="danger" *ngIf="journal.private">PRIVATE</ion-badge>
-                  <ion-badge class="ion-margin-end" color="primary" *ngIf="journal.mood">{{ journal.mood }} Mood</ion-badge>
-                  <ion-badge class="ion-margin-end" color="primary" *ngIf="journal.activity">{{ journal.activity }} Activity</ion-badge>
+                <ion-card-subtitle>
+                  <ion-badge class="ion-margin-end" color="danger" *ngIf="journal.private" (click)="setSelectedPage('Private')">PRIVATE</ion-badge>
+                  <ion-badge class="ion-margin-end" color="primary" *ngIf="journal.mood" (click)="searchFor('mood: ' + journal.mood)">{{ journal.mood }} Mood</ion-badge>
+                  <ion-badge class="ion-margin-end" color="primary" *ngIf="journal.activity" (click)="searchFor('activity: ' + journal.activity)">{{ journal.activity }} Activity</ion-badge>
                 </ion-card-subtitle>
               </ion-card-header>
 
@@ -154,10 +154,10 @@
             </ion-col>
           </ion-row>
           <ion-card-subtitle (click)="openJournalPage('/tabs/journalView', journal)">{{ dateFormattedMemories[i] }}</ion-card-subtitle>
-          <ion-card-subtitle (click)="openJournalPage('/tabs/journalView', journal)">
-            <ion-badge class="ion-margin-end" color="danger" *ngIf="journal.private">PRIVATE</ion-badge>
-            <ion-badge class="ion-margin-end" color="primary" *ngIf="journal.mood">{{ journal.mood }} Mood</ion-badge>
-            <ion-badge class="ion-margin-end" color="primary" *ngIf="journal.activity">{{ journal.activity }} Activity</ion-badge>
+          <ion-card-subtitle>
+            <ion-badge class="ion-margin-end" color="danger" *ngIf="journal.private" (click)="setSelectedPage('Private')">PRIVATE</ion-badge>
+            <ion-badge class="ion-margin-end" color="primary" *ngIf="journal.mood" (click)="searchFor('mood: ' + journal.mood)">{{ journal.mood }} Mood</ion-badge>
+            <ion-badge class="ion-margin-end" color="primary" *ngIf="journal.activity" (click)="searchFor('activity: ' + journal.activity)">{{ journal.activity }} Activity</ion-badge>
           </ion-card-subtitle>
         </ion-card-header>
 
