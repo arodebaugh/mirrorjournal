@@ -24,7 +24,7 @@
   </ion-grid>
 
   <div *ngIf="currentPage === 'Home'">
-    <div *ngIf="streakData.streak > 0">
+    <div *ngIf="streakData.streak > 1">
       <ion-card style="margin-bottom: 0; margin-top: 8px;">
         <ion-card-content class="details-card">
           <ion-grid style="--ion-grid-padding: 0;">
@@ -44,6 +44,13 @@
       </ion-card>
     </div>
 
+    <ion-card *ngIf="!showJournals">
+      <div style="text-align: center;"><img src="../assets/mirror-images/assembly 5.png" style="height: 300px; margin-top: 10px;"/></div>
+      <ion-card-content style="text-align: center;">
+        No entries... why don't you <a (click)="openPage('/tabs/journalNew')">express yourself</a>?
+      </ion-card-content>
+    </ion-card>
+
     <ion-grid>
       <ion-row>
         <ion-col sizeLg="6" sizeMd="6" sizeXs="12" *ngFor="let journal of journals; let i = index;">
@@ -60,7 +67,11 @@
                 </ion-row>
               </ion-grid>
               <ion-card-subtitle (click)="openJournalPage('/tabs/journalView', journal)">{{ dateFormatted[i] }}</ion-card-subtitle>
-              <ion-card-subtitle (click)="openJournalPage('/tabs/journalView', journal)" *ngIf="journal.locked"><ion-badge color="danger">Private</ion-badge></ion-card-subtitle>
+              <ion-card-subtitle>
+                <ion-badge class="ion-margin-end" color="danger" *ngIf="journal.private" (click)="setSelectedPage('Private')">PRIVATE</ion-badge>
+                <ion-badge class="ion-margin-end" color="primary" *ngIf="journal.mood" (click)="searchFor('mood: ' + journal.mood)">{{ journal.mood }} Mood</ion-badge>
+                <ion-badge class="ion-margin-end" color="primary" *ngIf="journal.activity" (click)="searchFor('activity: ' + journal.activity)">{{ journal.activity }} Activity</ion-badge>
+              </ion-card-subtitle>
             </ion-card-header>
 
             <ion-card-content (click)="openJournalPage('/tabs/journalView', journal)" [innerHTML]="journalContentFormatted[i] | words : 25">
@@ -82,7 +93,7 @@
   <div *ngIf="currentPage === 'Search'">
     <ion-grid>
       <ion-row>
-        <ion-col><ion-searchbar #searchbar (ionInput)="search($event.target.value)"></ion-searchbar></ion-col>
+        <ion-col><ion-searchbar [(ngModel)]="searchValue" #searchbar (ionInput)="search($event.target.value)"></ion-searchbar></ion-col>
       </ion-row>
     </ion-grid>
 
@@ -103,7 +114,11 @@
                   </ion-row>
                 </ion-grid>
                 <ion-card-subtitle (click)="openJournalPage('/tabs/journalView', journal)">{{ journal.date }}</ion-card-subtitle>
-                <ion-card-subtitle (click)="openJournalPage('/tabs/journalView', journal)" *ngIf="journal.locked"><ion-badge color="danger">Private</ion-badge></ion-card-subtitle>
+                <ion-card-subtitle>
+                  <ion-badge class="ion-margin-end" color="danger" *ngIf="journal.private" (click)="setSelectedPage('Private')">PRIVATE</ion-badge>
+                  <ion-badge class="ion-margin-end" color="primary" *ngIf="journal.mood" (click)="searchFor('mood: ' + journal.mood)">{{ journal.mood }} Mood</ion-badge>
+                  <ion-badge class="ion-margin-end" color="primary" *ngIf="journal.activity" (click)="searchFor('activity: ' + journal.activity)">{{ journal.activity }} Activity</ion-badge>
+                </ion-card-subtitle>
               </ion-card-header>
 
               <ion-card-content (click)="openJournalPage('/tabs/journalView', journal)" [innerHTML]="journal.content | words : 25">
@@ -139,11 +154,22 @@
             </ion-col>
           </ion-row>
           <ion-card-subtitle (click)="openJournalPage('/tabs/journalView', journal)">{{ dateFormattedMemories[i] }}</ion-card-subtitle>
-          <ion-card-subtitle *ngIf="journal.locked" (click)="openJournalPage('/tabs/journalView', journal)"><ion-badge color="danger">Private</ion-badge></ion-card-subtitle>
+          <ion-card-subtitle>
+            <ion-badge class="ion-margin-end" color="danger" *ngIf="journal.private" (click)="setSelectedPage('Private')">PRIVATE</ion-badge>
+            <ion-badge class="ion-margin-end" color="primary" *ngIf="journal.mood" (click)="searchFor('mood: ' + journal.mood)">{{ journal.mood }} Mood</ion-badge>
+            <ion-badge class="ion-margin-end" color="primary" *ngIf="journal.activity" (click)="searchFor('activity: ' + journal.activity)">{{ journal.activity }} Activity</ion-badge>
+          </ion-card-subtitle>
         </ion-card-header>
 
         <ion-card-content (click)="openJournalPage('/tabs/journalView', journal)" [innerHTML]="journalContentFormattedMemories[i] | words : 25">
         </ion-card-content>
+
+        <ion-card-footer>
+          <ion-button expand="full" (click)="openJournalPage('/tabs/journalView', journal, 'create');">
+            <ion-icon slot="start" name="search-outline"></ion-icon>
+            Create note
+          </ion-button>
+        </ion-card-footer>
       </ion-card>
     </div>
     
@@ -158,7 +184,7 @@
   </div>
 
   <div *ngIf="currentPage === 'Private'">
-    <ion-card  *ngIf="private.length == 0;">
+    <ion-card  *ngIf="private.length === 0;">
       <div style="text-align: center;"><img src="../assets/mirror-images/assembly 5.png" style="height: 300px; margin-top: 10px;"/></div>
       <ion-card-content style="text-align: center;">
         No private journals yet!
@@ -193,12 +219,7 @@
     <br/><br/><br/><br/>
   </div>
 
-  <ion-card *ngIf="!showJournals">
-    <div style="text-align: center;"><img src="../assets/mirror-images/assembly 5.png" style="height: 300px; margin-top: 10px;"/></div>
-    <ion-card-content style="text-align: center;">
-      No entries... why don't you <a (click)="openPage('/tabs/journalNew')">express yourself</a>?
-    </ion-card-content>
-  </ion-card>
+  <!-- Menu button -->
 
   <!-- Left -->
   <ion-fab vertical="bottom" horizontal="start" slot="fixed" style="margin-bottom: 20pt; margin-left: 10pt;" *ngIf="fabPos === 0">

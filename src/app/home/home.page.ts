@@ -54,6 +54,7 @@ export class HomePage implements OnInit {
   private = [];
   menuLabel = false;
   disableClickCard = false;
+  searchValue = "";
   streakData = {lastDate: moment(), streak: 0};
   journalIndex = 0;
   fabPos = 1; // 0 start, 1 center, 2 end
@@ -365,6 +366,7 @@ export class HomePage implements OnInit {
     this.journals = [];
     this.journalsFromCache = [];
     this.filteredJournal = [];
+    this.searchValue = "";
     this.showJournals = false;
     this.journalsLoaded = 0;
     this.lastId = "";
@@ -372,6 +374,7 @@ export class HomePage implements OnInit {
   }
 
   async resetFilteredJournal() {
+    this.searchValue = "";
     this.filteredJournal = [];
     setTimeout(() => {
       this.searchbar.setFocus();
@@ -407,21 +410,33 @@ export class HomePage implements OnInit {
     await modal.present();
   }
 
-  search(query) {
-    this.filteredJournal = this.cachedJournals.filter(item => {
-      return !JSON.parse(item.data).locked &&
-        (JSON.parse(item.data).name.toLowerCase().includes(query.toLowerCase()) ||
-        moment(JSON.parse(item.data).date).format('LLLL').toLowerCase().includes(query.toLowerCase()) ||
-        JSON.parse(item.data).content.toLowerCase().includes(query.toLowerCase()));
-    })
-    .map(item => JSON.parse(item.data))
-    .map(item => {
-      return {
-        ...item,
-        date: moment(item.date).format('LLLL'),
-        content: this.stripJournalContent(item.content)
-      };
+  search(query: string) {
+    this.filteredJournal = this.cachedJournals.map(item => JSON.parse(item.data))
+      .filter(({ locked, name, date, content, mood, activity }) => {
+        let lowerQuery = query.toLowerCase();
+        return !locked &&
+          (
+            (name && name.toLowerCase().includes(lowerQuery)) ||
+            (date && moment(date).format('LLLL').toLowerCase().includes(lowerQuery)) ||
+            (content && content.toLowerCase().includes(lowerQuery))) ||
+            (mood && ("mood: " + mood).toLowerCase().includes(lowerQuery)) ||
+            (activity && ("activity: " + activity).toLowerCase().includes(lowerQuery)
+          );
+      })
+      .map(item => {
+        return {
+          ...item,
+          date: moment(item.date).format('LLLL'),
+          content: this.stripJournalContent(item.content)
+        };
     });
+  }
+
+  searchFor(query: string) {
+    this.setSelectedPage('Search');
+    this.resetFilteredJournal();
+    this.searchValue = query;
+    this.search(query);
   }
 
   ionViewWillLeave() {
@@ -552,6 +567,7 @@ export class HomePage implements OnInit {
       this.passcode = undefined;
       this.lockIcon = 'lock-closed-outline';
       this.lockDesc = 'Unlock';
+      this.private = [];
       this.loadJournalView();
     }
   }

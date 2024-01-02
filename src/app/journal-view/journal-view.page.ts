@@ -241,7 +241,6 @@ export class JournalViewPage implements OnInit {
           role: 'cancel',
           cssClass: 'secondary',
           handler: () => {
-            // console.log('Confirm Cancel');
             this.passcode = undefined;
             Haptics.impact({style: ImpactStyle.Light});
           }
@@ -297,10 +296,7 @@ export class JournalViewPage implements OnInit {
       buttons: [
         {
           text: 'Dismiss',
-          role: 'cancel',
-          handler: () => {
-            // console.log('Cancel clicked');
-          }
+          role: 'cancel'
         }]
     });
     const modal = await this.modalController.create({
@@ -345,10 +341,7 @@ export class JournalViewPage implements OnInit {
       buttons: [
         {
           text: 'Dismiss',
-          role: 'cancel',
-          handler: () => {
-            // console.log('Cancel clicked');
-          }
+          role: 'cancel'
         }]
     });
     Haptics.impact({style: ImpactStyle.Light});

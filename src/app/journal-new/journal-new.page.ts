@@ -24,7 +24,6 @@ import {PasswordDialogComponent} from '../password-dialog/password-dialog.compon
 import {PopupEditorComponent} from '../popup-editor/popup-editor.component';
 import { Filesystem } from '@capacitor/filesystem';
 import { Haptics, ImpactStyle, NotificationType } from '@capacitor/haptics';
-import {JournalHelpComponent} from '../journal-help/journal-help.component';
 import { Preferences } from '@capacitor/preferences';
 
 const options = [
@@ -297,7 +296,6 @@ export class JournalNewPage implements OnInit {
         }
 
         this.writeToMasterDir(saveData, toast);
-        console.log('Wrote file', result);
       } catch (e) {
         alert('Unable to write file ' + JSON.stringify(e));
       }
@@ -320,10 +318,7 @@ export class JournalNewPage implements OnInit {
       buttons: [
         {
           text: 'Dismiss',
-          role: 'cancel',
-          handler: () => {
-            console.log('Cancel clicked');
-          }
+          role: 'cancel'
         }]
     });
 
@@ -388,10 +383,7 @@ export class JournalNewPage implements OnInit {
           {
             text: 'Cancel',
             role: 'cancel',
-            cssClass: 'secondary',
-            handler: () => {
-              console.log('Confirm Cancel');
-            }
+            cssClass: 'secondary'
           }, {
             text: 'Ok',
             handler: (out) => {
@@ -572,15 +564,6 @@ export class JournalNewPage implements OnInit {
     await alert.present();
   }
 
-  async help(ev: any) {
-    const popover = await this.popoverController.create({
-      component: JournalHelpComponent,
-      event: ev,
-      translucent: true
-    });
-    return await popover.present();
-  }
-
   async askForPasscode() {
     const alert = await this.alertController.create({
       message: 'What is your passcode?',
@@ -599,7 +582,6 @@ export class JournalNewPage implements OnInit {
             role: 'cancel',
             cssClass: 'secondary',
             handler: () => {
-              console.log('Confirm Cancel');
               this.passcode = undefined;
               this.lockState = false;
               // this.taptic.selection();

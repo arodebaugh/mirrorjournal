@@ -4,8 +4,8 @@
       <br/>
       <img src="../assets/mirror-images/assembly 3.png"/>
       <h2>👋 Oh hey there!</h2>
-      <p><b>Mirror</b> is the digital Journal designed for self-reflection.</p>
-      <p>Let's get set up and take a quick tour!</p>
+      <p><b>Mirror Journal 2</b> is the digital Journal designed for self-reflection.</p>
+      <p>Let's take a quick tour!</p>
 
       <ion-grid>
         <ion-row class="ion-align-items-center">
@@ -29,7 +29,7 @@
               <ion-card-subtitle>Saturday, June 20, 2020 5:00 pm</ion-card-subtitle>
             </ion-col>
             <ion-col size="1" offset="0" style="--ion-grid-column-padding: 0;">
-              <ion-icon name="ellipsis-horizontal-outline"></ion-icon>
+              <ion-icon name="ellipsis-horizontal-outline" (click)="presentCardOptions($event)"></ion-icon>
             </ion-col>
           </ion-row>
         </ion-card-header>
@@ -37,11 +37,9 @@
         <ion-card-content [innerHTML]="'Today was a wild day... I was just walking to the bus and here comes a giant bear! And I was like...'">
         </ion-card-content>
       </ion-card>
-      <p>After using <b>Mirror Journal</b> for a while the app will start suggesting entries from the past for you to reflect on.</p>
-      <h4>Creating entries</h4>
-      <p>Click the <ion-icon name="menu-outline"></ion-icon> button then click <ion-icon name="add-outline"></ion-icon></p>
-      <h4>Unlocking entries</h4>
-      <p>Click the <ion-icon name="menu-outline"></ion-icon> button then click <ion-icon name="lock-closed-outline"></ion-icon></p>
+      <p>After using <b>Mirror Journal</b> for a while the app will start suggesting entries from the past for you to reflect on in the Memories page.</p>
+      <p>We recommend creating a "note" for past journals which can be done after clicking <ion-icon name="ellipsis-horizontal-outline"></ion-icon> then 
+        clicking "Create note". This is a great way to reflect on the past!</p>
       <ion-grid>
         <ion-row class="ion-align-items-center">
           <ion-col size="12" class="ion-text-center">
@@ -57,11 +55,11 @@
       <p>We packed journals with tons of useful features for you to enjoy! </p>
       <p>Journal entries made in <b>Mirror Journal</b> are mostly text based, so we created a distraction-free editor that makes it easy to style your text.</p>
       <p>Journal entries can also be tagged with fun emoji reactions and/or an image that can show context around your day.</p>
-      <p>You can lock/encrypt their journals with a click of a button to be password protected!</p>
+      <p>You can lock your journal behind a passcode that is accessible in the Private page</p>
       <ion-grid>
         <ion-row class="ion-align-items-center">
           <ion-col size="12" class="ion-text-center">
-            <ion-button color="primary" fill="outline" (click)="close()">✨ This is my first time!</ion-button>
+            <ion-button color="primary" fill="outline" (click)="close()">✨ Ready!</ion-button>
           </ion-col>
         </ion-row>
       </ion-grid>

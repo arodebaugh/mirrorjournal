@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="close()">Close</ion-button>
+    </ion-buttons>
+    <ion-title>Tip us</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <p class="ion-text-center">Want to gain access to other app icons and support the development of Mirror Journal? Tipping is the best way to do that! All tiers give you access to the same benefits, just pick an amount that works best for you.</p>
+
+  <ion-list>
+    <ion-item button *ngFor="let p of products" (click)="purchase(p)" detail="false" [disabled]="p.owned">
+      <ion-label class="ion-text-wrap">
+        {{ p.title }}
+      </ion-label>
+      <ion-button disabled="true" *ngIf="p.owned" slot="end">
+        OWNED
+      </ion-button>
+      <ion-button *ngIf="!p.owned" slot="end">
+        {{ p.price }} {{ p.currency }}
+      </ion-button>
+    </ion-item>
+  </ion-list>
+
+  <ion-button expand="full" (click)="restore()">Restore</ion-button>
+</ion-content>

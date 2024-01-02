@@ -1,7 +1,8 @@
 import {ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {AlertController, ModalController, Platform, ToastController} from '@ionic/angular';
+import {AlertController, ModalController, Platform, PopoverController, ToastController} from '@ionic/angular';
 import { Haptics, ImpactStyle } from '@capacitor/haptics';
 import { Filesystem } from '@capacitor/filesystem';
+import { CardQuickOptionsComponent } from '../card-quick-options/card-quick-options.component';
 
 
 const PRODUCT_PRO_KEY = 'mirrorjournalpro';
@@ -20,13 +21,22 @@ export class WelcomeScreenComponent implements OnInit {
   cachedJournals = [];
   sortedJournals = [];
 
-  constructor(private toastController: ToastController, private platform: Platform, private alertController: AlertController, private modalController: ModalController, private ref: ChangeDetectorRef) { }
+  constructor(private toastController: ToastController, private platform: Platform, private alertController: AlertController, private popoverController: PopoverController, private modalController: ModalController, private ref: ChangeDetectorRef) { }
 
   async ngOnInit() {
     this.platform.ready().then(() => {
       this.viewEntered = true;
       this.last = false;
     });
+  }
+
+  async presentCardOptions(ev: any) {
+    const popover = await this.popoverController.create({
+      component: CardQuickOptionsComponent,
+      event: ev,
+      translucent: true
+    });
+    return await popover.present();
   }
 
   async presentAlert(header, message) {
