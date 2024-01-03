@@ -33,6 +33,7 @@ import { QuillModule } from 'ngx-quill';
 import { CustomIconComponent } from './custom-icon/custom-icon.component';
 import { CreditsPageComponent } from './credits-page/credits-page.component';
 import { TipPageComponent } from './tip-page/tip-page.component';
+import { LocalNotifications } from '@awesome-cordova-plugins/local-notifications/ngx';
 
 register();
 
@@ -58,7 +59,7 @@ register();
         AppRate,
         InAppBrowser,
         InAppPurchase2,
-        // LocalNotifications,
+        LocalNotifications,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
     ],
     bootstrap: [AppComponent],
