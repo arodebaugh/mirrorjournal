@@ -10,7 +10,7 @@ import {ThemeWatchService} from '../theme-watch.service';
 import {WhatsNewComponent} from '../whats-new/whats-new.component';
 import { Preferences } from '@capacitor/preferences';
 import { Filesystem } from '@capacitor/filesystem';
-import { LocalNotifications } from '@capacitor/local-notifications';
+import { LocalNotifications } from '@awesome-cordova-plugins/local-notifications/ngx';
 import { CustomIconComponent } from '../custom-icon/custom-icon.component';
 import { AppIcon } from '@capacitor-community/app-icon';
 import { CreditsPageComponent } from '../credits-page/credits-page.component';
@@ -48,7 +48,7 @@ export class SettingsComponent implements OnInit {
   theme = 'default';
   menuplacment = '1';
 
-  constructor(private platform: Platform, private appRate: AppRate, private alertController: AlertController,  private ref: ChangeDetectorRef, private modalController: ModalController, private emailComposer: EmailComposer, private themeWatch: ThemeWatchService, private modalCtrl: ModalController) { }
+  constructor(private platform: Platform, private appRate: AppRate, private alertController: AlertController,  private ref: ChangeDetectorRef, private localNotifications: LocalNotifications, private modalController: ModalController, private emailComposer: EmailComposer, private themeWatch: ThemeWatchService, private modalCtrl: ModalController) { }
 
   async ngOnInit() {
     const tempMenuLabel = await Preferences.get({key: 'menuLabel'});
@@ -73,17 +73,20 @@ export class SettingsComponent implements OnInit {
       this.menuplacment = tempMenuplacement.value;
     }
 
-    const pendingNotifications = await LocalNotifications.getPending();
-    const dailyNotification = pendingNotifications.notifications.find(notification => notification.id === 1);
-  
-    if (dailyNotification) {
-      this.notifications = true;
-      const scheduledTime = dailyNotification.schedule.on;
-  
-      this.time = new Date(new Date().setHours(scheduledTime.hour, scheduledTime.minute)).toISOString();
-    } else {
-      this.notifications = false;
-    }
+    this.platform.ready().then(() => {
+      this.localNotifications.getScheduledIds().then(out => {
+        if (out[0] === 1) {
+          this.notifications = true;
+          this.localNotifications.get(1).then(noti => {
+            const minute = (noti.trigger.every['minute'].toString().length <= 1) ? '0' + noti.trigger.every['minute'].toString() : noti.trigger.every['minute'].toString();
+            const hour = (noti.trigger.every['hour'].toString().length <= 1) ? '0' + noti.trigger.every['hour'].toString() : noti.trigger.every['hour'].toString();
+            this.time = hour + ':' + minute;
+          }).catch(err => {
+            alert(JSON.stringify(err));
+          });
+        }
+      });
+    });
   }
 
   async credits() {
@@ -185,30 +188,30 @@ export class SettingsComponent implements OnInit {
   }
 
   async schedule() {
-    await LocalNotifications.schedule({ notifications: [
-      {
+    await this.localNotifications.cancelAll();
+    if (this.notifications) {
+      this.localNotifications.schedule({
         id: 1,
-        title: 'Mirror Journal',
-        body: '👋 It\'s your scheduled journaling time!',
-        schedule: { allowWhileIdle: true, on: { hour: parseInt(this.time.split(':')[0]), minute: parseInt(this.time.split(':')[1]) }, every: 'day', repeats: true }
-      }
-    ]
-    }).catch(err => {
-      alert("Error: " + JSON.stringify(err));
-    });
+        text: '👋 It\'s your scheduled journaling time!',
+        trigger: { every: { hour: parseInt(this.time.split(':')[0]), minute: parseInt(this.time.split(':')[1]) } }
+      });
+    }
   }
 
-  async setNotifications() {
-    const permission = await LocalNotifications.checkPermissions();
-    if (permission.display === 'denied') {
-        await LocalNotifications.requestPermissions();
-    }
-
-    if (this.notifications) {
-      this.schedule();
-    } else {
-      LocalNotifications.cancel({ notifications: [{id: 1}]});
-    }
+  setNotifications() {
+    this.localNotifications.hasPermission().then(out => {
+      if (out) {
+        this.schedule();
+      } else {
+        this.localNotifications.requestPermission().then(() => {
+          this.schedule();
+        }).catch(err => {
+          alert('Error: ' + JSON.stringify(err));
+        });
+      }
+    }).catch(err => {
+      alert('Error: ' + JSON.stringify(err));
+    });
   }
 
   async setAutosave() {

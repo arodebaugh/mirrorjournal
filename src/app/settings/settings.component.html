@@ -70,7 +70,7 @@
       <ion-item>
         <ion-icon name="notifications-outline" slot="start"></ion-icon>
         <ion-label>Notifications</ion-label>
-        <ion-toggle [(ngModel)]="notifications" (ionChange)="setNotifications()"></ion-toggle>
+        <ion-toggle aria-label="notifications" [(ngModel)]="notifications" (ionChange)="setNotifications()" slot="end"></ion-toggle>
       </ion-item>
       <ion-item>
         <ion-icon name="alarm-outline" slot="start"></ion-icon>
@@ -80,7 +80,7 @@
       <ion-item>
         <ion-icon name="save-outline" slot="start"></ion-icon>
         <ion-label>Autosave</ion-label>
-        <ion-toggle [(ngModel)]="autosave" (ionChange)="setAutosave()"></ion-toggle>
+        <ion-toggle aria-label="autosave" [(ngModel)]="autosave" (ionChange)="setAutosave()" slot="end"></ion-toggle>
       </ion-item>
       <ion-item>
         <ion-icon name="brush-outline" slot="start"></ion-icon>
@@ -109,7 +109,7 @@
       <ion-item>
         <ion-icon name="chatbox-outline" slot="start"></ion-icon>
         <ion-label>Menu labels</ion-label>
-        <ion-toggle [(ngModel)]="menuLabel" (ionChange)="saveMenuLabel()"></ion-toggle>
+        <ion-toggle aria-label="menu labels" [(ngModel)]="menuLabel" (ionChange)="saveMenuLabel()" slot="end"></ion-toggle>
       </ion-item>
       <!--<ion-item detail="true">
         <ion-icon name="text-outline" slot="start"></ion-icon>
