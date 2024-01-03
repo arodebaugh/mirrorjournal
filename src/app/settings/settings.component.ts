@@ -41,6 +41,9 @@ export class SettingsComponent implements OnInit {
     { name: 'mirrorfab-icon', src: '../assets/icons/mirrorfab-icon.png' },
     { name: 'mirrorpride-icon', src: '../assets/icons/mirrorpride-icon.png' },
     { name: 'mirrortrans-icon', src: '../assets/icons/mirrortrans-icon.png' },
+    { name: 'book-icon', src: '../assets/icons/book-icon.png' },
+    { name: 'bookfloating-icon', src: '../assets/icons/bookfloating-icon.png' },
+    { name: 'bookstarry-icon', src: '../assets/icons/bookstarry-icon.png' }
   ];
   theme = 'default';
   menuplacment = '1';
