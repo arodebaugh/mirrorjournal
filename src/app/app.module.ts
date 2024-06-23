@@ -7,7 +7,6 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NativeStorage } from '@awesome-cordova-plugins/native-storage/ngx';
-import { TruncateModule } from '@yellowspot/ng-truncate';
 import { EmojiPickerComponent } from './emoji-picker/emoji-picker.component';
 import { RichTextEditorComponent } from './rich-text-editor/rich-text-editor.component';
 import { HttpClientModule} from '@angular/common/http';
@@ -35,12 +34,13 @@ import { CreditsPageComponent } from './credits-page/credits-page.component';
 import { TipPageComponent } from './tip-page/tip-page.component';
 import { LocalNotifications } from '@awesome-cordova-plugins/local-notifications/ngx';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { TruncateWordsPipe } from './pipes/truncate-words.pipe';
 
 register();
 
 @NgModule({
     declarations: [AppComponent, EmojiPickerComponent, JournalHelpComponent, CardQuickOptionsComponent, NotesListComponent, PopupEditorComponent, RichTextEditorComponent, WelcomeScreenComponent, NewAnalyzeComponent, ImageSettingsComponent, SettingsComponent, PasswordDialogComponent, WhatsNewComponent, CustomIconComponent, CreditsPageComponent, TipPageComponent],
-    imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, TruncateModule, HttpClientModule, FormsModule, BrowserAnimationsModule,
+    imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule, BrowserAnimationsModule,
         QuillModule.forRoot({
             modules: {
                 // placeholder: 'What are you thinking about?',

@@ -85,7 +85,7 @@
       <ion-item>
         <ion-icon name="brush-outline" slot="start"></ion-icon>
         <ion-label>Theme</ion-label>
-        <ion-select placeholder="Select One" [(ngModel)]="theme" (ionChange)="changeTheme()">
+        <ion-select slot="end" placeholder="Select One" [(ngModel)]="theme" (ionChange)="changeTheme()">
           <ion-select-option value="default">Blue</ion-select-option>
           <ion-select-option value="teal">Teal</ion-select-option>
           <ion-select-option value="purple">Purple</ion-select-option>
@@ -100,7 +100,7 @@
       <ion-item>
         <ion-icon name="menu-outline" slot="start"></ion-icon>
         <ion-label>Menu Button Placement</ion-label>
-        <ion-select placeholder="Select One" [(ngModel)]="menuplacment" (ionChange)="changeMenuplacement()">
+        <ion-select slot="end" placeholder="Select One" [(ngModel)]="menuplacment" (ionChange)="changeMenuplacement()">
           <ion-select-option value="0">Left</ion-select-option>
           <ion-select-option value="1">Center</ion-select-option>
           <ion-select-option value="2">Right</ion-select-option>

@@ -75,7 +75,7 @@
               </ion-card-subtitle>
             </ion-card-header>
 
-            <ion-card-content (click)="openJournalPage('/tabs/journalView', journal)" [innerHTML]="journalContentFormatted[i] | words : 25">
+            <ion-card-content (click)="openJournalPage('/tabs/journalView', journal)" [innerHTML]="journalContentFormatted[i] | truncateWords : 25">
             </ion-card-content>
           </ion-card>
         </ion-col>
@@ -122,7 +122,7 @@
                 </ion-card-subtitle>
               </ion-card-header>
 
-              <ion-card-content (click)="openJournalPage('/tabs/journalView', journal)" [innerHTML]="journal.content | words : 25">
+              <ion-card-content (click)="openJournalPage('/tabs/journalView', journal)" [innerHTML]="journal.content | truncateWords : 25">
               </ion-card-content>
             </ion-card>
           </ion-col>
@@ -162,7 +162,7 @@
           </ion-card-subtitle>
         </ion-card-header>
 
-        <ion-card-content (click)="openJournalPage('/tabs/journalView', journal)" [innerHTML]="journalContentFormattedMemories[i] | words : 25">
+        <ion-card-content (click)="openJournalPage('/tabs/journalView', journal)" [innerHTML]="journalContentFormattedMemories[i] | truncateWords : 25">
         </ion-card-content>
 
         <ion-card-footer>
@@ -206,7 +206,7 @@
           <ion-card-subtitle (click)="openJournalPage('/tabs/journalView', journal)">{{ dateFormattedPrivates[i] }}</ion-card-subtitle>
         </ion-card-header>
 
-        <ion-card-content (click)="openJournalPage('/tabs/journalView', journal)" [innerHTML]="journalContentFormattedPrivates[i] | words : 25">
+        <ion-card-content (click)="openJournalPage('/tabs/journalView', journal)" [innerHTML]="journalContentFormattedPrivates[i] | truncateWords : 25">
         </ion-card-content>
       </ion-card>
     </div>

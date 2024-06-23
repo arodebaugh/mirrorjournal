@@ -67,7 +67,7 @@ export class WelcomeScreenComponent implements OnInit {
       encoding: Encoding.UTF8,
     });
 
-    this.sortedJournals = JSON.parse(mirrorJournalListFile.data);
+    this.sortedJournals = JSON.parse(mirrorJournalListFile.data as string);
 
     for (let i = 0; i < this.sortedJournals.length; i++) {
       let nextJournal = this.sortedJournals[i];
@@ -89,7 +89,7 @@ export class WelcomeScreenComponent implements OnInit {
     });
   }
 
-  async syncFromOldMirrorJournal() {
+  /*async syncFromOldMirrorJournal() {
     const successToast = await this.toastController.create({
       message: 'Transfer complete!',
       duration: 2000,
@@ -116,7 +116,7 @@ export class WelcomeScreenComponent implements OnInit {
       alert("There was an error: " + JSON.stringify(err))
       this.close();
     });
-  }
+  }*/
 
   // tslint:disable-next-line:use-lifecycle-interface
   ngAfterViewInit() {

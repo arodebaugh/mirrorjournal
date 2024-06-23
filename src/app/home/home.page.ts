@@ -132,7 +132,7 @@ export class HomePage implements OnInit {
       directory: Directory.Documents,
       encoding: Encoding.UTF8
     });
-    let outParsed = JSON.parse(contents.data);
+    let outParsed = JSON.parse(contents.data as string);
     for (const i in outParsed) {
       if (outParsed.hasOwnProperty(i)) {
         if (outParsed[i].id === data.id) {
@@ -183,7 +183,7 @@ export class HomePage implements OnInit {
       directory: Directory.Documents,
       encoding: Encoding.UTF8
     });
-    const output = JSON.parse(contents.data);
+    const output = JSON.parse(contents.data as string);
     /* tslint:disable:no-string-literal */
     if (!output['locked'] || (this.passcode !== undefined && output['locked'])) {
       if (output['locked']) {
@@ -207,7 +207,7 @@ export class HomePage implements OnInit {
         encoding: Encoding.UTF8
       });
 
-      this.cachedJournals = contents.data ? JSON.parse(contents.data) : [];
+      this.cachedJournals = contents.data ? JSON.parse(contents.data as string) : [];
     } catch (e) {
       this.cachedJournals = [];
       this.saveJournalCache();
@@ -222,7 +222,7 @@ export class HomePage implements OnInit {
         encoding: Encoding.UTF8,
       });
 
-      this.sortedJournals = JSON.parse(mirrorJournalListFile.data);
+      this.sortedJournals = JSON.parse(mirrorJournalListFile.data as string);
     } catch (e) {
       console.error('file read err', e);
       this.createMirrorJournals();

@@ -242,7 +242,7 @@ export class JournalNewPage implements OnInit {
           encoding: Encoding.UTF8
         });
 
-        const cachedJournals = contents.data ? JSON.parse(contents.data) : [];
+        const cachedJournals = contents.data ? JSON.parse(contents.data as string) : [];
         const cachedJournalsEditIndex = cachedJournals.findIndex(obj => JSON.parse(obj.data).id === this.journalID);
         if (cachedJournalsEditIndex !== -1) {
           cachedJournals.splice(cachedJournalsEditIndex, 1, { data: JSON.stringify(this.saveData) });
@@ -282,7 +282,7 @@ export class JournalNewPage implements OnInit {
             encoding: Encoding.UTF8
           });
 
-          const cachedJournals = contents.data ? JSON.parse(contents.data) : [];
+          const cachedJournals = contents.data ? JSON.parse(contents.data as string) : [];
           cachedJournals.unshift({data: JSON.stringify(this.saveData)});
 
           await Filesystem.writeFile({

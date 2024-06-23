@@ -8,17 +8,16 @@ import { HomePageRoutingModule } from './home-routing.module';
 
 import { HomePage } from './home.page';
 import {EntryDisplayComponent} from '../entry-display/entry-display.component';
-import {TruncateModule} from '@yellowspot/ng-truncate';
+import { TruncateWordsPipe } from '../pipes/truncate-words.pipe';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         IonicModule,
-        HomePageRoutingModule,
-        TruncateModule
+        HomePageRoutingModule
     ],
-  declarations: [HomePage, EntryDisplayComponent],
+  declarations: [HomePage, EntryDisplayComponent, TruncateWordsPipe],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class HomePageModule {}
