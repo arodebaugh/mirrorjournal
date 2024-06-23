@@ -3,6 +3,8 @@
 [Mirror Journal](https://mirrorjournal.app/) is a journaling app for iOS and Android (in development). It's focus is on a clean UI, secrecy and the abiity to go back and reflect on past journal entries. The app originally was created and released by 
 [Andrew Rodebaugh](https://www.andrewrodebaugh.dev/) in 2020/2021. Now being rereleased as a free and open source application with a refreshed UI and other new features.
 
+[![Download on the App Store](https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg)](https://apps.apple.com/us/app/mirror-journal-2/id6474510656)
+
 ## Codebase
 
 This application was made using [Angular v14](https://angular.io/) and [Ionic Framework v7](https://ionicframework.com/)/[Capcitor v5](https://capacitorjs.com/).
