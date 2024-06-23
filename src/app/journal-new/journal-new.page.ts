@@ -104,7 +104,7 @@ export class JournalNewPage implements OnInit {
         this.activity = this.router.getCurrentNavigation().extras.state.activity;
         this.previouslySaved = true;
         this.created = this.router.getCurrentNavigation().extras.state.created;
-        this.journalContent = this.router.getCurrentNavigation().extras.state.journalContent;
+        this.journalContent = this.router.getCurrentNavigation().extras.state.journalContent.replace("<br>", "");
         this.journalID = this.router.getCurrentNavigation().extras.state.journalID;
         this.headerImageData = this.router.getCurrentNavigation().extras.state.headerImageData;
         this.lockState = this.router.getCurrentNavigation().extras.state.lockState;
@@ -417,7 +417,7 @@ export class JournalNewPage implements OnInit {
     });
     modal.onDidDismiss().then((dataReturned) => {
       if (dataReturned !== null) {
-        this.journalContent = dataReturned.data;
+        this.journalContent = dataReturned.data.replace("<br>", "");
         if (this.journalContent === '') {
           this.modalUp = false;
         } else {

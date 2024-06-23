@@ -23,11 +23,13 @@ export class JournalViewPage implements OnInit {
   passcode: string;
   menuLabel = false;
   fabPos = 1;
+  journalContent: string;
 
   constructor(private platform: Platform, private modalController: ModalController, private alertController: AlertController, private routerOutlet: IonRouterOutlet, private toastController: ToastController, private route: ActivatedRoute, private router: Router, private navCtrl: NavController, private nativeStorage: NativeStorage) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.data = this.router.getCurrentNavigation().extras.state.journal;
+        this.journalContent = this.data.content.replace("<br>", "")
         if (this.router.getCurrentNavigation().extras.state.passcode) {
           this.passcode = this.router.getCurrentNavigation().extras.state.passcode;
         }

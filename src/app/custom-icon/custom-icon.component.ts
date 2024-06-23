@@ -25,7 +25,7 @@ export class CustomIconComponent {
   constructor(private platform: Platform, private modalCtrl: ModalController, private store: InAppPurchase2, private ref: ChangeDetectorRef, private modalController: ModalController) {
     this.platform.ready().then(() => {
       // Only for debugging!
-      this.store.verbosity = this.store.DEBUG;
+      // this.store.verbosity = this.store.DEBUG;
 
       this.setupListeners();
 

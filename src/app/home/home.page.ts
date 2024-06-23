@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {
   AlertController,
   IonInfiniteScroll,
@@ -58,7 +58,7 @@ export class HomePage implements OnInit {
   streakData = {lastDate: moment(), streak: 0};
   journalIndex = 0;
   fabPos = 1; // 0 start, 1 center, 2 end
-  
+
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
   @ViewChild('searchbar') searchbar: IonSearchbar;
 
@@ -581,7 +581,6 @@ export class HomePage implements OnInit {
       }
     }
   }
-  
 }
 
 // Definitions that were not importing correctly from Filesystem

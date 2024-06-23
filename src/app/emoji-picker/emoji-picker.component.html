@@ -8,8 +8,17 @@
 </ion-header>
 
 <ion-content>
+  <ion-text *ngIf="recently_used.length > 0" style="text-align: center;"><h5>Recently Used</h5></ion-text>
+  <ion-grid *ngIf="recently_used.length > 0">
+    <ion-row style="display: flex; justify-content: start;">
+      <ion-col *ngFor="let item of recently_used" (click)="selectEmoji(item)" style="text-align: left; justify-content: flex-start;">
+        <div style="font-size: calc(3vw + 3vh);">{{ item }}</div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
   <ion-text style="text-align: center;"><h5>People</h5></ion-text>
-  <ion-segment scrollable [(ngModel)]="skinColor" (ionChange)="segmentChanged($event)" value="none">
+  <ion-segment scrollable [(ngModel)]="skin_color" (ionChange)="segmentChanged($event)" value="none">
     <ion-segment-button value="none">
       <ion-label>Default</ion-label>
     </ion-segment-button>

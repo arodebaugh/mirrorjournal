@@ -34,12 +34,13 @@ import { CustomIconComponent } from './custom-icon/custom-icon.component';
 import { CreditsPageComponent } from './credits-page/credits-page.component';
 import { TipPageComponent } from './tip-page/tip-page.component';
 import { LocalNotifications } from '@awesome-cordova-plugins/local-notifications/ngx';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 register();
 
 @NgModule({
     declarations: [AppComponent, EmojiPickerComponent, JournalHelpComponent, CardQuickOptionsComponent, NotesListComponent, PopupEditorComponent, RichTextEditorComponent, WelcomeScreenComponent, NewAnalyzeComponent, ImageSettingsComponent, SettingsComponent, PasswordDialogComponent, WhatsNewComponent, CustomIconComponent, CreditsPageComponent, TipPageComponent],
-    imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, TruncateModule, HttpClientModule, FormsModule, 
+    imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, TruncateModule, HttpClientModule, FormsModule, BrowserAnimationsModule,
         QuillModule.forRoot({
             modules: {
                 // placeholder: 'What are you thinking about?',
