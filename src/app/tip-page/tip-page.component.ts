@@ -22,7 +22,7 @@ export class TipPageComponent implements OnInit {
   constructor(private platform: Platform, private modalController: ModalController, private store: InAppPurchase2, private ref: ChangeDetectorRef, private alertController: AlertController) { 
     this.platform.ready().then(() => {
       // Only for debugging!
-      this.store.verbosity = this.store.DEBUG;
+      // this.store.verbosity = this.store.DEBUG;
 
       this.setupListeners();
 

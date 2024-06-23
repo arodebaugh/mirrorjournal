@@ -90,7 +90,7 @@ export class PasswordDialogComponent implements OnInit {
         directory: Directory.Documents,
         encoding: Encoding.UTF8
       }).then(contents => {
-        resolve(JSON.parse(contents.data));
+        resolve(JSON.parse(contents.data as string));
       }).catch(err => {
         reject(err);
       });
@@ -155,7 +155,7 @@ export class PasswordDialogComponent implements OnInit {
           directory: Directory.Documents,
           encoding: Encoding.UTF8
         }).then(out => {
-          const journals = JSON.parse(out.data);
+          const journals = JSON.parse(out.data as string);
           for (const i in journals) {
             if (journals.hasOwnProperty(i)) {
               const read = this.readJournal(journals[i].id);

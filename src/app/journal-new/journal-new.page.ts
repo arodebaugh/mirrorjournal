@@ -104,7 +104,7 @@ export class JournalNewPage implements OnInit {
         this.activity = this.router.getCurrentNavigation().extras.state.activity;
         this.previouslySaved = true;
         this.created = this.router.getCurrentNavigation().extras.state.created;
-        this.journalContent = this.router.getCurrentNavigation().extras.state.journalContent;
+        this.journalContent = this.router.getCurrentNavigation().extras.state.journalContent.replace("<br>", "");
         this.journalID = this.router.getCurrentNavigation().extras.state.journalID;
         this.headerImageData = this.router.getCurrentNavigation().extras.state.headerImageData;
         this.lockState = this.router.getCurrentNavigation().extras.state.lockState;
@@ -242,7 +242,7 @@ export class JournalNewPage implements OnInit {
           encoding: Encoding.UTF8
         });
 
-        const cachedJournals = contents.data ? JSON.parse(contents.data) : [];
+        const cachedJournals = contents.data ? JSON.parse(contents.data as string) : [];
         const cachedJournalsEditIndex = cachedJournals.findIndex(obj => JSON.parse(obj.data).id === this.journalID);
         if (cachedJournalsEditIndex !== -1) {
           cachedJournals.splice(cachedJournalsEditIndex, 1, { data: JSON.stringify(this.saveData) });
@@ -282,7 +282,7 @@ export class JournalNewPage implements OnInit {
             encoding: Encoding.UTF8
           });
 
-          const cachedJournals = contents.data ? JSON.parse(contents.data) : [];
+          const cachedJournals = contents.data ? JSON.parse(contents.data as string) : [];
           cachedJournals.unshift({data: JSON.stringify(this.saveData)});
 
           await Filesystem.writeFile({
@@ -417,7 +417,7 @@ export class JournalNewPage implements OnInit {
     });
     modal.onDidDismiss().then((dataReturned) => {
       if (dataReturned !== null) {
-        this.journalContent = dataReturned.data;
+        this.journalContent = dataReturned.data.replace("<br>", "");
         if (this.journalContent === '') {
           this.modalUp = false;
         } else {

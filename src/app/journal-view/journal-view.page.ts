@@ -23,11 +23,13 @@ export class JournalViewPage implements OnInit {
   passcode: string;
   menuLabel = false;
   fabPos = 1;
+  journalContent: string;
 
   constructor(private platform: Platform, private modalController: ModalController, private alertController: AlertController, private routerOutlet: IonRouterOutlet, private toastController: ToastController, private route: ActivatedRoute, private router: Router, private navCtrl: NavController, private nativeStorage: NativeStorage) {
     this.route.queryParams.subscribe(params => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.data = this.router.getCurrentNavigation().extras.state.journal;
+        this.journalContent = this.data.content.replace("<br>", "")
         if (this.router.getCurrentNavigation().extras.state.passcode) {
           this.passcode = this.router.getCurrentNavigation().extras.state.passcode;
         }
@@ -147,7 +149,7 @@ export class JournalViewPage implements OnInit {
       directory: Directory.Documents,
       encoding: Encoding.UTF8
     });
-    let outParsed = JSON.parse(contents.data);
+    let outParsed = JSON.parse(contents.data as string);
     outParsed = outParsed.filter(returnableObjects => returnableObjects.id !== data.id);
 
     try {
@@ -164,7 +166,7 @@ export class JournalViewPage implements OnInit {
         directory: Directory.Documents,
         encoding: Encoding.UTF8
       });
-      let cacheOutParsed = JSON.parse(cacheContents.data);
+      let cacheOutParsed = JSON.parse(cacheContents.data as string);
       let filteredOutParsed = cacheOutParsed.filter(returnableObjects => JSON.parse(returnableObjects.data).id !== data.id);
       if (filteredOutParsed.length === cacheOutParsed.length) {
         // No journal with matching id was found, filter by date instead

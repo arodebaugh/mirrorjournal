@@ -1,8 +1,21 @@
 <ion-content>
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="end">
+        <ion-button (click)="close()">
+          <ion-text>Close</ion-text>
+        </ion-button>
+      </ion-buttons>
+    </ion-toolbar>
+  </ion-header>
   <swiper-container #swiper *ngIf="viewEntered" style="overflow-y: scroll;" is-locked="true">
     <swiper-slide>
       <img src="../assets/mirror-images/assembly.png"/>
       <h2>✨ What's New ✨</h2>
+      <h3>v2.1 - The 🧹 returning housekeeping update</h3>
+      <p>Larger update coming soon! Just wanted to make a small update to pave the way for that.</p>
+      <p>- Emoji picker gets recently used row for easier use 😊</p>
+      <p>- Bug fixes and general behind the scenes improvements 🐛</p>
       <h3>v2 - The return update 🛸</h3>
       <p>Sorry for being gone for so long!</p>
       <p>- Home UI refresh 🏠</p>

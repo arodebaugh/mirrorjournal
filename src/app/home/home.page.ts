@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {
   AlertController,
   IonInfiniteScroll,
@@ -58,17 +58,17 @@ export class HomePage implements OnInit {
   streakData = {lastDate: moment(), streak: 0};
   journalIndex = 0;
   fabPos = 1; // 0 start, 1 center, 2 end
-  
+
   @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
   @ViewChild('searchbar') searchbar: IonSearchbar;
 
   constructor(private modalController: ModalController, private popoverController: PopoverController, private alertController: AlertController, private platform: Platform, private routerOutlet: IonRouterOutlet, private navCtrl: NavController, private nativeStorage: NativeStorage) { }
 
   async ngOnInit() {
-    const tempHide2new = await Preferences.get({key: 'hide2new'});
-    if (tempHide2new.value !== 'true') {
+    const tempHide21new = await Preferences.get({key: 'hide21new'});
+    if (tempHide21new.value !== 'true') {
       this.showWhatsNew();
-      await Preferences.set({key: 'hide2new', value: 'true'});
+      await Preferences.set({key: 'hide21new', value: 'true'});
     }
 
     this.platform.ready().then(() => {
@@ -132,7 +132,7 @@ export class HomePage implements OnInit {
       directory: Directory.Documents,
       encoding: Encoding.UTF8
     });
-    let outParsed = JSON.parse(contents.data);
+    let outParsed = JSON.parse(contents.data as string);
     for (const i in outParsed) {
       if (outParsed.hasOwnProperty(i)) {
         if (outParsed[i].id === data.id) {
@@ -183,7 +183,7 @@ export class HomePage implements OnInit {
       directory: Directory.Documents,
       encoding: Encoding.UTF8
     });
-    const output = JSON.parse(contents.data);
+    const output = JSON.parse(contents.data as string);
     /* tslint:disable:no-string-literal */
     if (!output['locked'] || (this.passcode !== undefined && output['locked'])) {
       if (output['locked']) {
@@ -207,7 +207,7 @@ export class HomePage implements OnInit {
         encoding: Encoding.UTF8
       });
 
-      this.cachedJournals = contents.data ? JSON.parse(contents.data) : [];
+      this.cachedJournals = contents.data ? JSON.parse(contents.data as string) : [];
     } catch (e) {
       this.cachedJournals = [];
       this.saveJournalCache();
@@ -222,7 +222,7 @@ export class HomePage implements OnInit {
         encoding: Encoding.UTF8,
       });
 
-      this.sortedJournals = JSON.parse(mirrorJournalListFile.data);
+      this.sortedJournals = JSON.parse(mirrorJournalListFile.data as string);
     } catch (e) {
       console.error('file read err', e);
       this.createMirrorJournals();
@@ -581,7 +581,6 @@ export class HomePage implements OnInit {
       }
     }
   }
-  
 }
 
 // Definitions that were not importing correctly from Filesystem
